@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchWrap.CradView">
+
+    <RelativeLayout
+        style="@style/WrapWrap"
+        android:background="?selectableItemBackground"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/item_date"
+            style="@style/WrapWrap"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/item_time"
+            style="@style/WrapWrap"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/item_date"/>
+
+        <ImageButton
+            android:id="@+id/item_more"
+            style="@style/WrapWrap"
+            android:layout_alignParentRight="true"
+            android:background="?selectableItemBackground"
+            android:contentDescription="@null"
+            android:src="@mipmap/more"/>
+
+        <io.github.mthli.knife.KnifeText
+            android:id="@+id/item_knife"
+            style="@style/knifeSelf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_date"
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:clickable="true"
+            android:enabled="true"
+            android:lineSpacingExtra="8dp"
+            android:lineSpacingMultiplier="1.1"
+            android:maxLines="8"
+            android:maxLength="550"
+            android:padding="0dp"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

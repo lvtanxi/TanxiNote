@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/MatchMatch.Vertical">
+
+    <include layout="@layout/common_toobar"/>
+
+    <io.github.mthli.knife.KnifeText
+        android:id="@+id/knife"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:lineSpacingExtra="6dp"
+        android:lineSpacingMultiplier="1.1"
+        style="@style/knifeSelf"/>
+
+    <HorizontalScrollView
+        android:id="@+id/tools"
+        style="@style/MatchWrap"
+        android:background="?attr/colorPrimary"
+        android:scrollbars="none">
+
+        <LinearLayout
+            style="@style/WrapWrap.Horizontal">
+
+            <ImageButton
+                android:id="@+id/undo"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_action_undo"/>
+
+            <ImageButton
+                android:id="@+id/redo"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_action_redo"/>
+
+            <ImageButton
+                android:id="@+id/bold"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_bold"/>
+
+            <ImageButton
+                android:id="@+id/italic"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_italic"/>
+
+            <ImageButton
+                android:id="@+id/underline"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_underline"/>
+
+            <ImageButton
+                android:id="@+id/strikethrough"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_strikethrough"/>
+
+            <ImageButton
+                android:id="@+id/bullet"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_bullet"/>
+
+            <ImageButton
+                android:id="@+id/quote"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_quote"/>
+
+            <ImageButton
+                android:id="@+id/link"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_insert_link"/>
+
+            <ImageButton
+                android:id="@+id/clear"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_format_clear"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+</LinearLayout>

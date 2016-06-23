@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="@color/COLOR_BORDER_LINE">
+    <item>
+        <selector>
+            <item >
+                <shape>
+                    <corners android:radius="180dp" />
+                    <solid android:color="@color/colorPrimary"/>
+                </shape>
+            </item>
+
+        </selector>
+    </item>
+</ripple>

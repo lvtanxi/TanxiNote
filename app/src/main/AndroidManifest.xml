@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.lv.note">
+    <!--允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!--获取sd卡写的权限，用于文件上传和下载-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--允许读取手机状态 用于创建BmobInstallation-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-permission android:name="com.xiaomi.market.sdk.UPDATE" />
+
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.LaunchAct"
+            android:theme="@style/NoTitleFullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.LoginAct"
+            android:theme="@style/NoTitleFullscreen"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".ui.MainAct"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ui.AddNoteAct"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+
+        <activity android:name=".ui.WebViewAct"/>
+        <activity android:name=".ui.WeatherAct"/>
+        <activity android:name=".ui.ClipAct"/>
+        <activity android:name=".ui.MovieAct"/>
+        <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+        <meta-data android:value="9db66424a27345ab8e98eff3a73a4ee8" android:name="BUG_HD_SDK_GENERAL_KEY" />
+    </application>
+
+</manifest>

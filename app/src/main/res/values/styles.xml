@@ -1,0 +1,89 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/WINDOW_BACKGROUND</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHint">@color/hit_color</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="NotBackAct" parent="AppTheme">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="NoTitleFullscreen" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="knifeItem">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="knifeSelf">
+        <item name="android:gravity">top|start</item>
+        <item name="android:scrollbars">none</item>
+        <item name="bulletColor">?attr/colorPrimary</item>
+        <item name="linkColor">?attr/colorPrimary</item>
+        <item name="quoteColor">?attr/colorPrimary</item>
+        <item name="bulletRadius">2dp</item>
+        <item name="bulletGapWidth">8dp</item>
+        <item name="historySize">99</item>
+        <item name="linkUnderline">true</item>
+        <item name="quoteStripeWidth">8dp</item>
+        <item name="quoteCapWidth">2dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="WrapWrap.Text">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="loading_dialog_style">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0</item>
+    </style>
+
+    <style name="ActionSheetAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/push_up_in</item>
+        <item name="android:windowExitAnimation">@anim/push_up_out</item>
+    </style>
+
+        <style name="MatchWrap.CradView">
+            <item name="android:layout_margin">8dp</item>
+            <item name="cardCornerRadius">5dp</item>
+            <item name="cardElevation">10dp</item>
+        </style>
+        <style name="WrapWrap.TOP5">
+            <item name="android:layout_marginTop">5dp</item>
+        </style>
+</resources>

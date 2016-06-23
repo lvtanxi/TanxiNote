@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchWrap.CradView">
+
+    <RelativeLayout
+        style="@style/WrapWrap"
+        android:background="?android:selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/navitem_image"
+            style="@style/WrapWrap"
+            android:layout_marginLeft="20dp"
+            android:contentDescription="@null"
+            android:src="@mipmap/more"/>
+
+        <TextView
+            android:id="@+id/navitem_txt"
+            style="@style/WrapWrap"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/navitem_image"/>
+
+        <ImageView
+            android:id="@+id/navitem_selected"
+            style="@style/WrapWrap"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@null"
+            android:src="@drawable/nav_item"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

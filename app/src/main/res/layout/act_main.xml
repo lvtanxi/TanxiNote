@@ -1,0 +1,19 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:tools="http://schemas.android.com/tools"
+                                        android:id="@+id/mian_drawer_layout"
+                                        style="@style/MatchMatch"
+                                        android:background="@color/WINDOW_BACKGROUND">
+
+
+    <include layout="@layout/content_main"/>
+
+    <fragment
+        android:id="@+id/main_nvg"
+        class="com.lv.note.ui.NavigationFra"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        tools:layout="@layout/fra_navigation_drawer"/>
+
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchMatch.Vertical"
+    android:background="@mipmap/wallpaper_3">
+
+
+    <com.lv.note.widget.clip.ClipImageLayout
+        android:id="@+id/id_clipImageLayout"
+        style="@style/MatchAuto" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:weightSum="10" >
+        <Button
+            android:id="@+id/id_action_clip"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="8"
+            android:background="@drawable/btn_fastlogin_selector"
+            android:gravity="center"
+            android:text="确 定"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

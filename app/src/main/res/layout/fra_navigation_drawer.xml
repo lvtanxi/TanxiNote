@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/MatchMatch.Vertical"
+              android:clickable="true"
+              android:layout_width="match_parent"
+              android:background="@mipmap/wallpaper_1">
+
+    <android.support.v7.widget.CardView
+        style="@style/MatchWrap"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:background="@mipmap/wallpaper_5">
+            <com.lv.note.widget.CircleImageView
+                android:id="@+id/nva_header"
+                style="@style/WrapWrap"
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
+                app:layoutBorderWidth="3dp"
+                app:CircleImageHight="120dp"
+                app:CircleImageWidth="120dp"
+                app:layoutBorderColor="@android:color/white"
+                app:CircleImageSrc="@mipmap/header"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/nva_recycler_view"
+        android:layout_marginTop="25dp"
+        style="@style/MatchAuto"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginBottom="5dp"
+        android:weightSum="10" >
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/nva_login_out"
+            android:layout_width="0dip"
+            android:layout_height="44dip"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="7"
+            android:background="@drawable/btn_fastlogin_selector"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+</LinearLayout>

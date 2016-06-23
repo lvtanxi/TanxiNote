@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FC4103</color>
+    <color name="colorPrimaryDark">#FC4103</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="TOAST_COLOR">#88000000</color>
+    <color name="COLOR_BORDER_LINE">#d7d7d7</color>
+    <color name="WINDOW_BACKGROUND">#F8F8F8</color>
+    <color name="black">#222222</color>
+    <color name="trans">#00000000</color>
+    <color name="dividerColor">#AAAAAA</color>
+    <color name="not_enabled">#e0e1e3</color>
+    <color name="blue">#03a9f4</color>
+    <color name="hit_color">#999999</color>
+    <color name="text_color">#666666</color>
+    <color name="GRAY2">#969696</color>
+
+    <integer-array name="colors">
+        <item>@android:color/holo_blue_light</item>
+        <item>@android:color/holo_green_light</item>
+        <item>@android:color/holo_orange_light</item>
+        <item>@android:color/holo_red_light</item>
+        <item>@android:color/holo_purple</item>
+    </integer-array>
+
+</resources>

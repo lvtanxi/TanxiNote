@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                style="@style/MatchMatch">
+
+
+    <com.github.glomadrian.loadingballs.BallView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        app:ball_colors="@array/colors"
+        app:balls="5"
+        app:enable_size_animation="true"
+        app:max_ball_size="12dp"
+        app:min_ball_size="5dp"
+        app:movement_cycle_time="1500"
+        app:size_cycle_time="500"
+        />
+
+</RelativeLayout>

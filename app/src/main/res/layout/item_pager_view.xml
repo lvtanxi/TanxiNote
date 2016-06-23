@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/WrapWrap"
+    android:background="@drawable/we_selector"
+    android:clickable="false"
+    android:padding="10dp">
+
+    <View
+        android:layout_width="800dp"
+        android:layout_height="10px"/>
+
+    <ImageView
+        android:id="@+id/vitem_image"
+        style="@style/WrapWrap.Text"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/vitem_temperature"
+        style="@style/WrapWrap.Text"
+        android:layout_below="@id/vitem_image"/>
+
+    <TextView
+        android:id="@+id/vitem_wind"
+        style="@style/WrapWrap.Text"
+        android:layout_below="@id/vitem_temperature"/>
+
+    <TextView
+        android:id="@+id/vitem_weather"
+        style="@style/WrapWrap.Text"
+        android:layout_below="@id/vitem_wind"/>
+
+    <TextView
+        android:id="@+id/vitem_date"
+        style="@style/WrapWrap.Text"
+        android:layout_below="@id/vitem_weather"/>
+
+    <TextView
+        android:id="@+id/vitem_week"
+        style="@style/WrapWrap.Text"
+        android:layout_below="@id/vitem_date"/>
+
+</RelativeLayout>

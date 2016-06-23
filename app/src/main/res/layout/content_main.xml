@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:id="@+id/id_coordinatorlayout"
+                                                 style="@style/MatchMatch"
+                                                 android:fitsSystemWindows="true">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/main_appbar"
+        style="@style/MatchWrap">
+
+        <include layout="@layout/common_toobar"/>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <include layout="@layout/common_recyclerview"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_float_button"
+        style="@style/WrapWrap"
+        android:layout_gravity="bottom|center"
+        android:src="@mipmap/ic_action_plusone"
+        app:backgroundTint="?attr/colorPrimary"
+        app:elevation="8dp"
+        android:layout_marginBottom="10dp"
+        app:pressedTranslationZ="16dp"
+        app:rippleColor="@color/alertdialog_line"
+        app:layout_behavior="com.lv.note.widget.ScrollBehavior"/>
+</android.support.design.widget.CoordinatorLayout>
