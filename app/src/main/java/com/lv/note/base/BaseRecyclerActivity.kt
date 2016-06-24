@@ -55,7 +55,7 @@ abstract class BaseRecyclerActivity<T> : BaseActivity(), BGARefreshDelegate.BGAR
     protected abstract val lBaseAdapter: LBaseAdapter<T>
 
 
-    protected fun addItems(items: List<T>) {
+    protected fun addItems(items: List<T>?) {
         mBaseAdapter?.addItems(items, true)
     }
 

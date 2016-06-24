@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 style="@style/MatchMatch"
+                                                 android:fitsSystemWindows="true"
+                                                 android:focusable="true"
+                                                 android:focusableInTouchMode="true">
+
+    <android.support.design.widget.AppBarLayout
+        style="@style/MatchWrap">
+
+        <include layout="@layout/common_toobar"/>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        style="@style/MatchMatch.Vertical"
+        android:background="@color/not_enabled"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <com.lv.note.widget.SearchEditText
+            android:id="@+id/city_search"
+            style="@style/editTextStyle"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="5dp"
+            android:hint="请输入城市名称"
+            android:imeOptions="actionSearch"/>
+
+        <RelativeLayout
+            android:background="@android:color/white"
+            style="@style/MatchMatch">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/city_recyclerview"
+                style="@style/MatchMatch"
+                android:overScrollMode="never"
+                android:scrollbars="none"/>
+
+            <com.lv.note.widget.FancyIndexer
+                android:id="@+id/city_fancyindexer"
+                style="@style/MatchMatch"
+                app:additionalTipOffset="40dip"
+                app:fontColor="@color/blue"
+                app:maxBezierHeight="150dip"
+                app:maxBezierWidth="180dip"
+                android:layout_marginRight="5dp"
+                app:maxFontSize="60"
+                app:minFontSize="50"
+                app:tipFontColor="?attr/colorPrimary"
+                app:tipFontSize="72"
+                app:widthOffset="15dip"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+

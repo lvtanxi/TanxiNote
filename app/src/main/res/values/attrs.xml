@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="HeartProgressBar">
-        <attr name="heartColor" format="color" />
+        <attr name="heartColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="CircleImageView">
         <attr name="layoutBorderColor" format="color|reference"/>
@@ -13,5 +13,20 @@
         <attr name="CircleImagePadding" format="float|dimension"/>
         <attr name="CircleImageSrc" format="reference"/>
     </declare-styleable>
+
+
+    <declare-styleable name="FancyIndexer">
+        <attr name="widthOffset" format="dimension" />
+        <attr name="minFontSize" format="integer" />
+        <attr name="maxFontSize" format="integer" />
+        <attr name="tipFontSize" format="integer" />
+        <attr name="maxBezierHeight" format="dimension" />
+        <attr name="maxBezierWidth" format="dimension" />
+        <attr name="maxBezierLines" format="integer" />
+        <attr name="additionalTipOffset" format="dimension" />
+        <attr name="fontColor" format="color" />
+        <attr name="tipFontColor" format="color" />
+    </declare-styleable>
+
 </resources>
 

@@ -24,6 +24,7 @@ import com.lv.test.ArrayUtils
 import com.lv.test.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
+import com.xiaomi.market.sdk.XiaomiUpdateAgent
 
 
 /**
@@ -100,6 +101,7 @@ class LoginAct : BaseActivity() {
 
     override fun processLogic() {
         super.processLogic()
+        XiaomiUpdateAgent.update(this)
         loadImage(Hawk.get(USER_NAME, ""))
         Handler().postDelayed({
             mP!!.start()

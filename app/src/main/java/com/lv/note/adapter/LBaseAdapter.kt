@@ -22,7 +22,7 @@ import java.util.*
  * Description:可以爲RecyclerView添加HeaderView
  */
 
-abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutResId: Int, protected var mDatas: MutableList<T> = ArrayList<T>()) : RecyclerView.Adapter<BaseHolder>() {
+abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutResId: Int=0, protected  var mDatas: MutableList<T> = ArrayList<T>()) : RecyclerView.Adapter<BaseHolder>() {
 
     private var mOpenAnimationEnable = true
     private val mInterpolator = LinearInterpolator()
@@ -80,7 +80,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         notifyDataSetChanged()
     }
 
-    fun addItems(items: List<T>, isRefresh: Boolean) {
+    fun addItems(items: List<T>?, isRefresh: Boolean) {
         if (isRefresh) {
             mDatas.clear()
             notifyDataSetChanged()
@@ -122,7 +122,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         return getDefItemViewType(position)
     }
 
-    protected fun getDefItemViewType(position: Int): Int {
+    protected open fun getDefItemViewType(position: Int): Int {
         return super.getItemViewType(position)
     }
 
@@ -132,7 +132,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
             HEADER_VIEW -> baseViewHolder = BaseHolder(mHeaderView!!)
             EMPTY_VIEW -> baseViewHolder = BaseHolder(emptyView!!)
             FOOTER_VIEW -> baseViewHolder = BaseHolder(mFooterView!!)
-            else -> baseViewHolder = onCreateDefViewHolder(parent)
+            else -> baseViewHolder = onCreateDefViewHolder(parent,viewType)
         }
         return baseViewHolder
 
@@ -170,7 +170,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         return holder.layoutPosition - headerViewsCount
     }
 
-    protected fun onCreateDefViewHolder(parent: ViewGroup): BaseHolder {
+    protected open fun onCreateDefViewHolder(parent: ViewGroup,viewType: Int): BaseHolder {
         return createBaseViewHolder(parent, mLayoutResId)
     }
 

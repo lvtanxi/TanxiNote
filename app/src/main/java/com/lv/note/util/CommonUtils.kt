@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -17,6 +18,7 @@ import com.plattysoft.leonids.ParticleSystem
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.ref.WeakReference
+import java.util.regex.Pattern
 
 /**
  * @author andy he
@@ -220,20 +222,6 @@ object CommonUtils {
                 .start();
     }
 
-    fun forMat(str: String?): String {
-        str?.let {
-            val length = str.length
-            val sb = StringBuffer()
-            for (i in 0..length - 1) {
-                sb.append(str[i])
-                if ((i + 1) % 10 == 0) {
-                    sb.append("\n")
-                }
-            }
-            return sb.toString()
-        }
-        return ""
-    }
 
     fun displayRoundImage(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
@@ -290,6 +278,16 @@ object CommonUtils {
         }
 
         return weatherId
+    }
+
+    fun getFirstLetter(pinyin: String): String {
+        if (TextUtils.isEmpty(pinyin)) return "#"
+        val c = pinyin.substring(0, 1)
+        val pattern = Pattern.compile("^[A-Za-z]+$")
+        if (pattern.matcher(c).matches()) {
+            return c.toUpperCase()
+        }
+        return "#"
     }
 
 }

@@ -2,6 +2,8 @@ package com.lv.note.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.dalong.francyconverflow.FancyCoverFlow
 import com.google.gson.Gson
@@ -14,6 +16,7 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.widget.chart.WeatherChartItem
 import com.lv.note.widget.chart.WeatherChartView
 import com.lv.test.BaseActivity
+import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
 import okhttp3.Call
@@ -36,6 +39,9 @@ class WeatherAct : BaseActivity(), BGARefreshDelegate.BGARefreshListener {
     private var mWeatherChartView: WeatherChartView<WeatherChartItem>? = null
 
     companion object {
+        val CITY_ID="CITY_ID"
+        val CITY_CHANGE="CITY_CHANGE"
+        val CITY_NAME="CITY_NAME"
         fun startWeatherAct(actvity: Activity) {
             actvity.startActivity(Intent(actvity, WeatherAct::class.java))
         }
@@ -52,10 +58,23 @@ class WeatherAct : BaseActivity(), BGARefreshDelegate.BGARefreshListener {
     }
 
     override fun initData() {
-        mToolbar!!.title = "檀溪天气"
+        mToolbar!!.title = "${Hawk.get(CITY_NAME,"成都")}天气"
         mDelegate = BGARefreshDelegate(mRefreshLayout!!, this, false)
         mfancyCoverFlow!!.unselectedScale = 0.3f//设置选中的规模
         mfancyCoverFlow!!.scaleDownGravity = 0.5f
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_change_city,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId==R.id.action_change){
+            ChangeCityAct.startChangeCityAct(this)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun processLogic() {
@@ -66,12 +85,21 @@ class WeatherAct : BaseActivity(), BGARefreshDelegate.BGARefreshListener {
         mRefreshLayout!!.setDelegate(mDelegate)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(Hawk.get(CITY_CHANGE,false)){
+            Hawk.remove(CITY_CHANGE)
+            mToolbar!!.title = "${Hawk.get(CITY_NAME,"成都")}天气"
+            processLogic()
+        }
+    }
+
     override fun onBGARefresh(): Boolean {
         val url = "http://apis.baidu.com/apistore/weatherservice/recentweathers"
         OkHttpUtils
                 .get()
                 .url(url)
-                .addParams("cityid", "101270101")
+                .addParams("cityid", Hawk.get(CITY_ID,"101270101"))
                 .addHeader("apikey", "8f6daecf84cbae393f48b080ae899728")
                 .tag(this)
                 .build()
