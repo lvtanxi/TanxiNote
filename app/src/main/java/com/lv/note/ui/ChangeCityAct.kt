@@ -9,6 +9,7 @@ import android.support.v4.util.ArrayMap
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,7 +75,8 @@ class ChangeCityAct : BaseActivity() {
         mToolbar!!.title="选择城市"
         mInflater = LayoutInflater.from(this)
         mTagFlowLayout= mInflater!!.inflate(R.layout.common_tagflow,null) as TagFlowLayout<String>?
-        mTagFlowLayout
+        mTagFlowLayout!!.setPadding( TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10.0f,resources.displayMetrics).toInt(),0,0,0)
+        mTagFlowLayout!!.setCheckable(false)
         mBaseAdapter = object : LBaseSearchAdapter<City>(R.layout.item_city) {
             override fun compareVal(item: City, constraint: String): Boolean {
                 return item.name.contains(constraint)||item.pinyin.contains(constraint)
@@ -95,8 +97,14 @@ class ChangeCityAct : BaseActivity() {
                 val tv = mInflater!!.inflate(R.layout.item_movie_type, parent, false) as TextView
                 tv.background= ContextCompat.getDrawable(tv.context, R.drawable.shape_white_border)
                 tv.text = t
-                tv.setOnClickListener {   httpCityCode(t) }
                 return tv
+            }
+            override fun onSelect(parent: ViewGroup, view: View, position: Int) {
+                httpCityCode(getItem(position))
+            }
+
+            override fun onUnSelect(parent: ViewGroup, view: View, position: Int) {
+                httpCityCode(getItem(position))
             }
         }
         mTagFlowLayout!!.setAdapter(tagAdapter)
