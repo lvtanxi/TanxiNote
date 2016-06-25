@@ -2,9 +2,7 @@ package com.lv.note.widget.flowtag
 
 import android.view.View
 import android.view.ViewGroup
-
-import java.util.ArrayList
-import java.util.Arrays
+import java.util.*
 
 /**
  * Created by zhy on 16/5/16.
@@ -32,20 +30,20 @@ abstract class TagAdapter<T> {
      * *
      * @return
      */
-    fun select(position: Int): Boolean {
+     fun  select(position: Int): Boolean {
         return false
     }
 
     /**
      * 未选中->选中，可以在这里设置样式
      */
-    fun onSelect(parent: ViewGroup, view: View, position: Int) {
+    open fun onSelect(parent: ViewGroup, view: View, position: Int) {
     }
 
     /**
      * 选中->未选中，可以在这里设置样式
      */
-    fun onUnSelect(parent: ViewGroup, view: View, position: Int) {
+    open fun onUnSelect(parent: ViewGroup, view: View, position: Int) {
     }
 
 

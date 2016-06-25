@@ -84,7 +84,7 @@ class MovieAct : BaseRecyclerActivity<Movie>() {
                         .setText(R.id.movieitem_time, "电影片长：${item.collect_count / 1000}分钟")
                         .setRating(R.id.movieitem_ratingbar, item.rating!!.average / 2)
 
-                baseHolder.getView<TagFlowLayout<String>>(R.id.movieitem_type).setAdapter(object : TagAdapter<String>(item.genres!!) {
+                baseHolder.getView<TagFlowLayout<String>>(R.id.common_tagflow).setAdapter(object : TagAdapter<String>(item.genres!!) {
                     override fun getView(parent: ViewGroup, position: Int, t: String): View {
                         val tv = mInflater!!.inflate(R.layout.item_movie_type, parent, false) as TextView
                         tv.text = t

@@ -31,9 +31,7 @@
                 style="@style/WrapWrap.TOP5"
                 android:text="类型:"/>
 
-            <com.lv.note.widget.flowtag.TagFlowLayout
-                android:id="@+id/movieitem_type"
-                style="@style/WrapWrap"/>
+            <include layout="@layout/common_tagflow"/>
 
             <TextView
                 style="@style/WrapWrap"

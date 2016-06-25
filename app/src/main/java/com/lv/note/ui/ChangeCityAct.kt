@@ -4,10 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
+import android.support.v4.content.ContextCompat
 import android.support.v4.util.ArrayMap
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lv.note.R
@@ -19,6 +24,8 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
 import com.lv.note.widget.FancyIndexer
 import com.lv.note.widget.SearchEditText
+import com.lv.note.widget.flowtag.TagAdapter
+import com.lv.note.widget.flowtag.TagFlowLayout
 import com.lv.test.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
@@ -30,13 +37,14 @@ import java.util.*
 
 class ChangeCityAct : BaseActivity() {
 
-
     private var citys: List<City>? = null
     private var mRecyclerView: RecyclerView? = null
     private var mBaseAdapter: LBaseSearchAdapter<City>? = null
     private var mLetterIndexes: ArrayMap<String, Int>? = null
     private var mFancyIndexer: FancyIndexer? = null
     private var mSearchEditText: SearchEditText? = null
+    private var mTagFlowLayout: TagFlowLayout<String>? = null
+    private var mInflater: LayoutInflater? = null
 
     private val mHandler: Handler = object : Handler() {
         override fun handleMessage(msg: Message?) {
@@ -64,6 +72,9 @@ class ChangeCityAct : BaseActivity() {
 
     override fun initData() {
         mToolbar!!.title="选择城市"
+        mInflater = LayoutInflater.from(this)
+        mTagFlowLayout= mInflater!!.inflate(R.layout.common_tagflow,null) as TagFlowLayout<String>?
+        mTagFlowLayout
         mBaseAdapter = object : LBaseSearchAdapter<City>(R.layout.item_city) {
             override fun compareVal(item: City, constraint: String): Boolean {
                 return item.name.contains(constraint)||item.pinyin.contains(constraint)
@@ -78,9 +89,18 @@ class ChangeCityAct : BaseActivity() {
             override fun onItemClick(item: City) {
                 httpCityCode(item.name)
             }
-
-
         }
+        val tagAdapter=object :TagAdapter<String>(arrayOf("成都","重庆","北京","上海","广州","深圳","武汉","杭州","天津")){
+            override fun getView(parent: ViewGroup, position: Int, t: String): View {
+                val tv = mInflater!!.inflate(R.layout.item_movie_type, parent, false) as TextView
+                tv.background= ContextCompat.getDrawable(tv.context, R.drawable.shape_white_border)
+                tv.text = t
+                tv.setOnClickListener {   httpCityCode(t) }
+                return tv
+            }
+        }
+        mTagFlowLayout!!.setAdapter(tagAdapter)
+        mBaseAdapter!!.addHeaderView(mTagFlowLayout)
         mRecyclerView!!.layoutManager = LinearLayoutManager(mRecyclerView!!.context, LinearLayoutManager.VERTICAL, false)
         mRecyclerView!!.adapter = mBaseAdapter
     }
@@ -147,7 +167,7 @@ class ChangeCityAct : BaseActivity() {
                         val currentLetter = CommonUtils.getFirstLetter(city.pinyin);
                         if (!mLetterIndexes!!.contains(currentLetter)) {
                             city.letter = currentLetter
-                            mLetterIndexes!!.put(currentLetter, index)
+                            mLetterIndexes!!.put(currentLetter, index+1)
                         }
                     }
                 }
