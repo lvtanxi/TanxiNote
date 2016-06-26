@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@null"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_loading"/>
+            android:src="@drawable/ic_loading"/>
 
         <LinearLayout
             style="@style/MatchWrap.Vertical"

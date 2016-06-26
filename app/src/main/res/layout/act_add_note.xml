@@ -26,61 +26,61 @@
                 android:id="@+id/undo"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_action_undo"/>
+                android:src="@drawable/ic_action_undo"/>
 
             <ImageButton
                 android:id="@+id/redo"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_action_redo"/>
+                android:src="@drawable/ic_action_redo"/>
 
             <ImageButton
                 android:id="@+id/bold"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_bold"/>
+                android:src="@drawable/ic_format_bold"/>
 
             <ImageButton
                 android:id="@+id/italic"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_italic"/>
+                android:src="@drawable/ic_format_italic"/>
 
             <ImageButton
                 android:id="@+id/underline"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_underline"/>
+                android:src="@drawable/ic_format_underline"/>
 
             <ImageButton
                 android:id="@+id/strikethrough"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_strikethrough"/>
+                android:src="@drawable/ic_format_strikethrough"/>
 
             <ImageButton
                 android:id="@+id/bullet"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_bullet"/>
+                android:src="@drawable/ic_format_bullet"/>
 
             <ImageButton
                 android:id="@+id/quote"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_quote"/>
+                android:src="@drawable/ic_format_quote"/>
 
             <ImageButton
                 android:id="@+id/link"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_insert_link"/>
+                android:src="@drawable/ic_insert_link"/>
 
             <ImageButton
                 android:id="@+id/clear"
                 style="@style/knifeItem"
                 android:contentDescription="@null"
-                android:src="@mipmap/ic_format_clear"/>
+                android:src="@drawable/ic_format_clear"/>
 
         </LinearLayout>
 

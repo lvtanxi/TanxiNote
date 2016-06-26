@@ -22,7 +22,7 @@
         android:id="@+id/main_float_button"
         style="@style/WrapWrap"
         android:layout_gravity="bottom|center"
-        android:src="@mipmap/ic_action_plusone"
+        android:src="@drawable/ic_action_plusone"
         app:backgroundTint="?attr/colorPrimary"
         app:elevation="8dp"
         android:layout_marginBottom="10dp"

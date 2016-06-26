@@ -16,7 +16,7 @@
             style="@style/WrapWrap"
             android:layout_marginLeft="20dp"
             android:contentDescription="@null"
-            android:src="@mipmap/more"/>
+            android:src="@drawable/more"/>
 
         <TextView
             android:id="@+id/navitem_txt"

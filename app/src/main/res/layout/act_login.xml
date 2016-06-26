@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               style="@style/MatchMatch.Vertical"
-              android:background="@mipmap/wallpaper_2"
+              android:background="@drawable/wallpaper_2"
               android:paddingLeft="50dp"
               android:paddingRight="50dp"
               android:weightSum="10">
@@ -32,7 +32,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 android:contentDescription="@null"
-                android:src="@mipmap/header"/>
+                android:src="@drawable/header"/>
 
             <android.support.design.widget.TextInputLayout
                 style="@style/MatchWrap">
@@ -75,6 +75,15 @@
                     android:contentDescription="@null"
                     android:visibility="gone"
                     android:src="@drawable/go"/>
+
+                <ImageButton
+                    android:id="@+id/login_what"
+                    style="@style/WrapWrap"
+                    android:layout_below="@id/login_progress"
+                    android:layout_alignParentRight="true"
+                    android:background="?selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:src="@drawable/what"/>
             </RelativeLayout>
 
         </LinearLayout>

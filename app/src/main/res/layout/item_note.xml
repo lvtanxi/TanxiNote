@@ -27,7 +27,7 @@
             android:layout_alignParentRight="true"
             android:background="?selectableItemBackground"
             android:contentDescription="@null"
-            android:src="@mipmap/more"/>
+            android:src="@drawable/more"/>
 
         <io.github.mthli.knife.KnifeText
             android:id="@+id/item_knife"

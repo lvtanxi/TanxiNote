@@ -6,6 +6,6 @@
         android:id="@+id/action_change"
         android:orderInCategory="100"
         android:title="切换"
-        android:icon="@mipmap/change_city"
+        android:icon="@drawable/change_city"
         app:showAsAction="ifRoom"/>
 </menu>

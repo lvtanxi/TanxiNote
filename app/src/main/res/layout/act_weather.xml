@@ -9,7 +9,7 @@
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
         android:id="@+id/w_recyclerview_refresh"
         style="@style/MatchMatch"
-        android:background="@mipmap/wallpaper_0"
+        android:background="@drawable/wallpaper_0"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout

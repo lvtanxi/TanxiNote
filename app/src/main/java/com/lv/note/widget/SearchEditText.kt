@@ -108,7 +108,7 @@ class SearchEditText @JvmOverloads constructor(context: Context, attrs: Attribut
             getGlobalVisibleRect(rect)
             rect!!.left = rect!!.right - drawableDel!!.intrinsicWidth
         } else {
-            drawableDel = ContextCompat.getDrawable(context, R.mipmap.delete)
+            drawableDel = ContextCompat.getDrawable(context, R.drawable.delete)
         }
         return super.onTouchEvent(event)
     }
@@ -118,7 +118,7 @@ class SearchEditText @JvmOverloads constructor(context: Context, attrs: Attribut
         if (this.length() < 1) {
             drawableDel = null
         } else {
-            drawableDel = ContextCompat.getDrawable(context, R.mipmap.delete)
+            drawableDel = ContextCompat.getDrawable(context, R.drawable.delete)
         }
         listener?.onSearchClick(arg0.toString())
     }

@@ -134,8 +134,8 @@ class BaseHolder
         val view = getView<ImageView>(viewId)
         Glide.with(view.context)
                 .load(url)
-                .placeholder(R.mipmap.ic_loading)
-                .error(R.mipmap.ic_loading)
+                .placeholder(R.drawable.ic_loading)
+                .error(R.drawable.ic_loading)
                 .crossFade()
                 .into(view)
         return this

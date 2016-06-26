@@ -3,6 +3,7 @@ package com.lv.note.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Handler
+import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
@@ -42,6 +43,7 @@ class LoginAct : BaseActivity() {
     private var ps: ParticleSystem ? = null
     private var mP: HeartProgressBar? = null
     private var header: ImageView? = null
+    private var what: ImageButton? = null
 
     companion object {
         val USER_NAME = "USER_PHONE"
@@ -60,6 +62,7 @@ class LoginAct : BaseActivity() {
         sub = fdb(R.id.login_sub);
         mP = fdb(R.id.login_progress);
         header = fdb(R.id.login_image);
+        what = fdb(R.id.login_what);
     }
 
     override fun initData() {
@@ -78,7 +81,7 @@ class LoginAct : BaseActivity() {
                 if (name!!.text.length == 11)
                     loadImage(name!!.text.toString())
                 else
-                    header!!.setImageResource(R.mipmap.header)
+                    header!!.setImageResource(R.drawable.header)
             }
         })
         pwd!!.addTextChangedListener(object : CustTextWatcher() {
@@ -87,6 +90,15 @@ class LoginAct : BaseActivity() {
             }
         })
         sub!!.setOnClickListener { findUser() }
+
+        what!!.setOnClickListener {
+            AlertDialog.Builder(this)
+            .setTitle("檀溪提示")
+            .setMessage("用户是根据后端判断是否存在，所以没用注册界面，请见谅")
+            .setPositiveButton("确定"){dialog,index -> dialog.dismiss()}
+            .create()
+            .show()
+        }
     }
 
     fun stopHeartProgressBar(){
@@ -142,7 +154,7 @@ class LoginAct : BaseActivity() {
         event?.let {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    ps = ParticleSystem(this, 200, R.mipmap.star_pink, 800)
+                    ps = ParticleSystem(this, 200, R.drawable.star_pink, 800)
                     ps!!.setScaleRange(0.7f, 1.3f)
                     ps!!.setSpeedRange(0.05f, 0.1f)
                     ps!!.setRotationSpeedRange(90f, 180f)

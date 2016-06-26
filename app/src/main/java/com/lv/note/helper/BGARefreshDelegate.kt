@@ -91,7 +91,7 @@ class BGARefreshDelegate : BGARefreshLayout.BGARefreshLayoutDelegate {
     fun getRefreshViewHolder(context: Context, loadMore: Boolean): BGARefreshViewHolder {
         val stickinessRefreshViewHolder = BGAStickinessRefreshViewHolder(context, loadMore)
         stickinessRefreshViewHolder.setStickinessColor(R.color.colorPrimary)
-        stickinessRefreshViewHolder.setRotateImage(R.mipmap.bga_refresh_stickiness)
+        stickinessRefreshViewHolder.setRotateImage(R.drawable.bga_refresh_stickiness)
         stickinessRefreshViewHolder.setLoadingMoreText("")
         return stickinessRefreshViewHolder
     }

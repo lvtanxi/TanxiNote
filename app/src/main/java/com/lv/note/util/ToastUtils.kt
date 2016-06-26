@@ -64,7 +64,7 @@ class ToastUtils(context: Context) {
         }
 
         fun textToastError(context: Context, text: String) {
-            textToast(context, text, R.mipmap.toast_error)
+            textToast(context, text, R.drawable.toast_error)
         }
 
         fun textToast(context: Context, text: String, imageId: Int) {
@@ -85,7 +85,7 @@ class ToastUtils(context: Context) {
             }
             mInstance!!.tv!!.text = text
             if (resId == 0)
-                resId = R.mipmap.toast_success
+                resId = R.drawable.toast_success
             mInstance!!.mImageView!!.setImageResource(resId)
             mToast!!.show()
         }

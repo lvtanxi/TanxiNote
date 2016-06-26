@@ -21,7 +21,7 @@
                 android:id="@+id/toast_image"
                 style="@style/WrapWrap"
                 android:contentDescription="@null"
-                android:src="@mipmap/toast_success" />
+                android:src="@drawable/toast_success" />
 
             <TextView
                 android:id="@+id/toast_text"
