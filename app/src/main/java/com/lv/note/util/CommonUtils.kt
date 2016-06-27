@@ -226,8 +226,8 @@ object CommonUtils {
     fun displayRoundImage(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
                 .load(url)
-                .placeholder(R.drawable.header)
-                .error(R.drawable.header)
+                .placeholder(imageView.drawable)
+                .error(imageView.drawable)
                 .crossFade()
                 .into(imageView)
     }

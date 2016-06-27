@@ -4,9 +4,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/theme_color_primary</item>
+        <item name="colorPrimaryDark">@color/theme_color_primary_dark</item>
+        <item name="colorAccent">@color/theme_color_primary_trans</item>
         <item name="android:windowBackground">@color/WINDOW_BACKGROUND</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColorHint">@color/hit_color</item>
@@ -100,13 +100,44 @@
         <item name="android:layout_height">35dp</item>
         <item name="android:background">@drawable/shape_white_corners</item>
         <item name="android:drawablePadding">2dp</item>
-        <item name="android:drawableStart">@drawable/search</item>
+        <item name="android:drawableStart">@drawable/ic_search_black_24dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:imeOptions">actionSearch</item>
         <item name="android:padding">8dp</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColorHint">@color/COLOR_BORDER_LINE</item>
+    </style>
+
+    <style name="AppTheme.pink">
+        <item name="colorPrimary">@color/theme_pink</item>
+        <item name="colorPrimaryDark">@color/theme_pink_dark</item>
+        <item name="colorAccent">@color/theme_blue</item>
+    </style>
+    <style name="AppTheme.blue">
+        <item name="colorPrimary">@color/theme_blue</item>
+        <item name="colorPrimaryDark">@color/theme_blue_dark</item>
+        <item name="colorAccent">@color/theme_purple</item>
+    </style>
+    <style name="AppTheme.purple">
+        <item name="colorPrimary">@color/theme_purple</item>
+        <item name="colorPrimaryDark">@color/theme_purple_dark</item>
+        <item name="colorAccent">@color/theme_green</item>
+    </style>
+    <style name="AppTheme.green">
+        <item name="colorPrimary">@color/theme_green</item>
+        <item name="colorPrimaryDark">@color/theme_green_dark</item>
+        <item name="colorAccent">@color/theme_yellow</item>
+    </style>
+    <style name="AppTheme.yellow">
+        <item name="colorPrimary">@color/theme_yellow</item>
+        <item name="colorPrimaryDark">@color/theme_yellow_dark</item>
+        <item name="colorAccent">@color/theme_orange</item>
+    </style>
+    <style name="AppTheme.orange">
+        <item name="colorPrimary">@color/theme_orange</item>
+        <item name="colorPrimaryDark">@color/theme_orange_dark</item>
+        <item name="colorAccent">@color/theme_color_primary</item>
     </style>
 
 </resources>

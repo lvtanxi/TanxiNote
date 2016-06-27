@@ -8,6 +8,7 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder
 import cn.bingoogolapple.refreshlayout.BGAStickinessRefreshViewHolder
 import com.lv.note.R
+import com.lv.note.util.ThemeUtils
 
 /**
  * User: 吕勇
@@ -90,7 +91,7 @@ class BGARefreshDelegate : BGARefreshLayout.BGARefreshLayoutDelegate {
      */
     fun getRefreshViewHolder(context: Context, loadMore: Boolean): BGARefreshViewHolder {
         val stickinessRefreshViewHolder = BGAStickinessRefreshViewHolder(context, loadMore)
-        stickinessRefreshViewHolder.setStickinessColor(R.color.colorPrimary)
+        stickinessRefreshViewHolder.setStickinessColor(ThemeUtils.obtainThemeColor())
         stickinessRefreshViewHolder.setRotateImage(R.drawable.bga_refresh_stickiness)
         stickinessRefreshViewHolder.setLoadingMoreText("")
         return stickinessRefreshViewHolder

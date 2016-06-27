@@ -27,6 +27,5 @@
         <attr name="fontColor" format="color" />
         <attr name="tipFontColor" format="color" />
     </declare-styleable>
-
 </resources>
 

@@ -9,7 +9,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
@@ -39,11 +38,11 @@ class LoginAct : BaseActivity() {
 
     private var name: EditText? = null
     private var pwd: EditText? = null
-    private var sub: ImageButton? = null
+    private var sub: ImageView? = null
     private var ps: ParticleSystem ? = null
     private var mP: HeartProgressBar? = null
     private var header: ImageView? = null
-    private var what: ImageButton? = null
+    private var what: ImageView? = null
 
     companion object {
         val USER_NAME = "USER_PHONE"
@@ -94,7 +93,7 @@ class LoginAct : BaseActivity() {
         what!!.setOnClickListener {
             AlertDialog.Builder(this)
             .setTitle("檀溪提示")
-            .setMessage("用户是根据后端判断是否存在，所以没用注册界面，请见谅")
+            .setMessage("用户是根据后端判断是否存在,所以没用注册界面,请见谅.也请妥善管理自己的用户名和密码!")
             .setPositiveButton("确定"){dialog,index -> dialog.dismiss()}
             .create()
             .show()

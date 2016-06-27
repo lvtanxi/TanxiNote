@@ -30,7 +30,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         val imagePadding = array.getDimension(R.styleable.CircleImageView_CircleImagePadding, 8f).toInt()
         val imageSrc = array.getDrawable(R.styleable.CircleImageView_CircleImageSrc)
         array.recycle()
-        this.circleImage = ImageView(context)
+        this.circleImage = TintImageView(context)
         val myGrad = GradientDrawable()
         myGrad.setShape(GradientDrawable.OVAL)
         myGrad.setColor(bgColor)
@@ -42,7 +42,7 @@ class CircleImageView @JvmOverloads constructor(context: Context, attrs: Attribu
         circleImage.layoutParams = ViewGroup.LayoutParams(imageWidth, imageHight)
         circleImage.setPadding(imagePadding, imagePadding, imagePadding, imagePadding)
         circleImage.scaleType= ImageView.ScaleType.FIT_XY
-        circleImage.setImageDrawable(imageSrc)
+        circleImage.changeDrawable(imageSrc)
         addView(circleImage)
     }
 }

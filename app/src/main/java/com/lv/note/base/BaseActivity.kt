@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import com.lv.note.R
 import com.lv.note.helper.IBaseView
+import com.lv.note.util.ThemeUtils
 import com.lv.note.util.ToastUtils
 import com.lv.note.widget.LoadingDialog
 
@@ -24,6 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     protected var mToolbar: Toolbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeUtils.obtainCurrentTheme())
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(loadLayoutId())
         initToolbar()

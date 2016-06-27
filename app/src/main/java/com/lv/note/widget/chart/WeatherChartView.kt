@@ -6,8 +6,10 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Point
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
+import com.lv.note.util.ThemeUtils
 import java.util.*
 
 class WeatherChartView<T : WeatherChartItem> : View {
@@ -37,7 +39,7 @@ class WeatherChartView<T : WeatherChartItem> : View {
         if (items == null) {
             return
         }
-
+        val mColor=ContextCompat.getColor(context,ThemeUtils.obtainThemeColor())
         val height = height
         val width = width
 
@@ -48,7 +50,7 @@ class WeatherChartView<T : WeatherChartItem> : View {
         val bheight = height - margint - 2 * split
 
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint.color = Color.parseColor("#7fffffff")
+        paint.color =  Color.WHITE
         paint.strokeWidth = 4f
         paint.style = Paint.Style.STROKE
         canvas.drawLine(split.toFloat(), margint2.toFloat(), (width - split).toFloat(), margint2.toFloat(), paint)
@@ -57,12 +59,12 @@ class WeatherChartView<T : WeatherChartItem> : View {
         // 画单位
         val p = Paint()
         p.alpha = 0x0000ff
+        p.color = Color.WHITE
         p.textSize = sp2px(context, 10f).toFloat()
-        p.color = Color.parseColor("#28bbff")
         canvas.drawText(unit!!, split.toFloat(), (margint2 + split * 2).toFloat(), p)
         // 画X坐标
         val xlist = ArrayList<Int>()
-        paint.color = Color.GRAY
+        paint.color = Color.WHITE
         for (i in items!!.indices) {
             val span = (width - 2 * marginl) / items!!.size
             val x = marginl + span / 2 + span * i
@@ -89,12 +91,12 @@ class WeatherChartView<T : WeatherChartItem> : View {
         // 获取点集合
         val mPoints = getPoints(xlist, max, min, bheight, margint)
         // 画线
-        paint.color = Color.parseColor("#7fffffff")
+        paint.color = Color.WHITE
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = 8f
         drawLine(mPoints, canvas, paint)
         // 画点
-        paint.color = Color.parseColor("#28bbff")
+        paint.color =mColor
         paint.style = Paint.Style.FILL
         for (i in mPoints.indices) {
             canvas.drawCircle(mPoints[i].x.toFloat(), mPoints[i].y.toFloat(), 12f, paint)

@@ -45,7 +45,7 @@
                 android:id="@+id/city_fancyindexer"
                 style="@style/MatchMatch"
                 app:additionalTipOffset="40dip"
-                app:fontColor="@color/blue"
+                app:fontColor="?attr/colorAccent"
                 app:maxBezierHeight="150dip"
                 app:maxBezierWidth="180dip"
                 app:maxFontSize="60"

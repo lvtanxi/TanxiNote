@@ -24,6 +24,7 @@
                 app:layoutBorderWidth="3dp"
                 app:CircleImageHight="120dp"
                 app:CircleImageWidth="120dp"
+                app:layoutBgColor="@android:color/white"
                 app:layoutBorderColor="@android:color/white"
                 app:CircleImageSrc="@drawable/header"/>
         </RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical">
 
-        <ImageView
+        <com.lv.note.widget.TintImageView
             android:id="@+id/navitem_image"
             style="@style/WrapWrap"
             android:layout_marginLeft="20dp"
@@ -24,7 +24,7 @@
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/navitem_image"/>
 
-        <ImageView
+        <com.lv.note.widget.TintImageView
             android:id="@+id/navitem_selected"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"

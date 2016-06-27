@@ -25,7 +25,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp">
 
-            <ImageView
+            <com.lv.note.widget.TintImageView
                 android:id="@+id/login_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -65,18 +65,19 @@
                     android:id="@+id/login_progress"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    app:heartColor="?attr/colorPrimary"
                     android:layout_centerHorizontal="true"/>
 
-                <ImageButton
+                <com.lv.note.widget.TintImageView
                     android:id="@+id/login_sub"
                     style="@style/WrapWrap"
                     android:layout_centerInParent="true"
                     android:background="?selectableItemBackground"
                     android:contentDescription="@null"
                     android:visibility="gone"
-                    android:src="@drawable/go"/>
+                    android:src="@drawable/go_p"/>
 
-                <ImageButton
+                <com.lv.note.widget.TintImageView
                     android:id="@+id/login_what"
                     style="@style/WrapWrap"
                     android:layout_below="@id/login_progress"

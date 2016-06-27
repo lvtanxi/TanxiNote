@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.widget.Button
 import cn.bmob.v3.BmobUser
+import com.cocosw.bottomsheet.BottomSheet
 import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.adapter.BaseHolder
@@ -22,6 +23,7 @@ import com.lv.note.helper.UpdateListenerSub
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.Permission.PermissionListener
 import com.lv.note.util.Permission.PermissionManager
+import com.lv.note.util.ThemeUtils
 import com.lv.note.widget.CircleImageView
 import com.lv.note.widget.selectpop.DefExtendItem
 import com.lv.note.widget.selectpop.SelectPopupWindow
@@ -88,14 +90,29 @@ class NavigationFra : BaseFragment() {
                         WeatherAct.startWeatherAct(activity)
                     3 ->
                         MovieAct.startMovieAct(activity)
+                    4 ->
+                        changeTheme()
                     else ->
                         WebViewAct.startWebViewAct(activity, urls[item.icon], item.txt)
                 }
                 lastIndex = item.icon
             }
+
+            private fun changeTheme() {
+                BottomSheet
+                        .Builder(activity)
+                        .title("请选择主题:")
+                        .sheet(R.menu.menu_theme)
+                        .listener { dialogInterface, index ->
+                                ThemeUtils.saveTheme(activity,index)
+                            }
+                        .grid()
+                        .build()
+                        .show()
+            }
         }
         mRecyclerView!!.adapter = mBaseAdapter
-        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪电影")
+        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪电影", "檀溪主题")
         val items = ArrayList<NavigationItem>();
         for ((index, name) in names.withIndex()) {
             when (index) {
