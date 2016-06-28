@@ -23,6 +23,11 @@
             style="@style/WrapWrap.Horizontal">
 
             <ImageButton
+                android:id="@+id/volume"
+                style="@style/knifeItem"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_volume_up_black_24dp"/>
+            <ImageButton
                 android:id="@+id/undo"
                 style="@style/knifeItem"
                 android:contentDescription="@null"

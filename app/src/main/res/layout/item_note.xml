@@ -21,7 +21,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/item_date"/>
 
-        <ImageButton
+        <com.lv.note.widget.TintImageView
             android:id="@+id/item_more"
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"

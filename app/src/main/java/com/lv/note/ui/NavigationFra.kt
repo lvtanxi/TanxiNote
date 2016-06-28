@@ -78,7 +78,7 @@ class NavigationFra : BaseFragment() {
         mBaseAdapter = object : LBaseAdapter<NavigationItem>(R.layout.item_nav) {
             override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: NavigationItem) {
                 baseHolder.setText(R.id.navitem_txt, item.txt)
-                        .setImageLevel(R.id.navitem_selected, item.selected)
+                        .setImageResource(R.id.navitem_selected, if(item.selected==1)R.drawable.selected else R.drawable.nav_item)
             }
 
             override fun onItemClick(item: NavigationItem) {
@@ -163,10 +163,6 @@ class NavigationFra : BaseFragment() {
                                             startActivityForResult(openCameraIntent, PHOTOTAKE)
                                         }
 
-                                        override fun onDenied() {
-                                            //用户拒绝该权限时调用
-                                            mBaseActivity!!.toastError("对不起！没有办法启动相机")
-                                        }
 
                                         override fun onShowRationale(permissionManager: PermissionManager, permissions: Array<String>) {
                                             //当用户拒绝某权限时并点击`不再提醒`的按钮时，下次应用再请求该权限时，需要给出合适的响应（比如,给个展示对话框来解释应用为什么需要该权限）

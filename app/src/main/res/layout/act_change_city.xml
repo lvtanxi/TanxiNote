@@ -37,7 +37,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/city_recyclerview"
                 style="@style/MatchMatch"
-                android:paddingRight="20dp"
+                android:paddingRight="40dp"
                 android:overScrollMode="never"
                 android:scrollbars="none"/>
 
@@ -48,6 +48,7 @@
                 app:fontColor="?attr/colorAccent"
                 app:maxBezierHeight="150dip"
                 app:maxBezierWidth="180dip"
+                android:layout_marginRight="5dp"
                 app:maxFontSize="60"
                 app:minFontSize="50"
                 app:tipFontColor="?attr/colorPrimary"

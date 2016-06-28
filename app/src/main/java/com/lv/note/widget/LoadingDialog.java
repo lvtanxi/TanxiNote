@@ -15,20 +15,15 @@ import com.lv.note.R;
  */
 public class LoadingDialog extends Dialog {
 
-    private boolean outSideCancele = false;
-    public LoadingDialog(Context context) {
-        this(context, false);
-    }
 
-    public LoadingDialog(Context context, boolean outSideCancele) {
+    public LoadingDialog(Context context) {
         super(context, R.style.loading_dialog_style);
-        this.outSideCancele = outSideCancele;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_dialog);
-        setCanceledOnTouchOutside(outSideCancele);
+        setCanceledOnTouchOutside(false);
     }
 }

@@ -73,28 +73,6 @@ class PermissionManager(private val mObject: Any) {
         }
     }
 
-    /**根据requestCode处理响应的权限
-     * @param permissions
-     * *
-     * @param results
-     */
-    fun onPermissionResult(permissions: Array<String>, results: IntArray) {
-        val deniedPermissions = ArrayList<String>()
-        for (i in results.indices) {
-            if (results[i] != PackageManager.PERMISSION_GRANTED) {//未授权
-                deniedPermissions.add(permissions[i])
-            }
-        }
-        if (deniedPermissions.size > 0) {
-            if (mListener != null) {
-                mListener!!.onDenied()
-            }
-        } else {
-            if (mListener != null) {
-                mListener!!.onGranted()
-            }
-        }
-    }
 
     private fun findDeniedPermissions(activity: Activity, vararg permissions: String): Map<String, List<String>> {
         val map = ArrayMap<String, List<String>>()

@@ -190,10 +190,12 @@
     *;
 }
 
+
 #protobuf
 -dontwarn com.google.**
 -keep class com.google.protobuf.** {*;}
 
+-keep class com.iflytek.**{*;}
 # 如果你需要兼容6.0系统，请不要混淆org.apache.http.legacy.jar
  -dontwarn android.net.compatibility.**
  -dontwarn android.net.http.**

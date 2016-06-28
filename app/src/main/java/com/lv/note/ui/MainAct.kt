@@ -6,11 +6,10 @@ import android.support.design.widget.AppBarLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.PopupMenu
 import android.text.Html
-import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
-import android.widget.PopupMenu
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
@@ -20,6 +19,7 @@ import com.lv.note.base.BaseRecyclerActivity
 import com.lv.note.entity.Note
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
+import com.lv.note.util.SpeechSynthesizerUtils
 import com.orhanobut.hawk.Hawk
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
 
@@ -84,21 +84,33 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
                     return
                 }
                 val mPopupMenu = PopupMenu(this@MainAct, view)
+                mPopupMenu.menu.add("语音播报")
                 mPopupMenu.menu.add("分享")
                 mPopupMenu.menu.add("删除")
                 mPopupMenu.setOnMenuItemClickListener { item ->
                     val note = mBaseAdapter?.getItem(position)
                     note?.let {
-                        if (TextUtils.equals("分享", item.title))
-                            shareText(note.note)
-                        else
-                            updateNote(note)
+                        when(item.title){
+                            "分享"->
+                                shareText(note.note)
+                            "删除"->
+                                updateNote(note)
+                            "语音播报"->
+                                SpeechSynthesizerUtils.initSpeechSynthesizer(this@MainAct)
+                                        .speechSynthesizer(this@MainAct,Html.fromHtml(note.note).toString())
+
+                        }
                     }
                     true
                 }
                 mPopupMenu.show()
             }
         })
+    }
+
+    override fun onDestroy() {
+        SpeechSynthesizerUtils.initSpeechSynthesizer(this).cancel()
+        super.onDestroy()
     }
 
     private fun shareText(message: String) {

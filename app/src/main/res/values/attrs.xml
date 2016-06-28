@@ -27,5 +27,16 @@
         <attr name="fontColor" format="color" />
         <attr name="tipFontColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="ColorfulRingProgressView">
+        <attr name="bgColor" format="color"/>
+        <attr name="fgColorStart" format="color" />
+        <attr name="fgColorEnd" format="color" />
+        <attr name="fgtextColor" format="color" />
+        <attr name="fgtextSzie" format="integer" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="percent" format="float"/>
+        <attr name="startAngle" format="float"/>
+    </declare-styleable>
 </resources>
 

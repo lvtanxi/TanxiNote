@@ -29,7 +29,6 @@
             style="@style/WrapWrap"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:contentDescription="@null"
-            android:src="@drawable/nav_item"/>
+            android:contentDescription="@null"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

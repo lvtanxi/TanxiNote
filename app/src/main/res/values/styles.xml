@@ -72,20 +72,25 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0</item>
     </style>
+    <style name="loading_dialog_style.color">
+        <item name="android:backgroundDimAmount">0.1</item>
+    </style>
 
     <style name="ActionSheetAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/push_up_in</item>
         <item name="android:windowExitAnimation">@anim/push_up_out</item>
     </style>
 
-        <style name="MatchWrap.CradView">
-            <item name="android:layout_margin">8dp</item>
-            <item name="cardCornerRadius">5dp</item>
-            <item name="cardElevation">10dp</item>
-        </style>
-        <style name="WrapWrap.TOP5">
-            <item name="android:layout_marginTop">5dp</item>
-        </style>
+    <style name="MatchWrap.CradView">
+        <item name="android:layout_margin">8dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="cardElevation">10dp</item>
+    </style>
+
+    <style name="WrapWrap.TOP5">
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
     <style name="LetterIndexTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -95,6 +100,7 @@
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textSize">16sp</item>
     </style>
+
     <style name="editTextStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">35dp</item>
@@ -114,26 +120,31 @@
         <item name="colorPrimaryDark">@color/theme_pink_dark</item>
         <item name="colorAccent">@color/theme_blue</item>
     </style>
+
     <style name="AppTheme.blue">
         <item name="colorPrimary">@color/theme_blue</item>
         <item name="colorPrimaryDark">@color/theme_blue_dark</item>
         <item name="colorAccent">@color/theme_purple</item>
     </style>
+
     <style name="AppTheme.purple">
         <item name="colorPrimary">@color/theme_purple</item>
         <item name="colorPrimaryDark">@color/theme_purple_dark</item>
         <item name="colorAccent">@color/theme_green</item>
     </style>
+
     <style name="AppTheme.green">
         <item name="colorPrimary">@color/theme_green</item>
         <item name="colorPrimaryDark">@color/theme_green_dark</item>
         <item name="colorAccent">@color/theme_yellow</item>
     </style>
+
     <style name="AppTheme.yellow">
         <item name="colorPrimary">@color/theme_yellow</item>
         <item name="colorPrimaryDark">@color/theme_yellow_dark</item>
         <item name="colorAccent">@color/theme_orange</item>
     </style>
+
     <style name="AppTheme.orange">
         <item name="colorPrimary">@color/theme_orange</item>
         <item name="colorPrimaryDark">@color/theme_orange_dark</item>
