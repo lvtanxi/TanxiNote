@@ -34,7 +34,7 @@ class BookListAct : BaseRecyclerActivity<Book>() {
     }
 
     override fun initData() {
-        mToolbar!!.title = "檀溪读物(本地)"
+        mToolbar!!.title = "檀溪阅读(本地)"
         super.initData()
     }
 

@@ -112,7 +112,7 @@ class NavigationFra : BaseFragment() {
             }
         }
         mRecyclerView!!.adapter = mBaseAdapter
-        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪工具", "檀溪主题")
+        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪阅读", "檀溪主题")
         val items = ArrayList<NavigationItem>();
         for ((index, name) in names.withIndex()) {
             when (index) {
