@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchWrap.CradView">
+
+    <RelativeLayout
+        style="@style/MatchWrap"
+        android:background="?selectableItemBackground"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="10dp">
+
+        <com.lv.note.widget.TintImageView
+            android:id="@+id/bookitem_image"
+            style="@style/WrapWrap"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_book"/>
+
+        <com.lv.note.widget.Focusedtrue4TV
+            android:id="@+id/bookitem_name"
+            style="@style/MatchWrap"
+            android:ellipsize="marquee"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/bookitem_image"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/bookitem_size"
+            style="@style/WrapWrap"
+            android:layout_alignLeft="@id/bookitem_name"
+            android:layout_below="@id/bookitem_name"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/bookitem_name"/>
+        <TextView
+            android:id="@+id/bookitem_progress"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:textColor="?attr/colorPrimary"
+            style="@style/WrapWrap"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

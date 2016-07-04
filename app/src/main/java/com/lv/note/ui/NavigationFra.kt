@@ -89,7 +89,7 @@ class NavigationFra : BaseFragment() {
                     2 ->
                         WeatherAct.startWeatherAct(activity)
                     3 ->
-                        MovieAct.startMovieAct(activity)
+                        BookListAct.startBookListAct(activity)
                     4 ->
                         changeTheme()
                     else ->
@@ -112,7 +112,7 @@ class NavigationFra : BaseFragment() {
             }
         }
         mRecyclerView!!.adapter = mBaseAdapter
-        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪电影", "檀溪主题")
+        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪工具", "檀溪主题")
         val items = ArrayList<NavigationItem>();
         for ((index, name) in names.withIndex()) {
             when (index) {

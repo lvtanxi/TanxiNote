@@ -13,8 +13,6 @@ import android.widget.CheckedTextView
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.lv.note.R
 import io.github.mthli.knife.KnifeText
 
 /**
@@ -130,16 +128,6 @@ class BaseHolder
         return this
     }
 
-    fun setImageUrl(viewId: Int, url: String): BaseHolder {
-        val view = getView<ImageView>(viewId)
-        Glide.with(view.context)
-                .load(url)
-                .placeholder(R.drawable.ic_loading)
-                .error(R.drawable.ic_loading)
-                .crossFade()
-                .into(view)
-        return this
-    }
 
     /**
      * Sets image bitmap.
