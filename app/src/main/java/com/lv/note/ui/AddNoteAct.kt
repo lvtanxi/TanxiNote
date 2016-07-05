@@ -23,7 +23,7 @@ import com.lv.note.util.CountDown
 import com.lv.note.util.JsonUtils
 import com.lv.note.util.Permission.PermissionListener
 import com.lv.note.util.Permission.PermissionManager
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 import com.lv.test.StrUtils
 import com.orhanobut.hawk.Hawk
 import io.github.mthli.knife.KnifeText

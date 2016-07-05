@@ -86,7 +86,7 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.3'
     compile 'com.google.android:flexbox:0.1.2'
     compile 'com.cocosw:bottomsheet:1.+@aar'
-    compile 'com.github.barteksc:android-pdf-viewer:1.1.2'
+    compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
 }
 repositories {
     mavenCentral()

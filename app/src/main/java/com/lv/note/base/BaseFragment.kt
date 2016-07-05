@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lv.note.util.ToastUtils
-import com.lv.test.BaseActivity
 
 /**
  * User: 吕勇

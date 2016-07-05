@@ -8,7 +8,7 @@ import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
 import com.lv.note.widget.EmptyView
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 
 /**
  * User: 吕勇

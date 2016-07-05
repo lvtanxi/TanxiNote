@@ -4,7 +4,7 @@
 
     <include layout="@layout/common_toobar"/>
 
-    <com.github.barteksc.pdfviewer.PDFView
+    <com.joanzapata.pdfview.PDFView
         android:id="@+id/book_pdf_view"
         style="@style/MatchMatch"/>
 </LinearLayout>

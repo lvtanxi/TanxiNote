@@ -1,4 +1,4 @@
-package com.lv.test
+package com.lv.note.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -88,7 +88,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
 
     override fun showLodingView() {
         if(null==mLodingView)
-            mLodingView=LoadingDialog(this)
+            mLodingView= LoadingDialog(this)
         mLodingView?.let {
             if (!mLodingView!!.isShowing)
                 mLodingView!!.show();
@@ -113,5 +113,4 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

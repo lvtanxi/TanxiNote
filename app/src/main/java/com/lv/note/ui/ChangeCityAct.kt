@@ -27,7 +27,7 @@ import com.lv.note.widget.FancyIndexer
 import com.lv.note.widget.SearchEditText
 import com.lv.note.widget.flowtag.TagAdapter
 import com.lv.note.widget.flowtag.TagFlowLayout
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback

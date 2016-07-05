@@ -52,7 +52,7 @@
                 <EditText
                     android:id="@+id/login_pwd"
                     style="@style/MatchWrap"
-                    android:hint="请输入密码"
+                    android:hint="请输入密码(6位及以上)"
                     android:inputType="textPassword"
                     android:maxLength="11"/>
             </android.support.design.widget.TextInputLayout>

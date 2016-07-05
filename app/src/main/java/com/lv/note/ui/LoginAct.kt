@@ -21,7 +21,7 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
 import com.lv.note.widget.HeartProgressBar
 import com.lv.test.ArrayUtils
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
 import com.xiaomi.market.sdk.XiaomiUpdateAgent

@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager
 import com.lv.note.R
 
 import com.lv.note.adapter.LBaseFragmentAdapter
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 
 /**
  * User: 吕勇

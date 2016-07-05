@@ -2,11 +2,11 @@ package com.lv.note.ui
 
 import android.app.Activity
 import android.content.Intent
-import com.github.barteksc.pdfviewer.PDFView
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
+import com.joanzapata.pdfview.PDFView
+import com.joanzapata.pdfview.listener.OnPageChangeListener
 import com.lv.note.R
 import com.lv.note.entity.Book
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 import com.orhanobut.hawk.Hawk
 import java.io.File
 
@@ -33,7 +33,7 @@ class BookAct : BaseActivity(), OnPageChangeListener {
     }
 
     override fun initViews() {
-        mPDFView = fdb(R.id.book_pdf_view);
+        mPDFView = fdb(R.id.book_pdf_view)
     }
 
     override fun initData() {

@@ -3,10 +3,10 @@ package com.lv.note.ui
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
+import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.util.CountDown
-import com.lv.test.BaseActivity
 
 
 /**
@@ -29,7 +29,9 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
 
     override fun initData() {
         mCountDown = CountDown(1000)
+
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -63,3 +65,5 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
         })
     }
 }
+
+

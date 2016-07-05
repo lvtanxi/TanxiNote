@@ -9,7 +9,7 @@ import android.view.WindowManager
 import com.lv.note.R
 import com.lv.note.util.CommonUtils
 import com.lv.note.widget.clip.ClipImageLayout
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 import java.io.File
 
 /**

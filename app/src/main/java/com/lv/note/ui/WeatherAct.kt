@@ -15,7 +15,7 @@ import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
 import com.lv.note.widget.chart.WeatherChartItem
 import com.lv.note.widget.chart.WeatherChartView
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback

@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.lv.note.R
 import com.lv.note.widget.WuWebView
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 
 
 /**
