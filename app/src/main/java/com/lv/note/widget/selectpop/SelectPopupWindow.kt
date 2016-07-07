@@ -14,7 +14,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup.LayoutParams
 import android.widget.*
 import com.lv.note.R
-import com.lv.test.notEmptyList
+import com.lv.note.util.notEmptyList
 import java.util.*
 
 /**

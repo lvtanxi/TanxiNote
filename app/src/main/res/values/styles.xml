@@ -11,8 +11,18 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColorHint">@color/hit_color</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">false</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:windowAnimationStyle">@style/AppAnimation.Activity</item>
+    </style>
+
+    <style name="AppAnimation"/>
+
+    <style name="AppAnimation.Activity" parent="android:Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -20,9 +30,6 @@
         <item name="color">@android:color/white</item>
     </style>
 
-    <style name="NotBackAct" parent="AppTheme">
-        <item name="android:windowIsTranslucent">false</item>
-    </style>
 
     <style name="NoTitleFullscreen" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
@@ -72,6 +79,7 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0</item>
     </style>
+
     <style name="loading_dialog_style.color">
         <item name="android:backgroundDimAmount">0.1</item>
     </style>

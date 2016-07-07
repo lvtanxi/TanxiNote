@@ -1,4 +1,4 @@
-package com.lv.test
+package com.lv.note.util
 
 
 /**
@@ -23,3 +23,4 @@ fun List<*>?.isEmptyList():Boolean{
 fun List<*>?.notEmptyList():Boolean{
     return this != null || !this!!.isEmpty()
 }
+

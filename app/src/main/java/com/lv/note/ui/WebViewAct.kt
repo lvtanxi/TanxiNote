@@ -3,8 +3,8 @@ package com.lv.note.ui
 import android.app.Activity
 import android.content.Intent
 import com.lv.note.R
-import com.lv.note.widget.WuWebView
 import com.lv.note.base.BaseActivity
+import com.lv.note.widget.WuWebView
 
 
 /**

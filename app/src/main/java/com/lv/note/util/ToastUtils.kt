@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.lv.note.R
-import com.lv.test.notEmptyStr
+import com.lv.note.util.notEmptyStr
 
 /**
 * User: 吕勇 

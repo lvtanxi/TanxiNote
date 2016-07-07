@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken
 import com.lv.note.R
 import com.lv.note.adapter.BaseHolder
 import com.lv.note.adapter.LBaseSearchAdapter
+import com.lv.note.base.BaseActivity
 import com.lv.note.entity.City
 import com.lv.note.helper.CityComparator
 import com.lv.note.util.CommonUtils
@@ -27,7 +28,6 @@ import com.lv.note.widget.FancyIndexer
 import com.lv.note.widget.SearchEditText
 import com.lv.note.widget.flowtag.TagAdapter
 import com.lv.note.widget.flowtag.TagFlowLayout
-import com.lv.note.base.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
@@ -193,11 +193,14 @@ class ChangeCityAct : BaseActivity() {
     }
 
     override fun bindListener() {
-        mFancyIndexer!!.setOnTouchLetterChangedListener { str ->
-            mLetterIndexes!![str]?.let {
-                mRecyclerView!!.layoutManager.scrollToPosition(mLetterIndexes!![str]!!)
+        mFancyIndexer!!.setOnTouchLetterChangedListener(object : FancyIndexer.OnTouchLetterChangedListener {
+            override fun onTouchLetterChanged(str: String) {
+                mLetterIndexes!![str]?.let {
+                    mRecyclerView!!.layoutManager.scrollToPosition(mLetterIndexes!![str]!!)
+                }
             }
-        }
+
+        })
         mSearchEditText!!.addTextChangedListener(mBaseAdapter!!.filterTextWatcher)
     }
 

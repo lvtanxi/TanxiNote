@@ -11,8 +11,8 @@ import android.widget.RelativeLayout
 import com.lv.note.anim.BaseAnimation
 import com.lv.note.anim.SlideInBottomAnimation
 import com.lv.note.util.CommonUtils
+import com.lv.note.util.isEmptyList
 import com.lv.note.widget.EmptyView
-import com.lv.test.isEmptyList
 import java.util.*
 
 /**

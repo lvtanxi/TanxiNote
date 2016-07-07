@@ -44,8 +44,7 @@
             android:theme="@style/NoTitleFullscreen"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".ui.MainAct"
-            android:theme="@style/AppTheme"/>
+            android:name=".ui.MainAct"/>
         <activity
             android:name=".ui.AddNoteAct"
             android:windowSoftInputMode="adjustResize|stateHidden"/>

@@ -9,13 +9,13 @@ import com.dalong.francyconverflow.FancyCoverFlow
 import com.google.gson.Gson
 import com.lv.note.R
 import com.lv.note.adapter.LFancyCoverFlowAdapter
+import com.lv.note.base.BaseActivity
 import com.lv.note.entity.weather.ResultData
 import com.lv.note.entity.weather.Weather
 import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
 import com.lv.note.widget.chart.WeatherChartItem
 import com.lv.note.widget.chart.WeatherChartView
-import com.lv.note.base.BaseActivity
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback

@@ -20,8 +20,8 @@ import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.SaveListenerSub
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
+import com.lv.note.util.isEmptyList
 import com.lv.note.widget.HeartProgressBar
-import com.lv.test.isEmptyList
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
 import com.xiaomi.market.sdk.XiaomiUpdateAgent

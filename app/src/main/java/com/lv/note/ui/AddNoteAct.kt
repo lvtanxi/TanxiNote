@@ -16,7 +16,7 @@ import com.lv.note.helper.SaveListenerSub
 import com.lv.note.helper.UpdateListenerSub
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
-import com.lv.test.notEmptyStr
+import com.lv.note.util.notEmptyStr
 import com.orhanobut.hawk.Hawk
 import io.github.mthli.knife.KnifeText
 

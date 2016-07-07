@@ -23,10 +23,10 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.Permission.PermissionListener
 import com.lv.note.util.Permission.PermissionManager
 import com.lv.note.util.ThemeUtils
+import com.lv.note.util.notEmptyStr
 import com.lv.note.widget.CircleImageView
 import com.lv.note.widget.selectpop.DefExtendItem
 import com.lv.note.widget.selectpop.SelectPopupWindow
-import com.lv.test.notEmptyStr
 import com.upyun.library.common.Params
 import com.upyun.library.common.UploadManager
 import com.upyun.library.listener.UpCompleteListener
