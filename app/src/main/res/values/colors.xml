@@ -47,5 +47,7 @@
     <color name="theme_orange">#EF6C00</color>
     <color name="theme_orange_dark">#EF6C00</color>
 
+    <color name="launch_color">#079EB1</color>
+
 
 </resources>

@@ -7,6 +7,7 @@ import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.util.CountDown
+import com.lv.note.util.changeTopBgColor
 
 
 /**
@@ -29,7 +30,7 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
 
     override fun initData() {
         mCountDown = CountDown(1000)
-
+        changeTopBgColor("#00738E")
     }
 
 
@@ -55,11 +56,12 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
             MainAct.startMainAct(this)
         finish()
     }
+
     private fun findUser() {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", "我是的")
         query.addWhereEqualTo("pwd", "123123")
-        query.findObjects(this,object : FindListenerSub<Person>(this,false) {
+        query.findObjects(this, object : FindListenerSub<Person>(this, false) {
             override fun onSuccess(p0: MutableList<Person>) {
             }
         })
