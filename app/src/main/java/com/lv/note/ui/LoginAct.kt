@@ -13,6 +13,7 @@ import android.widget.ImageView
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
+import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
 import com.lv.note.helper.CustTextWatcher
 import com.lv.note.helper.FindListenerSub
@@ -20,8 +21,7 @@ import com.lv.note.helper.SaveListenerSub
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
 import com.lv.note.widget.HeartProgressBar
-import com.lv.test.ArrayUtils
-import com.lv.note.base.BaseActivity
+import com.lv.test.isEmptyList
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
@@ -126,9 +126,9 @@ class LoginAct : BaseActivity() {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", mPerson.name)
         query.addWhereEqualTo("pwd", mPerson.pwd)
-        query.findObjects(this, object : FindListenerSub<Person>(this) {
-            override fun onSuccess(p0: MutableList<Person>?) {
-                if (ArrayUtils.isEmpty(p0)) {
+        query.findObjects(this,object :FindListenerSub<Person>(this){
+            override fun onSuccess(p0: MutableList<Person>) {
+                if (p0.isEmptyList()) {
                     addUser(mPerson)
                     return
                 }
@@ -169,7 +169,7 @@ class LoginAct : BaseActivity() {
     }
 
     private fun addUser(mPerson: Person) {
-        mPerson.save(this, object : SaveListenerSub(this) {
+        mPerson.save(this,object : SaveListenerSub(this){
             override fun onSuccess() {
                 changeAct(mPerson)
             }

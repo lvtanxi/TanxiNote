@@ -2,8 +2,6 @@ package com.lv.note
 
 import android.app.Application
 import cn.bmob.v3.Bmob
-import com.iflytek.cloud.SpeechConstant
-import com.iflytek.cloud.SpeechUtility
 import com.lv.note.entity.Person
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.hawk.HawkBuilder
@@ -49,7 +47,6 @@ class App : Application() {
 
     private fun initBmob() {
         Bmob.initialize(this, "a43cff586c57dc8bcebb977d34cb7685");
-        SpeechUtility.createUtility(this, SpeechConstant.APPID +"=5770df82")
     }
 
     private fun initHttp() {

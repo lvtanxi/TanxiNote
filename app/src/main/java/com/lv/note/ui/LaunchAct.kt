@@ -59,8 +59,8 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", "我是的")
         query.addWhereEqualTo("pwd", "123123")
-        query.findObjects(this, object : FindListenerSub<Person>(this,false) {
-            override fun onSuccess(p0: MutableList<Person>?) {
+        query.findObjects(this,object : FindListenerSub<Person>(this,false) {
+            override fun onSuccess(p0: MutableList<Person>) {
             }
         })
     }

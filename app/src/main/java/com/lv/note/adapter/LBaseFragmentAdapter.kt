@@ -3,7 +3,6 @@ package com.lv.note.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.lv.test.ArrayUtils
 import java.util.*
 
 /**
@@ -35,10 +34,16 @@ class LBaseFragmentAdapter : FragmentStatePagerAdapter {
     }
 
     override fun getCount(): Int {
-        return if (ArrayUtils.isEmpty(mFragments)) 0 else mFragments!!.size
+        mFragments?.last {
+            return mFragments!!.size
+        }
+        return 0
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return if (ArrayUtils.isEmpty(mFragments)) "" else mTitles!![position]
+        mTitles?.last {
+            return mTitles!![position]
+        }
+        return ""
     }
 }

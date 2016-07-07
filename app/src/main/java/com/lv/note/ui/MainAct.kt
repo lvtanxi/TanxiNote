@@ -19,7 +19,6 @@ import com.lv.note.base.BaseRecyclerActivity
 import com.lv.note.entity.Note
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
-import com.lv.note.util.LSpeechSynthesizer
 import com.orhanobut.hawk.Hawk
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
 
@@ -36,7 +35,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
     private var mActionBarDrawerToggle: ActionBarDrawerToggle? = null;
     private var mAppBar: AppBarLayout? = null
     private var mAddBtn: FloatingActionButton? = null
-    private var mLSpeechSynthesizer: LSpeechSynthesizer? = null
     var mFrag: NavigationFra? = null
     private var year = ""
 
@@ -70,7 +68,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         mActionBarDrawerToggle?.syncState()
         super.initData()
         year = DateFormat.format("yyyy年", System.currentTimeMillis()) as String
-        mLSpeechSynthesizer= LSpeechSynthesizer(this,this).init()
     }
 
     override fun bindListener() {
@@ -86,7 +83,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
                     return
                 }
                 val mPopupMenu = PopupMenu(this@MainAct, view)
-                mPopupMenu.menu.add("语音播报")
                 mPopupMenu.menu.add("分享")
                 mPopupMenu.menu.add("删除")
                 mPopupMenu.setOnMenuItemClickListener { item ->
@@ -97,8 +93,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
                                 shareText(note.note)
                             "删除"->
                                 updateNote(note)
-                            "语音播报"->
-                                mLSpeechSynthesizer!!.speak(Html.fromHtml(note.note).toString())
 
                         }
                     }
@@ -111,11 +105,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
 
 
 
-    override fun onDestroy() {
-        mLSpeechSynthesizer!!.cancel()
-        mLSpeechSynthesizer=null
-        super.onDestroy()
-    }
 
     private fun shareText(message: String) {
         val shareIntent = Intent()
@@ -127,7 +116,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
 
     private fun updateNote(note: Note) {
         note.status = "0"
-        note.update(this, note.objectId, object : UpdateListenerSub(this) {
+        note.update(this,note.objectId, object : UpdateListenerSub(this) {
             override fun onSuccess() {
                 processLogic()
             }
@@ -153,11 +142,10 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         query.addWhereEqualTo("userId", App.getInstance().getPerson()?.objectId)
         query.addWhereEqualTo("status", "1")
         query.order("createdAt")
-        query.findObjects(this, object : FindListenerSub<Note>(this, false) {
-            override fun onSuccess(p0: MutableList<Note>?) {
-                addItems(p0!!)
+        query.findObjects(this,object : FindListenerSub<Note>(this, false) {
+            override fun onSuccess(p0: MutableList<Note>) {
+                addItems(p0)
             }
-
             override fun onFinish() {
                 stopRefreshing()
             }
@@ -174,14 +162,12 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
             commonRefresh?.setDelegate(mDelegate)
             processLogic()
         }
-        mLSpeechSynthesizer?.resumeSpeaking()
     }
 
 
     override fun onPause() {
         super.onPause()
         mAppBar?.removeOnOffsetChangedListener(this)
-        mLSpeechSynthesizer?.pauseSpeaking()
     }
 
 

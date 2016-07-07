@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.widget.Button
-import cn.bmob.v3.BmobUser
 import com.cocosw.bottomsheet.BottomSheet
 import com.lv.note.App
 import com.lv.note.R
@@ -27,7 +26,7 @@ import com.lv.note.util.ThemeUtils
 import com.lv.note.widget.CircleImageView
 import com.lv.note.widget.selectpop.DefExtendItem
 import com.lv.note.widget.selectpop.SelectPopupWindow
-import com.lv.test.StrUtils
+import com.lv.test.notEmptyStr
 import com.upyun.library.common.Params
 import com.upyun.library.common.UploadManager
 import com.upyun.library.listener.UpCompleteListener
@@ -136,7 +135,6 @@ class NavigationFra : BaseFragment() {
 
     override fun bindListener() {
         mLoginOut!!.setOnClickListener {
-            BmobUser.logOut(activity)
             App.getInstance().savePerson(null)
             LoginAct.startLoginAct(activity)
             activity.finish()
@@ -195,7 +193,7 @@ class NavigationFra : BaseFragment() {
                     return
                 val uri = data.data
                 path = uri.path
-                if (StrUtils.notEmpty(path) && !File(path).exists())
+                if (path.notEmptyStr() && !File(path).exists())
                     path = getRealPathFromURI(uri)
                 ClipAct.startClipAct(activity, path!!)
             }
@@ -238,7 +236,7 @@ class NavigationFra : BaseFragment() {
 
     private fun updateUser() {
         val mPerson = App.getInstance().getPerson()!!
-        mPerson.update(activity, mPerson.objectId, object : UpdateListenerSub(mBaseActivity!!) {
+        mPerson.update(activity,mPerson.objectId, object : UpdateListenerSub(mBaseActivity!!) {
             override fun onSuccess() {
                 App.getInstance().savePerson(mPerson)
                 CommonUtils.displayRoundImage(mImageView!!.circleImage, mPerson.header)

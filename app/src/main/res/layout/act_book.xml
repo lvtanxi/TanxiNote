@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               style="@style/MatchMatch.Vertical">
 
     <include layout="@layout/common_toobar"/>
 
     <com.joanzapata.pdfview.PDFView
         android:id="@+id/book_pdf_view"
+        android:layout_marginTop="?attr/actionBarSize"
         style="@style/MatchMatch"/>
-</LinearLayout>
+    <TextView
+        android:id="@+id/book_pdf_num"
+        style="@style/WrapWrap"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textColor="?attr/colorPrimary"
+        android:layout_margin="10dp"/>
+</RelativeLayout>

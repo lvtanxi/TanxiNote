@@ -12,7 +12,7 @@ import com.lv.note.anim.BaseAnimation
 import com.lv.note.anim.SlideInBottomAnimation
 import com.lv.note.util.CommonUtils
 import com.lv.note.widget.EmptyView
-import com.lv.test.ArrayUtils
+import com.lv.test.isEmptyList
 import java.util.*
 
 /**
@@ -255,7 +255,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         val lp = baseHolder!!.itemView.layoutParams
         if (lp != null && lp is StaggeredGridLayoutManager.LayoutParams) {
             val position = baseHolder.layoutPosition
-            if (isHeaderView(position) || isBottomView(position)|| ArrayUtils.isEmpty(mDatas)) {
+            if (isHeaderView(position) || isBottomView(position)|| mDatas.isEmptyList()) {
                 lp.isFullSpan = true
             }
         }
@@ -291,7 +291,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
     }
 
     val isEmpty: Boolean
-        get() = ArrayUtils.isEmpty(mDatas)
+        get() = mDatas.isEmptyList()
 
     fun clearDatas() {
         if (!isEmpty) {

@@ -2,11 +2,12 @@ package com.lv.note.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.TextView
 import com.joanzapata.pdfview.PDFView
 import com.joanzapata.pdfview.listener.OnPageChangeListener
 import com.lv.note.R
-import com.lv.note.entity.Book
 import com.lv.note.base.BaseActivity
+import com.lv.note.entity.Book
 import com.orhanobut.hawk.Hawk
 import java.io.File
 
@@ -28,12 +29,15 @@ class BookAct : BaseActivity(), OnPageChangeListener {
 
     private var mPDFView: PDFView ? = null
 
+    private var mNum:TextView?=null
+
     override fun loadLayoutId(): Int {
         return R.layout.act_book
     }
 
     override fun initViews() {
         mPDFView = fdb(R.id.book_pdf_view)
+        mNum =fdb(R.id.book_pdf_num)
     }
 
     override fun initData() {
@@ -54,6 +58,7 @@ class BookAct : BaseActivity(), OnPageChangeListener {
     override fun onPageChanged(page: Int, pageCount: Int) {
         Hawk.put(mToolbar!!.title.toString(),page)
         Hawk.put("${mToolbar!!.title}_progress","$page/$pageCount")
+        mNum!!.text="$page/$pageCount"
     }
 
 }
