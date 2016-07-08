@@ -52,6 +52,7 @@ class WuWebView(context: Context, attrs: AttributeSet) : WebView(context, attrs)
         webSettings.domStorageEnabled = true
         webSettings.loadWithOverviewMode = true
         webSettings.allowFileAccess = true
+        settings.useWideViewPort=true
         webSettings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
         requestFocus()
         requestFocusFromTouch()

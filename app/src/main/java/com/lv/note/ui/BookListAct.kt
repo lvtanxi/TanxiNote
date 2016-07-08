@@ -59,6 +59,13 @@ class BookListAct : BaseRecyclerActivity<Book>() {
             }
         }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mBaseAdapter?.let {
+            mBaseAdapter!!.notifyDataSetChanged()
+        }
+    }
+
     internal inner class BookAsyncTask : AsyncTask<Void, Void, Void>() {
         private var mBooks: ArrayList<Book>? = null
 
@@ -115,5 +122,6 @@ class BookListAct : BaseRecyclerActivity<Book>() {
                 }
             }
         }
+
     }
 }

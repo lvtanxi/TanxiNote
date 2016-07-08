@@ -23,7 +23,7 @@ class BookAct : BaseActivity(), OnPageChangeListener {
     companion object {
         private val BOOK_PARAM = "book_param"
         fun startBookAct(actvity: Activity, book: Book) {
-            actvity.startActivity(Intent(actvity, BookAct::class.java).putExtra(BOOK_PARAM, book))
+            actvity.startActivityForResult(Intent(actvity, BookAct::class.java).putExtra(BOOK_PARAM, book),0X102)
         }
     }
 
