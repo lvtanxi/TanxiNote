@@ -10,6 +10,7 @@ import android.support.v7.widget.PopupMenu
 import android.text.Html
 import android.text.format.DateFormat
 import android.view.View
+import android.view.ViewTreeObserver
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
@@ -21,6 +22,7 @@ import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
 import com.orhanobut.hawk.Hawk
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
+import io.github.mthli.knife.KnifeText
 
 
 /**
@@ -78,7 +80,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         mBaseAdapter?.setOnRecyclerItemChildClickListener(object : LBaseAdapter
         .OnRecyclerItemChildClickListener {
             override fun onItemChildClick(view: View, position: Int) {
-                if (view.id == R.id.item_knife) {
+                if (view.id == R.id.item_view) {
                     AddNoteAct.startAddNoteAct(this@MainAct, mBaseAdapter!!.getItem(position))
                     return
                 }
@@ -88,10 +90,10 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
                 mPopupMenu.setOnMenuItemClickListener { item ->
                     val note = mBaseAdapter?.getItem(position)
                     note?.let {
-                        when(item.title){
-                            "分享"->
+                        when (item.title) {
+                            "分享" ->
                                 shareText(note.note)
-                            "删除"->
+                            "删除" ->
                                 updateNote(note)
 
                         }
@@ -104,8 +106,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
     }
 
 
-
-
     private fun shareText(message: String) {
         val shareIntent = Intent()
         shareIntent.action = Intent.ACTION_SEND
@@ -116,7 +116,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
 
     private fun updateNote(note: Note) {
         note.status = "0"
-        note.update(this,note.objectId, object : UpdateListenerSub(this) {
+        note.update(this, note.objectId, object : UpdateListenerSub(this) {
             override fun onSuccess() {
                 processLogic()
             }
@@ -126,26 +126,39 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
     override val lBaseAdapter: LBaseAdapter<Note>
         get() = object : LBaseAdapter<Note>(R.layout.item_note) {
             override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: Note) {
+                val knife = baseHolder.getView<KnifeText>(R.id.item_knife)
                 baseHolder.setKnifeTextHtml(R.id.item_knife, item.note)
                         .setText(R.id.item_date, item.year.replace(year, ""))
                         .setText(R.id.item_time, item.time)
-                        .setOnItemChildClickListener(OnItemChildClickListener(), R.id.item_more, R.id.item_knife)
+                        .setOnItemChildClickListener(OnItemChildClickListener(), R.id.item_more, R.id.item_view)
+                knife.getViewTreeObserver().addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        knife.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                        val itemView = baseHolder.getView<View>(R.id.item_view)
+                        val itemViewL = itemView.layoutParams
+                        itemViewL.height = knife.height
+                        itemView.layoutParams = itemViewL
+                    }
+                })
             }
 
             override fun onItemClick(item: Note) {
                 AddNoteAct.startAddNoteAct(this@MainAct, item)
+
             }
         }
+
 
     override fun onBGARefresh(): Boolean {
         val query = BmobQuery<Note>()
         query.addWhereEqualTo("userId", App.getInstance().getPerson()?.objectId)
         query.addWhereEqualTo("status", "1")
         query.order("createdAt")
-        query.findObjects(this,object : FindListenerSub<Note>(this, false) {
+        query.findObjects(this, object : FindListenerSub<Note>(this, false) {
             override fun onSuccess(p0: MutableList<Note>) {
                 addItems(p0)
             }
+
             override fun onFinish() {
                 stopRefreshing()
             }
