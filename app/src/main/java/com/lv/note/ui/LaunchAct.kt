@@ -30,7 +30,7 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
 
     override fun initData() {
         mCountDown = CountDown(1000)
-        changeTopBgColor("#00738E")
+        changeTopBgColor()
     }
 
 

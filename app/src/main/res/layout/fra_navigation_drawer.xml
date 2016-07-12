@@ -2,52 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               style="@style/MatchMatch.Vertical"
-              android:clickable="true"
               android:layout_width="match_parent"
-              android:background="@drawable/wallpaper_1">
+              android:background="@drawable/wallpaper_1"
+              android:clickable="true">
 
-    <android.support.v7.widget.CardView
-        style="@style/MatchWrap"
-        app:cardElevation="10dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center"
-            android:background="@drawable/wallpaper_5">
-            <com.lv.note.widget.CircleImageView
-                android:id="@+id/nva_header"
-                style="@style/WrapWrap"
-                android:layout_marginTop="10dp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center_horizontal"
-                app:layoutBorderWidth="3dp"
-                app:CircleImageHight="120dp"
-                app:CircleImageWidth="120dp"
-                app:layoutBgColor="@android:color/white"
-                app:layoutBorderColor="@android:color/white"
-                app:CircleImageSrc="@drawable/header"/>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/wallpaper_5"
+        android:elevation="10dp"
+        android:gravity="center">
+
+        <com.lv.note.widget.CircleImageView
+            android:id="@+id/nva_header"
+            style="@style/WrapWrap"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            app:CircleImageHight="120dp"
+            app:CircleImageSrc="@drawable/header"
+            app:CircleImageWidth="120dp"
+            app:layoutBgColor="@android:color/white"
+            app:layoutBorderColor="@android:color/white"
+            app:layoutBorderWidth="3dp"/>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/nva_recycler_view"
-        android:layout_marginTop="25dp"
-        style="@style/MatchAuto"/>
+        style="@style/MatchAuto"
+        android:layout_marginTop="15dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:layout_marginBottom="5dp"
-        android:weightSum="10" >
-        <android.support.v7.widget.AppCompatButton
+        android:gravity="center"
+        android:weightSum="10">
+
+        <Button
             android:id="@+id/nva_login_out"
             android:layout_width="0dip"
             android:layout_height="44dip"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="7"
             android:background="@drawable/btn_fastlogin_selector"
+            android:elevation="10dp"
             android:gravity="center"
             android:text="退出登录"
             android:textColor="@android:color/white"

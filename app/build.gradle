@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.lv.note"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 22
         versionCode 6
         versionName "1.5"

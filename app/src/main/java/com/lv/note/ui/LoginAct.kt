@@ -66,7 +66,7 @@ class LoginAct : BaseActivity() {
     }
 
     override fun initData() {
-        changeTopBgColor("#061623")
+        changeTopBgColor()
         name!!.setText(Hawk.get(USER_NAME, ""))
         if(name!!.text.length !=0){
             pwd!!.isFocusable=true
