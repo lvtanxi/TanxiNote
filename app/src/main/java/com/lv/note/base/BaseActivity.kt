@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import com.lv.note.R
 import com.lv.note.helper.IBaseView
+import com.lv.note.util.CommonUtils
 import com.lv.note.util.ThemeUtils
 import com.lv.note.util.ToastUtils
 import com.lv.note.widget.LoadingDialog
@@ -34,6 +35,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         bindListener()
         processLogic()
     }
+
 
     protected fun initToolbar() {
         mToolbar = fdb(R.id.comm_toobar)
@@ -87,8 +89,8 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun showLodingView() {
-        if(null==mLodingView)
-            mLodingView= LoadingDialog(this)
+        if (null == mLodingView)
+            mLodingView = LoadingDialog(this)
         mLodingView?.let {
             if (!mLodingView!!.isShowing)
                 mLodingView!!.show();
@@ -108,7 +110,10 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == android.R.id.home) {
-            finish()
+            mToolbar?.let {
+                CommonUtils.hiddenKeyBoard(mToolbar!!)
+            }
+            finishAfterTransition()
             return true
         }
         return super.onOptionsItemSelected(item)

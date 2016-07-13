@@ -76,6 +76,7 @@
                     android:background="?selectableItemBackground"
                     android:contentDescription="@null"
                     android:visibility="gone"
+                    android:elevation="10dp"
                     android:src="@drawable/go_p"/>
 
                 <com.lv.note.widget.TintImageView

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.WuWebView
 
 
@@ -21,7 +22,7 @@ class WebViewAct : BaseActivity() {
         val URL_PARAM = "URL_PARAM"
         val TITLE_PARAM = "TITLE_PARAM"
         fun startWebViewAct(actvity: Activity, url: String,title:String) {
-            actvity.startActivity(Intent(actvity, WebViewAct::class.java)
+            actvity.openNewAct(Intent(actvity, WebViewAct::class.java)
                     .putExtra(URL_PARAM, url)
                     .putExtra(TITLE_PARAM,title))
         }

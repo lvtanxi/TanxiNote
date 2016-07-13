@@ -1,7 +1,6 @@
 package com.lv.note.ui
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Handler
 import android.os.Message
 import android.support.v4.content.ContextCompat
@@ -24,6 +23,7 @@ import com.lv.note.entity.City
 import com.lv.note.helper.CityComparator
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.FancyIndexer
 import com.lv.note.widget.SearchEditText
 import com.lv.note.widget.flowtag.TagAdapter
@@ -57,7 +57,7 @@ class ChangeCityAct : BaseActivity() {
 
     companion object {
         fun startChangeCityAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity, ChangeCityAct::class.java))
+            actvity.openNewAct(ChangeCityAct::class.java)
         }
     }
 
@@ -85,10 +85,11 @@ class ChangeCityAct : BaseActivity() {
             override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: City) {
                 baseHolder.setText(R.id.cityitem_name, item.name)
                         .setVisible(R.id.cityitem_letter, !TextUtils.isEmpty(item.letter))
+                        .setAvatarImageText(R.id.cityitem_name_icon,item.name[0])
                         .setText(R.id.cityitem_letter, item.letter)
             }
 
-            override fun onItemClick(item: City) {
+            override fun onItemClick(view: View,item: City) {
                 httpCityCode(item.name)
             }
         }

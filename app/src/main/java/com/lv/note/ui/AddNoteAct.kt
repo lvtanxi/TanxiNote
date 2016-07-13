@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog
 import android.text.format.DateFormat
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import com.lv.note.App
@@ -17,6 +18,7 @@ import com.lv.note.helper.UpdateListenerSub
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
 import com.lv.note.util.notEmptyStr
+import com.lv.note.util.openNewAct
 import com.orhanobut.hawk.Hawk
 import io.github.mthli.knife.KnifeText
 
@@ -49,9 +51,9 @@ class AddNoteAct : BaseActivity() {
 
     companion object {
         val ADD_PARAM: String = "ADD_PARAM"
-        fun startAddNoteAct(activity: Activity, note: Note?) {
-            activity.startActivity(Intent(activity, AddNoteAct::class.java)
-                    .putExtra(ADD_PARAM, note))
+        fun startAddNoteAct(activity: Activity, note: Note?,view: View) {
+            activity.openNewAct(Intent(activity, AddNoteAct::class.java)
+                    .putExtra(ADD_PARAM, note),view,"notetransition")
         }
     }
 
@@ -150,7 +152,7 @@ class AddNoteAct : BaseActivity() {
         CommonUtils.showSuccess(this, knife!!, object : CountDown.CountDownBack {
             override fun countDownFinish() {
                 Hawk.put(MainAct.CHANGE_NOTE, true)
-                finish()
+                finishAfterTransition()
             }
         })
     }

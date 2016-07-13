@@ -47,7 +47,7 @@
             android:name=".ui.MainAct"/>
         <activity
             android:name=".ui.AddNoteAct"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="adjustResize|stateVisible"/>
         <activity android:name=".ui.WebViewAct"/>
         <activity android:name=".ui.WeatherAct"/>
         <activity android:name=".ui.ClipAct"/>

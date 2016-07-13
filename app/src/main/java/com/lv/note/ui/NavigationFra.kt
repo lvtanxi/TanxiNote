@@ -2,6 +2,7 @@ package com.lv.note.ui
 
 import android.Manifest
 import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Intent
 import android.net.Uri
 import android.os.Environment
@@ -10,7 +11,9 @@ import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
+import cn.carbs.android.avatarimageview.library.AvatarImageView
 import com.cocosw.bottomsheet.BottomSheet
 import com.lv.note.App
 import com.lv.note.R
@@ -24,7 +27,7 @@ import com.lv.note.util.Permission.PermissionListener
 import com.lv.note.util.Permission.PermissionManager
 import com.lv.note.util.ThemeUtils
 import com.lv.note.util.notEmptyStr
-import com.lv.note.widget.CircleImageView
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.selectpop.DefExtendItem
 import com.lv.note.widget.selectpop.SelectPopupWindow
 import com.upyun.library.common.Params
@@ -55,7 +58,7 @@ class NavigationFra : BaseFragment() {
     private var mBaseAdapter: LBaseAdapter<NavigationItem>? = null
     private var lastIndex = 0
     private var mLoginOut: Button? = null
-    private var mImageView: CircleImageView? = null
+    private var mImageView: AvatarImageView? = null
     private var urls = arrayOf("http://user.qzone.qq.com/992507862/2", "http://my.oschina.net/u/1269023")
     private var photoSaveName: String? = null//图pian名
     private var path: String? = null//图片全路径
@@ -80,7 +83,7 @@ class NavigationFra : BaseFragment() {
                         .setImageResource(R.id.navitem_selected, if(item.selected==1)R.drawable.selected else R.drawable.nav_item)
             }
 
-            override fun onItemClick(item: NavigationItem) {
+            override fun onItemClick(view: View, item: NavigationItem) {
                 mBaseAdapter!!.getItem(lastIndex).selected = 0
                 item.selected = 1
                 notifyDataSetChanged()
@@ -130,7 +133,7 @@ class NavigationFra : BaseFragment() {
         if (!file.exists())
             file.mkdirs()
         photoSaveName = System.currentTimeMillis().toString() + ".png"
-        CommonUtils.displayRoundImage(mImageView!!.circleImage, App.getInstance().getPerson()!!.header)
+        CommonUtils.displayRoundImage(mImageView!!, App.getInstance().getPerson()!!.header)
     }
 
     override fun bindListener() {
@@ -158,7 +161,7 @@ class NavigationFra : BaseFragment() {
                                             val imageUri = Uri.fromFile(File(ClipAct.Clip_CACHE, photoSaveName))
                                             openCameraIntent.putExtra(MediaStore.Images.Media.ORIENTATION, 0)
                                             openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                                            startActivityForResult(openCameraIntent, PHOTOTAKE)
+                                            startActivityForResult(openCameraIntent, PHOTOTAKE, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
                                         }
 
 
@@ -174,7 +177,7 @@ class NavigationFra : BaseFragment() {
                         } else {
                             val openAlbumIntent = Intent(Intent.ACTION_GET_CONTENT)
                             openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-                            startActivityForResult(openAlbumIntent, PHOTOZOOM)
+                            activity.openNewAct(openAlbumIntent, PHOTOZOOM)
                         }
                     }
                 }
@@ -239,7 +242,7 @@ class NavigationFra : BaseFragment() {
         mPerson.update(activity,mPerson.objectId, object : UpdateListenerSub(mBaseActivity!!) {
             override fun onSuccess() {
                 App.getInstance().savePerson(mPerson)
-                CommonUtils.displayRoundImage(mImageView!!.circleImage, mPerson.header)
+                CommonUtils.displayRoundImage(mImageView!!, mPerson.header)
                 CommonUtils.showSuccess(activity, mRecyclerView!!, null)
             }
         })

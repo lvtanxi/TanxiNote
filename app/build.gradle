@@ -16,8 +16,8 @@ android {
         applicationId "com.lv.note"
         minSdkVersion 21
         targetSdkVersion 22
-        versionCode 6
-        versionName "1.5"
+        versionCode 8
+        versionName "1.7"
     }
 
     signingConfigs {
@@ -93,6 +93,7 @@ dependencies {
     compile 'com.google.android:flexbox:0.1.2'
     compile 'com.cocosw:bottomsheet:1.+@aar'
     compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
+    compile 'cn.carbs.android:AvatarImageView:1.0.2'
 }
 repositories {
     mavenCentral()

@@ -1,31 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:ignore="RtlHardcoded">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              style="@style/MatchWrap.Vertical"
+              tools:ignore="RtlHardcoded">
 
     <TextView
         android:id="@+id/cityitem_letter"
         style="@style/LetterIndexTextViewStyle"
-        android:textSize="18sp"
-        android:textStyle="italic|bold"
+        android:clickable="false"
         android:textColor="?attr/colorPrimary"
-        android:clickable="false"/>
+        android:textSize="18sp"
+        android:textStyle="italic|bold"/>
 
-    <TextView
-        android:id="@+id/cityitem_name"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="@dimen/side_letter_bar_width"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="@dimen/side_letter_bar_width"
-        android:background="@color/COLOR_BORDER_LINE"/>
+    <RelativeLayout
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        style="@style/MatchWrap">
+
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
+            android:id="@+id/cityitem_name_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            app:aiv_TextColor="?attr/colorPrimary"
+            app:aiv_TextSizeRatio="0.4"
+            app:aiv_ShowBoarder="true"/>
+
+        <TextView
+            android:id="@+id/cityitem_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/cityitem_name_icon"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="@dimen/side_letter_bar_width"
+            android:text="asd"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignLeft="@id/cityitem_name"
+            android:layout_below="@id/cityitem_name"
+            android:layout_marginLeft="16dp"
+            android:background="@color/COLOR_BORDER_LINE"/>
+    </RelativeLayout>
 </LinearLayout>

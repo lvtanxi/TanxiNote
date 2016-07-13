@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.os.Environment
 import android.text.format.DateFormat
+import android.view.View
 import com.lv.note.R
 import com.lv.note.adapter.BaseHolder
 import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.base.BaseRecyclerActivity
 import com.lv.note.entity.Book
+import com.lv.note.util.openNewAct
 import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
 import java.io.File
@@ -29,7 +31,7 @@ class BookListAct : BaseRecyclerActivity<Book>() {
 
     companion object {
         fun startBookListAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity, BookListAct::class.java))
+            actvity.openNewAct(BookListAct::class.java)
         }
     }
 
@@ -54,7 +56,7 @@ class BookListAct : BaseRecyclerActivity<Book>() {
                         .setText(R.id.bookitem_progress,Hawk.get("${item.fileName}_progress",""))
             }
 
-            override fun onItemClick(item: Book) {
+            override fun onItemClick(view: View, item: Book) {
                 BookAct.startBookAct(this@BookListAct,item)
             }
         }

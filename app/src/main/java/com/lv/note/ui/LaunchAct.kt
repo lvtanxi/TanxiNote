@@ -1,5 +1,6 @@
 package com.lv.note.ui
 
+import android.content.Intent
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
@@ -53,7 +54,7 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
         if (App.getInstance().getPerson() == null)
             LoginAct.startLoginAct(this)
         else
-            MainAct.startMainAct(this)
+            startActivity(Intent(this,MainAct::class.java))
         finish()
     }
 

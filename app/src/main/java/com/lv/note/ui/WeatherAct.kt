@@ -1,7 +1,6 @@
 package com.lv.note.ui
 
 import android.app.Activity
-import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
@@ -14,6 +13,7 @@ import com.lv.note.entity.weather.ResultData
 import com.lv.note.entity.weather.Weather
 import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.chart.WeatherChartItem
 import com.lv.note.widget.chart.WeatherChartView
 import com.orhanobut.hawk.Hawk
@@ -43,7 +43,7 @@ class WeatherAct : BaseActivity(), BGARefreshDelegate.BGARefreshListener {
         val CITY_CHANGE="CITY_CHANGE"
         val CITY_NAME="CITY_NAME"
         fun startWeatherAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity, WeatherAct::class.java))
+            actvity.openNewAct(WeatherAct::class.java)
         }
     }
 

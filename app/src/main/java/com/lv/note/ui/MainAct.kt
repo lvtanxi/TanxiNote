@@ -20,6 +20,7 @@ import com.lv.note.base.BaseRecyclerActivity
 import com.lv.note.entity.Note
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
+import com.lv.note.util.openNewAct
 import com.orhanobut.hawk.Hawk
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
 import io.github.mthli.knife.KnifeText
@@ -44,7 +45,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
     companion object {
         val CHANGE_NOTE = "CHANGE_NOTE"
         fun startMainAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity, MainAct::class.java))
+            actvity.openNewAct(MainAct::class.java)
         }
     }
 
@@ -76,12 +77,12 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         super.bindListener()
         mDrawerLayout?.addDrawerListener(mActionBarDrawerToggle!!)
         mAppBar?.addOnOffsetChangedListener(this)
-        mAddBtn?.setOnClickListener { AddNoteAct.startAddNoteAct(this, null) }
+        mAddBtn?.setOnClickListener { AddNoteAct.startAddNoteAct(this, null,mAddBtn!!) }
         mBaseAdapter?.setOnRecyclerItemChildClickListener(object : LBaseAdapter
         .OnRecyclerItemChildClickListener {
             override fun onItemChildClick(view: View, position: Int) {
                 if (view.id == R.id.item_view) {
-                    AddNoteAct.startAddNoteAct(this@MainAct, mBaseAdapter!!.getItem(position))
+                    AddNoteAct.startAddNoteAct(this@MainAct, mBaseAdapter!!.getItem(position),view)
                     return
                 }
                 val mPopupMenu = PopupMenu(this@MainAct, view)
@@ -111,7 +112,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         shareIntent.action = Intent.ACTION_SEND
         shareIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(message).toString())
         shareIntent.type = "text/plain"
-        startActivity(Intent.createChooser(shareIntent, "分享到"))
+        openNewAct(Intent.createChooser(shareIntent, "分享到"))
     }
 
     private fun updateNote(note: Note) {
@@ -142,8 +143,8 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
                 })
             }
 
-            override fun onItemClick(item: Note) {
-                AddNoteAct.startAddNoteAct(this@MainAct, item)
+            override fun onItemClick(view: View,item: Note) {
+                AddNoteAct.startAddNoteAct(this@MainAct, item, view)
 
             }
         }

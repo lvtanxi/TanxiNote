@@ -48,7 +48,7 @@ class LoginAct : BaseActivity() {
     companion object {
         val USER_NAME = "USER_PHONE"
         fun startLoginAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity, LoginAct::class.java))
+            actvity.startActivity(Intent(actvity,LoginAct::class.java))
         }
     }
 
@@ -145,7 +145,7 @@ class LoginAct : BaseActivity() {
             override fun countDownFinish() {
                 Hawk.put(USER_NAME, mPerson.name)
                 App.getInstance().savePerson(mPerson)
-                MainAct.startMainAct(this@LoginAct)
+                startActivity(Intent(this@LoginAct,MainAct::class.java))
                 finish()
             }
         })

@@ -14,18 +14,14 @@
         android:elevation="10dp"
         android:gravity="center">
 
-        <com.lv.note.widget.CircleImageView
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
             android:id="@+id/nva_header"
-            style="@style/WrapWrap"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            app:CircleImageHight="120dp"
-            app:CircleImageSrc="@drawable/header"
-            app:CircleImageWidth="120dp"
-            app:layoutBgColor="@android:color/white"
-            app:layoutBorderColor="@android:color/white"
-            app:layoutBorderWidth="3dp"/>
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:aiv_BoarderWidth="2dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/header"
+            app:aiv_ShowBoarder="true"/>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

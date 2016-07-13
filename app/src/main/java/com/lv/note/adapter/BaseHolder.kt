@@ -1,6 +1,7 @@
 package com.lv.note.adapter
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v7.widget.RecyclerView.ViewHolder
@@ -13,6 +14,7 @@ import android.widget.CheckedTextView
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import cn.carbs.android.avatarimageview.library.AvatarImageView
 import io.github.mthli.knife.KnifeText
 
 /**
@@ -66,6 +68,20 @@ class BaseHolder
     fun setText(viewId: Int, text: String): BaseHolder {
         val view = getView<TextView>(viewId)
         view.text = text
+        return this
+    }
+    /**
+     * 设置TextView的内
+
+     * @param viewId 控件id
+     * *
+     * @param text   文本内容
+     * *
+     * @return ViewHolder text
+     */
+    fun setAvatarImageText(viewId: Int, text: Char): BaseHolder {
+        val view = getView<AvatarImageView>(viewId)
+        view.setTextAndColorSeed(text.toString(),text.toString())
         return this
     }
 

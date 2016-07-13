@@ -179,12 +179,12 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         baseViewHolder.itemView.setOnClickListener { view ->
             val vTag = view.tag
             if (vTag != null && vTag is Int)
-                onItemClick(mDatas[Integer.valueOf(vTag.toString())!!])
+                onItemClick(view,mDatas[Integer.valueOf(vTag.toString())!!])
         }
         return baseViewHolder
     }
 
-    protected open fun onItemClick(item: T) {
+    protected open fun onItemClick(view: View,item: T) {
 
     }
 

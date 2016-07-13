@@ -9,6 +9,7 @@ import android.view.WindowManager
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.util.CommonUtils
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.clip.ClipImageLayout
 import java.io.File
 
@@ -74,7 +75,7 @@ class ClipAct : BaseActivity() {
         val Clip_PATH = "Clip_PATH"
         val Clip_CACHE = "${Environment.getExternalStorageDirectory()}/tanxi/cache/"
         fun startClipAct(activity: Activity, path: String) {
-            activity.startActivityForResult(Intent(activity, ClipAct::class.java).putExtra(Clip_PATH, path), IMAGE_COMPLETE)
+            activity.openNewAct(Intent(activity, ClipAct::class.java).putExtra(Clip_PATH, path), IMAGE_COMPLETE)
         }
     }
 }
