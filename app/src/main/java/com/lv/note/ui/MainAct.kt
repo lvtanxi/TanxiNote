@@ -1,6 +1,5 @@
 package com.lv.note.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.FloatingActionButton
@@ -44,9 +43,6 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
 
     companion object {
         val CHANGE_NOTE = "CHANGE_NOTE"
-        fun startMainAct(actvity: Activity) {
-            actvity.openNewAct(MainAct::class.java)
-        }
     }
 
     override fun loadLayoutId(): Int {
@@ -77,7 +73,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         super.bindListener()
         mDrawerLayout?.addDrawerListener(mActionBarDrawerToggle!!)
         mAppBar?.addOnOffsetChangedListener(this)
-        mAddBtn?.setOnClickListener { AddNoteAct.startAddNoteAct(this, null,mAddBtn!!) }
+        mAddBtn?.setOnClickListener {openNewAct(AddNoteAct::class.java,mAddBtn!!)}
         mBaseAdapter?.setOnRecyclerItemChildClickListener(object : LBaseAdapter
         .OnRecyclerItemChildClickListener {
             override fun onItemChildClick(view: View, position: Int) {
@@ -112,7 +108,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
         shareIntent.action = Intent.ACTION_SEND
         shareIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(message).toString())
         shareIntent.type = "text/plain"
-        openNewAct(Intent.createChooser(shareIntent, "分享到"))
+        startActivity(Intent.createChooser(shareIntent, "分享到"))
     }
 
     private fun updateNote(note: Note) {

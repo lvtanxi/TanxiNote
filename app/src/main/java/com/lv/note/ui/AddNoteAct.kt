@@ -53,7 +53,7 @@ class AddNoteAct : BaseActivity() {
         val ADD_PARAM: String = "ADD_PARAM"
         fun startAddNoteAct(activity: Activity, note: Note?,view: View) {
             activity.openNewAct(Intent(activity, AddNoteAct::class.java)
-                    .putExtra(ADD_PARAM, note),view,"notetransition")
+                    .putExtra(ADD_PARAM, note),view)
         }
     }
 

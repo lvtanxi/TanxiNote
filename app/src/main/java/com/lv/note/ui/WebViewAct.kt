@@ -2,6 +2,7 @@ package com.lv.note.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.util.openNewAct
@@ -21,10 +22,10 @@ class WebViewAct : BaseActivity() {
     companion object {
         val URL_PARAM = "URL_PARAM"
         val TITLE_PARAM = "TITLE_PARAM"
-        fun startWebViewAct(actvity: Activity, url: String,title:String) {
+        fun startWebViewAct(actvity: Activity, tagView: View,url: String, title:String) {
             actvity.openNewAct(Intent(actvity, WebViewAct::class.java)
                     .putExtra(URL_PARAM, url)
-                    .putExtra(TITLE_PARAM,title))
+                    .putExtra(TITLE_PARAM,title),tagView)
         }
     }
 

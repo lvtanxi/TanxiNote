@@ -74,8 +74,12 @@ class ClipAct : BaseActivity() {
         val IMAGE_COMPLETE = 2 // 结果
         val Clip_PATH = "Clip_PATH"
         val Clip_CACHE = "${Environment.getExternalStorageDirectory()}/tanxi/cache/"
+
+        fun startClipAct(activity: Activity,view:View, path: String) {
+            activity.openNewAct(Intent(activity, ClipAct::class.java).putExtra(Clip_PATH, path),view, IMAGE_COMPLETE)
+        }
         fun startClipAct(activity: Activity, path: String) {
-            activity.openNewAct(Intent(activity, ClipAct::class.java).putExtra(Clip_PATH, path), IMAGE_COMPLETE)
+            activity.startActivityForResult(Intent(activity, ClipAct::class.java).putExtra(Clip_PATH, path), IMAGE_COMPLETE)
         }
     }
 }

@@ -8,7 +8,7 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
@@ -75,8 +75,8 @@ class NavigationFra : BaseFragment() {
     }
 
     override fun initData() {
-        (activity as MainAct).mFrag = this@NavigationFra
-        mRecyclerView!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        //(activity as MainAct).mFrag = this@NavigationFra
+        mRecyclerView!!.layoutManager = GridLayoutManager(activity,2)
         mBaseAdapter = object : LBaseAdapter<NavigationItem>(R.layout.item_nav) {
             override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: NavigationItem) {
                 baseHolder.setText(R.id.navitem_txt, item.txt)
@@ -89,13 +89,13 @@ class NavigationFra : BaseFragment() {
                 notifyDataSetChanged()
                 when (item.icon) {
                     2 ->
-                        WeatherAct.startWeatherAct(activity)
+                        activity.openNewAct(WeatherAct::class.java,view)
                     3 ->
-                        BookListAct.startBookListAct(activity)
+                        activity.openNewAct(BookListAct::class.java,view)
                     4 ->
                         changeTheme()
                     else ->
-                        WebViewAct.startWebViewAct(activity, urls[item.icon], item.txt)
+                        WebViewAct.startWebViewAct(activity,view, urls[item.icon], item.txt)
                 }
                 lastIndex = item.icon
             }
@@ -106,7 +106,7 @@ class NavigationFra : BaseFragment() {
                         .title("请选择主题:")
                         .sheet(R.menu.menu_theme)
                         .listener { dialogInterface, index ->
-                                ThemeUtils.saveTheme(activity,index)
+                                ThemeUtils.saveTheme(activity,mRecyclerView!!,index)
                             }
                         .grid()
                         .build()
@@ -177,7 +177,7 @@ class NavigationFra : BaseFragment() {
                         } else {
                             val openAlbumIntent = Intent(Intent.ACTION_GET_CONTENT)
                             openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-                            activity.openNewAct(openAlbumIntent, PHOTOZOOM)
+                            activity.openNewAct(openAlbumIntent,mImageView!!, PHOTOZOOM)
                         }
                     }
                 }

@@ -1,14 +1,11 @@
 package com.lv.note.ui
 
-import android.app.Activity
-import android.content.Intent
 import android.widget.TextView
 import com.joanzapata.pdfview.PDFView
 import com.joanzapata.pdfview.listener.OnPageChangeListener
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Book
-import com.lv.note.util.openNewAct
 import com.orhanobut.hawk.Hawk
 import java.io.File
 
@@ -23,9 +20,6 @@ class BookAct : BaseActivity(), OnPageChangeListener {
 
     companion object {
         private val BOOK_PARAM = "book_param"
-        fun startBookAct(activity: Activity, book: Book) {
-            activity.openNewAct(Intent(activity, BookAct::class.java).putExtra(BOOK_PARAM, book),0X102)
-        }
     }
 
     private var mPDFView: PDFView ? = null

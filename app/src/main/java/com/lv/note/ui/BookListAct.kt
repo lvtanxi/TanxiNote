@@ -1,6 +1,5 @@
 package com.lv.note.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Environment
@@ -29,12 +28,6 @@ import java.util.*
 class BookListAct : BaseRecyclerActivity<Book>() {
 
 
-    companion object {
-        fun startBookListAct(actvity: Activity) {
-            actvity.openNewAct(BookListAct::class.java)
-        }
-    }
-
     override fun initData() {
         mToolbar!!.title = "檀溪阅读(本地pdf)"
         super.initData()
@@ -57,7 +50,7 @@ class BookListAct : BaseRecyclerActivity<Book>() {
             }
 
             override fun onItemClick(view: View, item: Book) {
-                BookAct.startBookAct(this@BookListAct,item)
+                openNewAct(BookAct::class.java,view)
             }
         }
 

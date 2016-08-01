@@ -27,10 +27,7 @@ abstract class BaseFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (seavStatus) {
-            if (contentView == null)
-                initFragment(inflater)
-
+        if (seavStatus&&contentView!=null) {
             contentView?.parent?.let {
                 val parent = contentView!!.parent as ViewGroup
                 parent.removeView(contentView)

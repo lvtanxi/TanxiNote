@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               style="@style/MatchMatch.Vertical"
               android:background="@color/WINDOW_BACKGROUND">
 
     <include layout="@layout/common_toobar"/>
 
-    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
-        android:id="@+id/w_recyclerview_refresh"
-        style="@style/MatchMatch"
-        android:background="@drawable/wallpaper_0"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            style="@style/MatchMatch.Vertical"
-            android:gravity="center">
-
-            <com.dalong.francyconverflow.FancyCoverFlow
-                android:id="@+id/w_fancyCoverFlow"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="300dp"/>
-            <com.lv.note.widget.chart.WeatherChartView
-                android:id="@+id/w_weather_chartview"
-                style="@style/MatchAuto"/>
-        </LinearLayout>
-
-    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+    <include layout="@layout/fra_weather"/>
 
 </LinearLayout>

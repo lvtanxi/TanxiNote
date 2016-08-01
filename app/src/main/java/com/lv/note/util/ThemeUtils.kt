@@ -9,6 +9,7 @@ import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
+import android.view.View
 import com.lv.note.R
 import com.lv.note.ui.MainAct
 import com.orhanobut.hawk.Hawk
@@ -23,7 +24,7 @@ import com.orhanobut.hawk.Hawk
 object ThemeUtils {
     val THEMEID = "themeId"
 
-    fun saveTheme(activity: Activity, whichId: Int) {
+    fun saveTheme(activity: Activity, tageView: View, whichId: Int) {
         var themeId = R.style.AppTheme
         when (whichId) {
             R.id.action_theme_pink ->
@@ -40,7 +41,7 @@ object ThemeUtils {
                 themeId = R.style.AppTheme_orange
         }
         Hawk.put(THEMEID, themeId)
-        MainAct.startMainAct(activity)
+        activity.openNewAct(MainAct::class.java,tageView)
         activity.finish()
     }
 

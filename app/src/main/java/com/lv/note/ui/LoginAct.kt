@@ -18,10 +18,7 @@ import com.lv.note.entity.Person
 import com.lv.note.helper.CustTextWatcher
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.SaveListenerSub
-import com.lv.note.util.CommonUtils
-import com.lv.note.util.CountDown
-import com.lv.note.util.changeTopBgColor
-import com.lv.note.util.isEmptyList
+import com.lv.note.util.*
 import com.lv.note.widget.HeartProgressBar
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
@@ -145,7 +142,10 @@ class LoginAct : BaseActivity() {
             override fun countDownFinish() {
                 Hawk.put(USER_NAME, mPerson.name)
                 App.getInstance().savePerson(mPerson)
-                startActivity(Intent(this@LoginAct,MainAct::class.java))
+                if(Hawk.get(NewMainAct.IS_NEW,true))
+                    openNewAct(NewMainAct::class.java,sub!!)
+                else
+                    openNewAct(MainAct::class.java,sub!!)
                 finish()
             }
         })

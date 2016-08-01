@@ -31,8 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.LaunchAct"
-            android:theme="@style/NoTitleFullscreen">
+            android:name=".ui.LaunchAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -41,10 +40,13 @@
         </activity>
         <activity
             android:name=".ui.LoginAct"
-            android:theme="@style/NoTitleFullscreen"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".ui.MainAct"/>
+            android:name=".ui.MainAct"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.NewMainAct"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".ui.AddNoteAct"
             android:windowSoftInputMode="adjustResize|stateVisible"/>

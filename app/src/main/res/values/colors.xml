@@ -25,7 +25,7 @@
         <item>@android:color/holo_red_light</item>
         <item>@android:color/holo_purple</item>
     </integer-array>
-
+    <color name="brown">#8D6E63</color>
 
     <!-- theme color -->
     <color name="theme_pink">#fb7299</color>
