@@ -42,9 +42,7 @@ class AddNoteAct : BaseActivity() {
     private var undo: ImageButton? = null
     private var redo: ImageButton? = null
     private var knife: KnifeText? = null
-    private var isShowDialog = true
     private var mAlertDialog: AlertDialog? = null
-    private val resultText =StringBuffer()
 
 
 

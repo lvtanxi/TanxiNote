@@ -1,5 +1,6 @@
 package com.lv.note.ui
 
+import android.app.Activity
 import android.os.Handler
 import android.os.Message
 import android.support.v4.content.ContextCompat
@@ -22,6 +23,7 @@ import com.lv.note.entity.City
 import com.lv.note.helper.CityComparator
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.CountDown
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.FancyIndexer
 import com.lv.note.widget.SearchEditText
 import com.lv.note.widget.flowtag.TagAdapter
@@ -53,6 +55,11 @@ class ChangeCityAct : BaseActivity() {
     }
 
 
+    companion object {
+        fun startChangeCityAct(actvity: Activity,tageView:View) {
+            actvity.openNewAct(ChangeCityAct::class.java,tageView)
+        }
+    }
 
     override fun loadLayoutId(): Int {
         return R.layout.act_change_city

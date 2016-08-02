@@ -9,7 +9,6 @@ import com.lv.note.entity.Person
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.util.CountDown
 import com.lv.note.util.changeTopBgColor
-import com.orhanobut.hawk.Hawk
 
 
 /**
@@ -55,10 +54,8 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
         var mCl:Class<*> = LoginAct::class.java
         if (App.getInstance().getPerson() == null)
             mCl = LoginAct::class.java
-        else if(Hawk.get(NewMainAct.IS_NEW,true))
-            mCl = NewMainAct::class.java
         else
-            mCl = MainAct::class.java
+            mCl = HomeAct::class.java
         startActivity(Intent(this,mCl))
         finish()
     }

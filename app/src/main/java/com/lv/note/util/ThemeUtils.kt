@@ -41,7 +41,7 @@ object ThemeUtils {
                 themeId = R.style.AppTheme_orange
         }
         Hawk.put(THEMEID, themeId)
-        activity.openNewAct(MainAct::class.java,tageView)
+        activity.openNewAct(MainAct::class.java, tageView)
         activity.finish()
     }
 
@@ -49,12 +49,12 @@ object ThemeUtils {
         return Hawk.get(THEMEID, R.style.AppTheme)
     }
 
-    fun obtainThemeColor():Int{
-        val themeId=Hawk.get(THEMEID, R.style.AppTheme)
+    fun obtainThemeColor(): Int {
+        val themeId = Hawk.get(THEMEID, R.style.AppTheme)
         when (themeId) {
             R.style.AppTheme_pink ->
                 return R.color.theme_pink
-            R.style.AppTheme_purple->
+            R.style.AppTheme_purple ->
                 return R.color.theme_purple
             R.style.AppTheme_blue ->
                 return R.color.theme_blue

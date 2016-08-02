@@ -8,7 +8,7 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
@@ -75,8 +75,8 @@ class NavigationFra : BaseFragment() {
     }
 
     override fun initData() {
-        //(activity as MainAct).mFrag = this@NavigationFra
-        mRecyclerView!!.layoutManager = GridLayoutManager(activity,2)
+       // (activity as MainAct).mFrag = this@NavigationFra
+        mRecyclerView!!.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         mBaseAdapter = object : LBaseAdapter<NavigationItem>(R.layout.item_nav) {
             override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: NavigationItem) {
                 baseHolder.setText(R.id.navitem_txt, item.txt)
@@ -139,7 +139,7 @@ class NavigationFra : BaseFragment() {
     override fun bindListener() {
         mLoginOut!!.setOnClickListener {
             App.getInstance().savePerson(null)
-            LoginAct.startLoginAct(activity)
+            LoginAct.startLoginAct(activity,mLoginOut!!)
             activity.finish()
         }
         mImageView!!.setOnClickListener {

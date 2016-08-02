@@ -3,7 +3,6 @@ package com.lv.note.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import java.util.*
 
 /**
  * User: 吕勇
@@ -20,10 +19,6 @@ class LBaseFragmentAdapter : FragmentStatePagerAdapter {
         mTitles = titles
     }
 
-    constructor(fm: FragmentManager, fragments: Array<Fragment>, vararg titles: String) : super(fm) {
-        mFragments = Arrays.asList(*fragments)
-        mTitles = titles as Array<String>
-    }
 
     constructor(fm: FragmentManager, fragments: List<Fragment>) : super(fm) {
         mFragments = fragments

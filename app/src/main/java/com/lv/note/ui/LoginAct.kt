@@ -1,7 +1,6 @@
 package com.lv.note.ui
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.text.Editable
@@ -44,8 +43,8 @@ class LoginAct : BaseActivity() {
 
     companion object {
         val USER_NAME = "USER_PHONE"
-        fun startLoginAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity,LoginAct::class.java))
+        fun startLoginAct(actvity: Activity,tageView:View) {
+            actvity.openNewAct(LoginAct::class.java,tageView)
         }
     }
 
@@ -142,10 +141,7 @@ class LoginAct : BaseActivity() {
             override fun countDownFinish() {
                 Hawk.put(USER_NAME, mPerson.name)
                 App.getInstance().savePerson(mPerson)
-                if(Hawk.get(NewMainAct.IS_NEW,true))
-                    openNewAct(NewMainAct::class.java,sub!!)
-                else
-                    openNewAct(MainAct::class.java,sub!!)
+                openNewAct(HomeAct::class.java,sub!!)
                 finish()
             }
         })

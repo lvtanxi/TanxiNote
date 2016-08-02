@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/MatchMatch.Vertical">
 
     <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/w_recyclerview_refresh"
         style="@style/MatchMatch"
         android:background="@drawable/wallpaper_0"
@@ -26,12 +24,3 @@
         </LinearLayout>
 
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
-
-    <ImageView
-        android:id="@+id/change_city_btn"
-        style="@style/WrapWrap"
-        android:layout_gravity="end"
-        android:layout_margin="15dp"
-        android:contentDescription="@null"
-        android:src="@drawable/change_city"/>
-</FrameLayout>

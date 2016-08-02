@@ -45,7 +45,7 @@
             android:name=".ui.MainAct"
             android:launchMode="singleTask"/>
         <activity
-            android:name=".ui.NewMainAct"
+            android:name=".ui.HomeAct"
             android:launchMode="singleTask"/>
         <activity
             android:name=".ui.AddNoteAct"

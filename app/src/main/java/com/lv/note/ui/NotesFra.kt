@@ -122,4 +122,10 @@ class NotesFra: BaseRecyclerFragment<Note>() {
             }
         })
     }
+
+    fun changeDelegate(addDelegate:Boolean,freshen:Boolean){
+        commonRefresh?.setDelegate(if (addDelegate) mDelegate else null)
+        if(freshen)
+            processLogic()
+    }
 }

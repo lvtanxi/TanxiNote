@@ -12,7 +12,6 @@ import com.lv.note.entity.weather.ResultData
 import com.lv.note.entity.weather.Weather
 import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
-import com.lv.note.util.openNewAct
 import com.lv.note.widget.chart.WeatherChartItem
 import com.lv.note.widget.chart.WeatherChartView
 import com.orhanobut.hawk.Hawk
@@ -67,7 +66,7 @@ class WeatherAct : BaseActivity(), BGARefreshDelegate.BGARefreshListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item!!.itemId==R.id.action_change){
-            openNewAct(ChangeCityAct::class.java,mToolbar!!)
+            ChangeCityAct.startChangeCityAct(this,mToolbar!!)
             return true
         }
         return super.onOptionsItemSelected(item)

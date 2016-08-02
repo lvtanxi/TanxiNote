@@ -58,7 +58,7 @@ class MainAct : BaseRecyclerActivity<Note>(), AppBarLayout.OnOffsetChangedListen
     override fun initViews() {
         super.initViews()
         mDrawerLayout = fdb(R.id.mian_drawer_layout);
-        mAppBar = fdb(R.id.main_appbar);
+        //mAppBar = fdb(R.id.main_appbar);
         mAddBtn = fdb(R.id.main_float_button);
     }
 
