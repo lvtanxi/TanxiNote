@@ -73,7 +73,7 @@ class NotesFra : BaseRecyclerFragment<Note>() {
         val query = BmobQuery<Note>()
         query.addWhereEqualTo("userId", App.getInstance().getPerson()?.objectId)
         query.addWhereEqualTo("status", "1")
-        if (!TextUtils.isEmpty(mSearchMessage) && !TextUtils.equals("clean", mSearchMessage))
+        if (!TextUtils.isEmpty(mSearchMessage))
             query.addWhereContains("note", mSearchMessage)
         query.order("createdAt")
         query.findObjects(activity, object : FindListenerSub<Note>(mBaseActivity!!, false) {
@@ -82,6 +82,7 @@ class NotesFra : BaseRecyclerFragment<Note>() {
             }
 
             override fun onFinish() {
+                mSearchMessage=""
                 stopRefreshing()
             }
         })
@@ -135,6 +136,7 @@ class NotesFra : BaseRecyclerFragment<Note>() {
         })
     }
 
+
     override fun onResume() {
         super.onResume()
         if (Hawk.get(CHANGE_NOTE, false)) {
@@ -146,6 +148,6 @@ class NotesFra : BaseRecyclerFragment<Note>() {
 
     fun doSearch(message: String) {
         mSearchMessage = message
-        processLogic()
+        commonRefresh?.beginRefreshing()
     }
 }

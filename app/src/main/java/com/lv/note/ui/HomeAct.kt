@@ -54,7 +54,7 @@ class HomeAct : BaseActivity() {
 
     override fun initData() {
         mSearchView?.adjustTintAlpha(0.8f)
-        mSearchView?.setHint("请输入关键字(clean表示查询全部)")
+        mSearchView?.setHint("请输入关键字")
         mActionBarDrawerToggle = ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
         mActionBarDrawerToggle?.syncState()
         mAdapter= LBaseFragmentAdapter(supportFragmentManager, Arrays.asList(NotesFra(), WeatherFra()), arrayOf("笔记", "天气"))

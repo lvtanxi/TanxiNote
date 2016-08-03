@@ -58,10 +58,6 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
             </intent-filter>
         </receiver>
-
-        <meta-data
-            android:name="BUG_HD_SDK_GENERAL_KEY"
-            android:value="9db66424a27345ab8e98eff3a73a4ee8"/>
         <provider
             android:name="br.com.mauker.materialsearchview.db.HistoryProvider"
             android:authorities="br.com.mauker.materialsearchview.searchhistorydatabase"
