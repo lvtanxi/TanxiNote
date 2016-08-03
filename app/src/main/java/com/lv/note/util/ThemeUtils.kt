@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.lv.note.R
-import com.lv.note.ui.MainAct
+import com.lv.note.ui.HomeAct
 import com.orhanobut.hawk.Hawk
 
 
@@ -41,7 +41,7 @@ object ThemeUtils {
                 themeId = R.style.AppTheme_orange
         }
         Hawk.put(THEMEID, themeId)
-        activity.openNewAct(MainAct::class.java, tageView)
+        activity.openNewAct(HomeAct::class.java, tageView)
         activity.finish()
     }
 

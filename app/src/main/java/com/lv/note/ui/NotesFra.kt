@@ -3,6 +3,7 @@ package com.lv.note.ui
 import android.content.Intent
 import android.support.v7.widget.PopupMenu
 import android.text.Html
+import android.text.TextUtils
 import android.text.format.DateFormat
 import android.view.View
 import android.view.ViewTreeObserver
@@ -15,6 +16,7 @@ import com.lv.note.base.BaseRecyclerFragment
 import com.lv.note.entity.Note
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
+import com.orhanobut.hawk.Hawk
 import io.github.mthli.knife.KnifeText
 
 
@@ -24,12 +26,19 @@ import io.github.mthli.knife.KnifeText
  * Time: 15:47
  * Description:
  */
-class NotesFra: BaseRecyclerFragment<Note>() {
+class NotesFra : BaseRecyclerFragment<Note>() {
     private var year = ""
+    private var mSearchMessage = ""
+
+    companion object{
+        val CHANGE_NOTE="CHANGE_NOTE"
+    }
+
     override fun loadLayoutId(): Int {
-        column=2
+        column = 2
         return super.loadLayoutId()
     }
+
     override fun initData() {
         super.initData()
         year = DateFormat.format("yyyy年", System.currentTimeMillis()) as String
@@ -64,6 +73,8 @@ class NotesFra: BaseRecyclerFragment<Note>() {
         val query = BmobQuery<Note>()
         query.addWhereEqualTo("userId", App.getInstance().getPerson()?.objectId)
         query.addWhereEqualTo("status", "1")
+        if (!TextUtils.isEmpty(mSearchMessage) && !TextUtils.equals("clean", mSearchMessage))
+            query.addWhereContains("note", mSearchMessage)
         query.order("createdAt")
         query.findObjects(activity, object : FindListenerSub<Note>(mBaseActivity!!, false) {
             override fun onSuccess(p0: MutableList<Note>) {
@@ -83,7 +94,7 @@ class NotesFra: BaseRecyclerFragment<Note>() {
         .OnRecyclerItemChildClickListener {
             override fun onItemChildClick(view: View, position: Int) {
                 if (view.id == R.id.item_view) {
-                    AddNoteAct.startAddNoteAct(activity, mBaseAdapter!!.getItem(position),view)
+                    AddNoteAct.startAddNoteAct(activity, mBaseAdapter!!.getItem(position), view)
                     return
                 }
                 val mPopupMenu = PopupMenu(activity, view)
@@ -106,6 +117,7 @@ class NotesFra: BaseRecyclerFragment<Note>() {
             }
         })
     }
+
     private fun shareText(message: String) {
         val shareIntent = Intent()
         shareIntent.action = Intent.ACTION_SEND
@@ -123,9 +135,17 @@ class NotesFra: BaseRecyclerFragment<Note>() {
         })
     }
 
-    fun changeDelegate(addDelegate:Boolean,freshen:Boolean){
-        commonRefresh?.setDelegate(if (addDelegate) mDelegate else null)
-        if(freshen)
+    override fun onResume() {
+        super.onResume()
+        if (Hawk.get(CHANGE_NOTE, false)) {
+            Hawk.remove(CHANGE_NOTE)
+            commonRefresh?.setDelegate(mDelegate)
             processLogic()
+        }
+    }
+
+    fun doSearch(message: String) {
+        mSearchMessage = message
+        processLogic()
     }
 }

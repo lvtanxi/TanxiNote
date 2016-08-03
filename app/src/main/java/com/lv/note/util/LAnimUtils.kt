@@ -52,35 +52,45 @@ object LAnimUtils {
     /**
      * 向四周伸张，直到完成显示。
      */
-    fun showView(view: View) {
-        // 收缩按钮
-        view.visibility = View.VISIBLE
-        val scaleAnimation = ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        scaleAnimation.fillAfter = true
-        scaleAnimation.duration = PERFECT_MILLS
-        scaleAnimation.setAnimationListener(object : CustAnimationListener(view) {
-            override fun onAnimationEnd(animation: Animation) {
-                mView.clearAnimation()
-            }
-        })
-        view.startAnimation(scaleAnimation)
+    fun showView(view: View?) {
+        view?.let {
+            // 收缩按钮
+            view.visibility = View.VISIBLE
+            val scaleAnimation = ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            scaleAnimation.fillAfter = true
+            scaleAnimation.duration = PERFECT_MILLS
+            scaleAnimation.setAnimationListener(object : CustAnimationListener(view) {
+                override fun onAnimationEnd(animation: Animation) {
+                    mView.clearAnimation()
+                }
+            })
+            view.startAnimation(scaleAnimation)
+        }
     }
 
     /**
      * 由满向中间收缩，直到隐藏。
      */
-    fun hideView(view: View) {
-        // 收缩按钮
-        val scaleAnimation = ScaleAnimation(1f, 0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        scaleAnimation.fillAfter = true
-        scaleAnimation.duration = PERFECT_MILLS
-        scaleAnimation.setAnimationListener(object : CustAnimationListener(view) {
-            override fun onAnimationEnd(animation: Animation) {
-                mView.visibility = View.GONE
-                mView.clearAnimation()
-            }
-        })
-        view.startAnimation(scaleAnimation)
+    fun hideView(view: View?) {
+        view?.let {
+            // 收缩按钮
+            val scaleAnimation = ScaleAnimation(1f, 0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            scaleAnimation.fillAfter = true
+            scaleAnimation.duration = PERFECT_MILLS
+            scaleAnimation.setAnimationListener(object : CustAnimationListener(view) {
+                override fun onAnimationEnd(animation: Animation) {
+                    mView.visibility = View.GONE
+                    mView.clearAnimation()
+                }
+            })
+            view.startAnimation(scaleAnimation)
+        }
+    }
+    fun hideOrShowView(view: View?,isShow:Boolean) {
+        if(isShow)
+            showView(view)
+        else
+            hideView(view)
     }
 
 

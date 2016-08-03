@@ -113,7 +113,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
             mToolbar?.let {
                 CommonUtils.hiddenKeyBoard(mToolbar!!)
             }
-            finishAfterTransition()
+            finish()
             return true
         }
         return super.onOptionsItemSelected(item)

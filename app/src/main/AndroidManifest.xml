@@ -42,20 +42,17 @@
             android:name=".ui.LoginAct"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".ui.MainAct"
-            android:launchMode="singleTask"/>
-        <activity
             android:name=".ui.HomeAct"
             android:launchMode="singleTask"/>
         <activity
             android:name=".ui.AddNoteAct"
             android:windowSoftInputMode="adjustResize|stateVisible"/>
         <activity android:name=".ui.WebViewAct"/>
-        <activity android:name=".ui.WeatherAct"/>
         <activity android:name=".ui.ClipAct"/>
         <activity android:name=".ui.ChangeCityAct"/>
         <activity android:name=".ui.BookListAct"/>
         <activity android:name=".ui.BookAct"/>
+
         <receiver android:name="com.xiaomi.market.sdk.DownloadCompleteReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
@@ -65,8 +62,12 @@
         <meta-data
             android:name="BUG_HD_SDK_GENERAL_KEY"
             android:value="9db66424a27345ab8e98eff3a73a4ee8"/>
-
-
+        <provider
+            android:name="br.com.mauker.materialsearchview.db.HistoryProvider"
+            android:authorities="br.com.mauker.materialsearchview.searchhistorydatabase"
+            android:exported="false"
+            android:protectionLevel="signature"
+            android:syncable="true"/>
     </application>
 
 </manifest>

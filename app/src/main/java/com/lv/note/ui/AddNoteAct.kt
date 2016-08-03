@@ -149,8 +149,8 @@ class AddNoteAct : BaseActivity() {
     private fun goBack() {
         CommonUtils.showSuccess(this, knife!!, object : CountDown.CountDownBack {
             override fun countDownFinish() {
-                Hawk.put(MainAct.CHANGE_NOTE, true)
-                finishAfterTransition()
+                Hawk.put(NotesFra.CHANGE_NOTE, true)
+                finish()
             }
         })
     }

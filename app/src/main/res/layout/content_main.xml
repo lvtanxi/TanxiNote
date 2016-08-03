@@ -5,7 +5,7 @@
     style="@style/MatchMatch"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         style="@style/MatchMatch.Vertical">
 
         <android.support.v7.widget.Toolbar
@@ -43,21 +43,21 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/main_view_pager"
             style="@style/MatchMatch"
+            android:layout_marginTop="?attr/actionBarSize"
             android:background="@color/WINDOW_BACKGROUND"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/main_float_button"
             style="@style/WrapWrap"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_action_plusone"
-            android:visibility="gone"
             app:backgroundTint="?attr/colorPrimary"
             app:elevation="8dp"
             app:layout_behavior="com.lv.note.widget.ScrollBehavior"
             app:pressedTranslationZ="16dp"
             app:rippleColor="@color/alertdialog_line"/>
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <br.com.mauker.materialsearchview.MaterialSearchView
         android:id="@+id/main_search_view"

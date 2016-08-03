@@ -75,7 +75,6 @@ class NavigationFra : BaseFragment() {
     }
 
     override fun initData() {
-       // (activity as MainAct).mFrag = this@NavigationFra
         mRecyclerView!!.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         mBaseAdapter = object : LBaseAdapter<NavigationItem>(R.layout.item_nav) {
             override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: NavigationItem) {
@@ -89,10 +88,8 @@ class NavigationFra : BaseFragment() {
                 notifyDataSetChanged()
                 when (item.icon) {
                     2 ->
-                        activity.openNewAct(WeatherAct::class.java,view)
-                    3 ->
                         activity.openNewAct(BookListAct::class.java,view)
-                    4 ->
+                    3 ->
                         changeTheme()
                     else ->
                         WebViewAct.startWebViewAct(activity,view, urls[item.icon], item.txt)
@@ -114,7 +111,7 @@ class NavigationFra : BaseFragment() {
             }
         }
         mRecyclerView!!.adapter = mBaseAdapter
-        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪天气", "檀溪阅读", "檀溪主题")
+        val names = arrayOf("檀溪动态", "檀溪博客", "檀溪阅读", "檀溪主题")
         val items = ArrayList<NavigationItem>();
         for ((index, name) in names.withIndex()) {
             when (index) {

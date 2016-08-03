@@ -1,5 +1,6 @@
 package com.lv.note.ui
 
+import android.widget.TextView
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.dalong.francyconverflow.FancyCoverFlow
 import com.google.gson.Gson
@@ -33,9 +34,12 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
     private var mDelegate: BGARefreshDelegate? = null
     private var mfancyCoverFlow: FancyCoverFlow? = null
     private var mWeatherChartView: WeatherChartView<WeatherChartItem>? = null
+    private var mTextView:TextView? =null
 
     companion object {
         val CITY_ID="CITY_ID"
+        val CITY_CHANGE="CITY_CHANGE"
+        val CITY_NAME="CITY_NAME"
     }
 
     override fun loadLayoutId(): Int {
@@ -46,9 +50,11 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
         mRefreshLayout = fdb(R.id.w_recyclerview_refresh)
         mfancyCoverFlow = fdb(R.id.w_fancyCoverFlow)
         mWeatherChartView = fdb(R.id.w_weather_chartview)
+        mTextView = fdb(R.id.change_city_btn)
     }
 
     override fun initData() {
+        mTextView?.text = "${Hawk.get(CITY_NAME,"成都")}天气"
         mDelegate = BGARefreshDelegate(mRefreshLayout!!, this, false)
         mfancyCoverFlow!!.unselectedScale = 0.3f//设置选中的规模
         mfancyCoverFlow!!.scaleDownGravity = 0.5f
@@ -62,6 +68,9 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
 
     override fun bindListener() {
         mRefreshLayout!!.setDelegate(mDelegate)
+        mTextView?.setOnClickListener{view->
+            ChangeCityAct.startChangeCityAct(activity,view)
+        }
     }
 
 
@@ -125,6 +134,14 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
     override fun onDestroy() {
         OkHttpUtils.getInstance().cancelTag(this)
         super.onDestroy()
+    }
+    override fun onResume() {
+        super.onResume()
+        if(Hawk.get(CITY_CHANGE,false)){
+            Hawk.remove(CITY_CHANGE)
+            mTextView?.text = "${Hawk.get(CITY_NAME,"成都")}天气"
+            processLogic()
+        }
     }
 
 }

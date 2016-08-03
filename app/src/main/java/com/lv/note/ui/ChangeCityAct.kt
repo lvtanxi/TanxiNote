@@ -133,9 +133,9 @@ class ChangeCityAct : BaseActivity() {
                             val jsonObj = JSONObject(response)
                             val code: Int = jsonObj.optInt("errNum")
                             if (code == 0) {
-                                Hawk.put(WeatherAct.CITY_ID, jsonObj.optJSONObject("retData").optString("cityCode"))
-                                Hawk.put(WeatherAct.CITY_NAME,jsonObj.optJSONObject("retData").optString("cityName"))
-                                Hawk.put(WeatherAct.CITY_CHANGE, true)
+                                Hawk.put(WeatherFra.CITY_ID, jsonObj.optJSONObject("retData").optString("cityCode"))
+                                Hawk.put(WeatherFra.CITY_NAME,jsonObj.optJSONObject("retData").optString("cityName"))
+                                Hawk.put(WeatherFra.CITY_CHANGE, true)
                                 CommonUtils.showSuccess(this@ChangeCityAct, mRecyclerView!!, object : CountDown.CountDownBack{
                                     override fun countDownFinish() {
                                         finish()
