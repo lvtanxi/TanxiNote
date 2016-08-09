@@ -152,12 +152,11 @@ class ChangeCityAct : BaseActivity() {
     }
 
     override fun processLogic() {
+        showLodingView()
         Observable.create(Observable.OnSubscribe<List<City>> { subscriber ->
             subscriber.onNext(getCitys())
             subscriber.onCompleted()
-        }).doOnSubscribe {
-            showLodingView()
-        }.io_main<List<City>>()
+        }).io_main<List<City>>()
                 .subscribe(object : Subscriber<List<City>>() {
                     override fun onError(e: Throwable?) {
 
@@ -168,12 +167,14 @@ class ChangeCityAct : BaseActivity() {
                     }
 
                     override fun onNext(mCitys: List<City>?) {
+                        mBaseAdapter?.addItems(mCitys,true)
                     }
                 })
     }
 
     fun getCitys(): List<City>? {
         var input: InputStream? = null
+        var citys: List<City>? = null
         try {
             input = assets.open("city.txt")
             val size = input.available()
@@ -182,7 +183,7 @@ class ChangeCityAct : BaseActivity() {
             val txt = String(buffer)
             input.close()
 
-            val citys: List<City> = Gson().fromJson(txt, object : TypeToken<List<City>>() {}.type);
+            citys =Gson().fromJson(txt, object : TypeToken<List<City>>() {}.type);
             citys?.let {
                 Collections.sort<City>(citys, CityComparator())
                 mLetterIndexes = ArrayMap(citys!!.size)
@@ -194,7 +195,6 @@ class ChangeCityAct : BaseActivity() {
                     }
                 }
             }
-            return citys
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -202,7 +202,7 @@ class ChangeCityAct : BaseActivity() {
                 input!!.close()
                 input = null
             }
-            return null
+            return citys
         }
     }
 
