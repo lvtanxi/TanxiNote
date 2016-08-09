@@ -76,16 +76,17 @@ class NotesFra : BaseRecyclerFragment<Note>() {
         if (!TextUtils.isEmpty(mSearchMessage))
             query.addWhereContains("note", mSearchMessage)
         query.order("createdAt")
-        query.findObjects(activity, object : FindListenerSub<Note>(mBaseActivity!!, false) {
-            override fun onSuccess(p0: MutableList<Note>) {
-                addItems(p0)
+        addSubscription(query.findObjects(object :FindListenerSub<Note>(mBaseActivity!!, false){
+            override fun onSuccess(result: MutableList<Note>) {
+                addItems(result)
             }
 
             override fun onFinish() {
                 mSearchMessage=""
                 stopRefreshing()
             }
-        })
+
+        }))
         return false
     }
 
@@ -129,11 +130,11 @@ class NotesFra : BaseRecyclerFragment<Note>() {
 
     private fun updateNote(note: Note) {
         note.status = "0"
-        note.update(activity, note.objectId, object : UpdateListenerSub(mBaseActivity!!) {
+        addSubscription(note.update(object :UpdateListenerSub(mBaseActivity!!){
             override fun onSuccess() {
                 processLogic()
             }
-        })
+        }))
     }
 
 

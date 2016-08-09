@@ -13,6 +13,8 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.ThemeUtils
 import com.lv.note.util.ToastUtils
 import com.lv.note.widget.LoadingDialog
+import rx.Subscription
+import rx.subscriptions.CompositeSubscription
 
 
 /**
@@ -24,6 +26,8 @@ import com.lv.note.widget.LoadingDialog
 abstract class BaseActivity : AppCompatActivity(), IBaseView {
     protected var mLodingView: LoadingDialog? = null
     protected var mToolbar: Toolbar? = null
+    protected var mCompositeSubscription: CompositeSubscription? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(ThemeUtils.obtainCurrentTheme())
@@ -83,9 +87,13 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
 
 
     override fun onDestroy() {
-        super.onDestroy()
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription?.unsubscribe()
+            mCompositeSubscription = null
+        }
         mToolbar = null
         mLodingView = null
+        super.onDestroy()
     }
 
     override fun showLodingView() {
@@ -104,7 +112,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         }
     }
 
-    override fun toastError(message: String) {
+    override fun toastError(message: String?) {
         ToastUtils.textToastError(this, message)
     }
 
@@ -118,4 +126,12 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    protected fun addSubscription(subscription: Subscription?) {
+        if (mCompositeSubscription == null)
+            mCompositeSubscription = CompositeSubscription()
+        mCompositeSubscription?.add(subscription)
+    }
+
+
 }

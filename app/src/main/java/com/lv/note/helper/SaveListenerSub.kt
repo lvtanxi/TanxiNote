@@ -1,5 +1,6 @@
 package com.lv.note.helper
 
+import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.SaveListener
 import com.lv.note.util.CommonUtils
 
@@ -10,18 +11,22 @@ import com.lv.note.util.CommonUtils
  * Time: 13:14
  * Description:
  */
-abstract class SaveListenerSub@JvmOverloads constructor(private var mBaseView: IBaseView, private var mShowLodingView: Boolean = true) : SaveListener() {
+abstract class SaveListenerSub@JvmOverloads constructor(private var mBaseView: IBaseView, private var mShowLodingView: Boolean = true) : SaveListener<String>() {
+    override fun done(p0: String?, p1: BmobException?) {
+        if (p1 != null)
+            mBaseView.toastError(CommonUtils.getErrorMessage(p1.errorCode))
+        else
+            onSuccess()
+        onFinish()
+    }
 
     override fun onStart() {
         if (mShowLodingView)
             mBaseView.showLodingView()
     }
 
+    abstract fun onSuccess()
 
-    override fun onFailure(p0: Int, p1: String?) {
-        mBaseView.toastError(CommonUtils.getErrorMessage(p0))
-        onFinish()
-    }
 
     override fun onFinish() {
         if (mShowLodingView)

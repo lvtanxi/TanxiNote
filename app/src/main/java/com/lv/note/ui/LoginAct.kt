@@ -14,10 +14,14 @@ import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
+import com.lv.note.helper.ActionBack
 import com.lv.note.helper.CustTextWatcher
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.SaveListenerSub
-import com.lv.note.util.*
+import com.lv.note.util.CommonUtils
+import com.lv.note.util.changeTopBgColor
+import com.lv.note.util.isEmptyList
+import com.lv.note.util.openNewAct
 import com.lv.note.widget.HeartProgressBar
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
@@ -43,8 +47,8 @@ class LoginAct : BaseActivity() {
 
     companion object {
         val USER_NAME = "USER_PHONE"
-        fun startLoginAct(actvity: Activity,tageView:View) {
-            actvity.openNewAct(LoginAct::class.java,tageView)
+        fun startLoginAct(actvity: Activity, tageView: View) {
+            actvity.openNewAct(LoginAct::class.java, tageView)
         }
     }
 
@@ -64,9 +68,9 @@ class LoginAct : BaseActivity() {
     override fun initData() {
         changeTopBgColor()
         name!!.setText(Hawk.get(USER_NAME, ""))
-        if(name!!.text.length !=0){
-            pwd!!.isFocusable=true
-            pwd!!.isFocusableInTouchMode=true
+        if (name!!.text.length != 0) {
+            pwd!!.isFocusable = true
+            pwd!!.isFocusableInTouchMode = true
             pwd!!.requestFocus()
         }
     }
@@ -90,21 +94,21 @@ class LoginAct : BaseActivity() {
 
         what!!.setOnClickListener {
             AlertDialog.Builder(this)
-            .setTitle("檀溪提示")
-            .setMessage("用户是根据后端判断是否存在,所以没用注册界面,请见谅.也请妥善管理自己的用户名和密码!")
-            .setPositiveButton("确定"){dialog,index -> dialog.dismiss()}
-            .create()
-            .show()
+                    .setTitle("檀溪提示")
+                    .setMessage("用户是根据后端判断是否存在,所以没用注册界面,请见谅.也请妥善管理自己的用户名和密码!")
+                    .setPositiveButton("确定") { dialog, index -> dialog.dismiss() }
+                    .create()
+                    .show()
         }
     }
 
-    fun stopHeartProgressBar(){
-        if((name!!.text.length == 11) && (pwd!!.text.length >= 6)){
+    fun stopHeartProgressBar() {
+        if ((name!!.text.length == 11) && (pwd!!.text.length >= 6)) {
             mP!!.dismiss()
-            sub!!.visibility= View.VISIBLE
+            sub!!.visibility = View.VISIBLE
             return
         }
-        sub!!.visibility= View.GONE
+        sub!!.visibility = View.GONE
         mP!!.start()
     }
 
@@ -124,26 +128,28 @@ class LoginAct : BaseActivity() {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", mPerson.name)
         query.addWhereEqualTo("pwd", mPerson.pwd)
-        query.findObjects(this,object :FindListenerSub<Person>(this){
-            override fun onSuccess(p0: MutableList<Person>) {
-                if (p0.isEmptyList()) {
+        addSubscription(query.findObjects(object : FindListenerSub<Person>(this) {
+            override fun onSuccess(result: MutableList<Person>) {
+                if (result.isEmptyList()) {
                     addUser(mPerson)
                     return
                 }
-                changeAct(p0!![0])
+                changeAct(result!![0])
             }
-        })
+
+        }))
     }
 
     private fun changeAct(mPerson: Person) {
         CommonUtils.showSuccess(this, sub!!
-                , object : CountDown.CountDownBack {
-            override fun countDownFinish() {
+                , object : ActionBack{
+            override fun call() {
                 Hawk.put(USER_NAME, mPerson.name)
                 App.getInstance().savePerson(mPerson)
-                openNewAct(HomeAct::class.java,sub!!)
+                openNewAct(HomeAct::class.java, sub!!)
                 finish()
             }
+
         })
     }
 
@@ -167,11 +173,11 @@ class LoginAct : BaseActivity() {
     }
 
     private fun addUser(mPerson: Person) {
-        mPerson.save(this,object : SaveListenerSub(this){
+        addSubscription(mPerson.save(object : SaveListenerSub(this) {
             override fun onSuccess() {
                 changeAct(mPerson)
             }
-        })
+        }))
     }
 
 

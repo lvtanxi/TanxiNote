@@ -13,10 +13,10 @@ import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Note
+import com.lv.note.helper.ActionBack
 import com.lv.note.helper.SaveListenerSub
 import com.lv.note.helper.UpdateListenerSub
 import com.lv.note.util.CommonUtils
-import com.lv.note.util.CountDown
 import com.lv.note.util.notEmptyStr
 import com.lv.note.util.openNewAct
 import com.orhanobut.hawk.Hawk
@@ -130,25 +130,25 @@ class AddNoteAct : BaseActivity() {
         note.note = knife?.toHtml().toString()
         note.year = DateFormat.format("yyyy年MM月dd日", System.currentTimeMillis()) as String
         note.time = DateFormat.format("HH:mm", System.currentTimeMillis()) as String
-        note.save(this,object : SaveListenerSub(this) {
+        addSubscription(note.save(object:SaveListenerSub(this){
             override fun onSuccess() {
                 goBack()
             }
-        })
+        }))
     }
 
     private fun updateNote(note: Note) {
         note.note = knife?.toHtml().toString()
-        note.update(this,note.objectId, object : UpdateListenerSub(this) {
+        addSubscription(note.update(note.objectId,object :UpdateListenerSub(this){
             override fun onSuccess() {
                 goBack()
             }
-        })
+        }))
     }
 
     private fun goBack() {
-        CommonUtils.showSuccess(this, knife!!, object : CountDown.CountDownBack {
-            override fun countDownFinish() {
+        CommonUtils.showSuccess(this, knife!!, object : ActionBack {
+            override fun call() {
                 Hawk.put(NotesFra.CHANGE_NOTE, true)
                 finish()
             }

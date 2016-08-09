@@ -236,13 +236,13 @@ class NavigationFra : BaseFragment() {
 
     private fun updateUser() {
         val mPerson = App.getInstance().getPerson()!!
-        mPerson.update(activity,mPerson.objectId, object : UpdateListenerSub(mBaseActivity!!) {
+        addSubscription(mPerson.update(object :UpdateListenerSub(mBaseActivity!!){
             override fun onSuccess() {
                 App.getInstance().savePerson(mPerson)
                 CommonUtils.displayRoundImage(mImageView!!, mPerson.header)
                 CommonUtils.showSuccess(activity, mRecyclerView!!, null)
             }
-        })
+        }))
     }
 
     fun getRealPathFromURI(contentUri: Uri): String {

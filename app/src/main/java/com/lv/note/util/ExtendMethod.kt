@@ -6,6 +6,9 @@ import android.graphics.Color
 import android.view.View
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
+import rx.Observable
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 
 /**
@@ -53,4 +56,9 @@ fun Activity.openNewAct(mClass:Class<*>,tagView:View,requestCode:Int){
 fun Activity.openNewAct(mIntent:Intent,tagView:View,requestCode:Int){
     LAnimUtils.startActivityForResultAsCircular(this,mIntent,requestCode,tagView, R.color.brown)
 }
+
+ fun <T> Observable<T>.io_main():Observable<T>{
+    return this.compose(Observable.Transformer<T, T> { tObservable -> tObservable.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()) })
+}
+
 

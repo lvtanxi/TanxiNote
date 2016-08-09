@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lv.note.util.ToastUtils
+import rx.Subscription
+import rx.subscriptions.CompositeSubscription
 
 /**
  * User: 吕勇
@@ -19,6 +21,7 @@ abstract class BaseFragment : Fragment() {
     protected var contentView: View? = null
     protected var mBaseActivity: BaseActivity? = null
     protected var seavStatus = true
+    protected var mCompositeSubscription: CompositeSubscription? = null
 
     override fun onAttach(activity: Context?) {
         mBaseActivity = getActivity() as BaseActivity
@@ -99,8 +102,18 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription?.unsubscribe()
+            mCompositeSubscription = null
+        }
         contentView = null
         mBaseActivity = null
         super.onDestroyView()
+    }
+
+    protected fun addSubscription(subscription: Subscription) {
+        if (mCompositeSubscription == null)
+            mCompositeSubscription = CompositeSubscription()
+        mCompositeSubscription?.add(subscription)
     }
 }

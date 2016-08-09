@@ -7,8 +7,10 @@ import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
 import com.lv.note.helper.FindListenerSub
-import com.lv.note.util.CountDown
 import com.lv.note.util.changeTopBgColor
+import rx.Observable
+import rx.Subscription
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -17,11 +19,11 @@ import com.lv.note.util.changeTopBgColor
  * Time: 09:33
  * Description:启动界面
  */
-class LaunchAct : BaseActivity(), CountDown.CountDownBack {
+class LaunchAct : BaseActivity(){
 
-    private var mCountDown: CountDown? = null
     val param = "isFrist"
 
+    private var mSubscribe: Subscription? =null
     override fun loadLayoutId(): Int {
         return R.layout.act_launch
     }
@@ -30,45 +32,40 @@ class LaunchAct : BaseActivity(), CountDown.CountDownBack {
     }
 
     override fun initData() {
-        mCountDown = CountDown(1000)
         changeTopBgColor()
     }
 
 
     override fun onResume() {
         super.onResume()
-        mCountDown?.start()
+        mSubscribe=Observable.timer(800,TimeUnit.MILLISECONDS)
+                .subscribe {
+                    var mCl:Class<*> = LoginAct::class.java
+                    if (App.getInstance().getPerson() == null)
+                    mCl = LoginAct::class.java
+                    else
+                    mCl = HomeAct::class.java
+                    startActivity(Intent(this,mCl))
+                    finish()
+                }
+        addSubscription(mSubscribe)
     }
 
     override fun onPause() {
         super.onPause()
-        mCountDown?.cancel()
+        mCompositeSubscription?.remove(mSubscribe)
     }
 
-    override fun bindListener() {
-        mCountDown?.setDownBack(this)
-    }
-
-    override fun countDownFinish() {
-        findUser()
-        var mCl:Class<*> = LoginAct::class.java
-        if (App.getInstance().getPerson() == null)
-            mCl = LoginAct::class.java
-        else
-            mCl = HomeAct::class.java
-        startActivity(Intent(this,mCl))
-        finish()
-    }
-
-    private fun findUser() {
+    override fun processLogic() {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", "我是的")
         query.addWhereEqualTo("pwd", "123123")
-        query.findObjects(this, object : FindListenerSub<Person>(this, false) {
-            override fun onSuccess(p0: MutableList<Person>) {
+        addSubscription(query.findObjects(object :FindListenerSub<Person>(this,false){
+            override fun onSuccess(result: MutableList<Person>) {
             }
-        })
+        }))
     }
+
 }
 
 

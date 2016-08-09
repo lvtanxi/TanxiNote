@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.lv.note.R
-import com.lv.note.util.notEmptyStr
 
 /**
 * User: 吕勇 
@@ -62,17 +61,17 @@ class ToastUtils(context: Context) {
                 textToast(context, text, 0, Toast.LENGTH_SHORT)
         }
 
-        fun textToastError(context: Context, text: String) {
+        fun textToastError(context: Context, text: String?) {
             textToast(context, text, R.drawable.toast_error)
         }
 
-        fun textToast(context: Context, text: String, imageId: Int) {
+        fun textToast(context: Context, text: String?, imageId: Int) {
             if (text.notEmptyStr())
                 textToast(context, text, imageId, Toast.LENGTH_SHORT)
         }
 
 
-        fun textToast(context: Context, text: String, resId: Int, duration: Int) {
+        fun textToast(context: Context, text: String?, resId: Int, duration: Int) {
             var resId = resId
             getInstance(context)
             getToast(duration)

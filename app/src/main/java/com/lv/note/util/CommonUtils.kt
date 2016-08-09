@@ -14,10 +14,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.lv.note.R
+import com.lv.note.helper.ActionBack
 import com.plattysoft.leonids.ParticleSystem
+import rx.Observable
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.ref.WeakReference
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 /**
@@ -212,14 +215,17 @@ object CommonUtils {
         }
     }
 
-    fun showSuccess(activity: Activity, tageView: View, back: CountDown.CountDownBack?) {
+    fun showSuccess(activity: Activity, tageView: View, back: ActionBack?) {
         ParticleSystem(activity, 800, R.drawable.star_pink, 1000)
                 .setSpeedRange(0.1f, 0.25f)
                 .oneShot(tageView, 100)
-        CountDown(1000)
-                .setActivity(activity)
-                .setDownBack(back)
-                .start();
+        Observable.timer(1000,TimeUnit.MILLISECONDS)
+            .io_main<Long>()
+            .subscribe{
+                back?.let {
+                    back.call()
+                }
+            }
     }
 
 
