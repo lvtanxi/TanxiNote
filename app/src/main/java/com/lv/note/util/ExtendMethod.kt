@@ -9,6 +9,7 @@ import com.lv.note.base.BaseActivity
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
+import java.util.regex.Pattern
 
 
 /**
@@ -59,6 +60,14 @@ fun Activity.openNewAct(mIntent:Intent,tagView:View,requestCode:Int){
 
  fun <T> Observable<T>.io_main():Observable<T>{
     return this.compose(Observable.Transformer<T, T> { tObservable -> tObservable.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()) })
+}
+
+fun String?.isNumeric(): Boolean {
+    if(this.isEmptyStr())
+        return false
+    val pattern = Pattern.compile("[0-9]*")
+    val isNum = pattern.matcher(this)
+    return isNum.matches()
 }
 
 
