@@ -25,15 +25,15 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="10dp">
-
-            <com.lv.note.widget.TintImageView
+            <cn.carbs.android.avatarimageview.library.AvatarImageView
                 android:id="@+id/login_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
-                android:contentDescription="@null"
-                android:src="@drawable/header"/>
+                android:layout_centerVertical="true"
+                android:src="@drawable/header"
+                app:aiv_ShowBoarder="true"/>
 
             <android.support.design.widget.TextInputLayout
                 style="@style/MatchWrap">
@@ -84,9 +84,19 @@
                     style="@style/WrapWrap"
                     android:layout_below="@id/login_progress"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="2dp"
                     android:background="?selectableItemBackground"
                     android:contentDescription="@null"
                     android:src="@drawable/what"/>
+                <com.lv.note.widget.TintImageView
+                    android:id="@+id/login_qq"
+                    style="@style/WrapWrap"
+                    android:paddingRight="10dp"
+                    android:layout_toLeftOf="@id/login_what"
+                    android:layout_below="@id/login_progress"
+                    android:background="?selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_qq"/>
             </RelativeLayout>
 
         </LinearLayout>

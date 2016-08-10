@@ -12,6 +12,11 @@ import com.lv.note.util.CommonUtils
  * Description:
  */
 abstract class FindListenerSub<T> @JvmOverloads constructor(private var mBaseView: IBaseView, private var mShowLodingView: Boolean = true) : FindListener<T>() {
+    init {
+        if (mShowLodingView)
+            mBaseView.showLodingView()
+    }
+
     override fun done(p0: MutableList<T>?, p1: BmobException?) {
         if (p1 != null)
             mBaseView.toastError(CommonUtils.getErrorMessage(p1.errorCode))

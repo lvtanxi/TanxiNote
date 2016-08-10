@@ -1,6 +1,7 @@
 package com.lv.note.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.EditText
 import android.widget.ImageView
 import cn.bmob.v3.BmobQuery
+import cn.carbs.android.avatarimageview.library.AvatarImageView
 import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
@@ -23,9 +25,16 @@ import com.lv.note.util.changeTopBgColor
 import com.lv.note.util.isEmptyList
 import com.lv.note.util.openNewAct
 import com.lv.note.widget.HeartProgressBar
+import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
+import com.tencent.connect.UserInfo
+import com.tencent.connect.common.Constants
+import com.tencent.tauth.IUiListener
+import com.tencent.tauth.Tencent
+import com.tencent.tauth.UiError
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
+import org.json.JSONObject
 
 
 /**
@@ -42,10 +51,14 @@ class LoginAct : BaseActivity() {
     private var sub: ImageView? = null
     private var ps: ParticleSystem ? = null
     private var mP: HeartProgressBar? = null
-    private var header: ImageView? = null
+    private var header: AvatarImageView? = null
     private var what: ImageView? = null
+    private var qq: ImageView? = null
+    private var mTencent: Tencent? = null
+
 
     companion object {
+        val APPID = "1105488020"
         val USER_NAME = "USER_PHONE"
         fun startLoginAct(actvity: Activity, tageView: View) {
             actvity.openNewAct(LoginAct::class.java, tageView)
@@ -57,12 +70,13 @@ class LoginAct : BaseActivity() {
     }
 
     override fun initViews() {
-        name = fdb(R.id.login_name);
-        pwd = fdb(R.id.login_pwd);
-        sub = fdb(R.id.login_sub);
-        mP = fdb(R.id.login_progress);
-        header = fdb(R.id.login_image);
-        what = fdb(R.id.login_what);
+        name = fdb(R.id.login_name)
+        pwd = fdb(R.id.login_pwd)
+        sub = fdb(R.id.login_sub)
+        mP = fdb(R.id.login_progress)
+        header = fdb(R.id.login_image)
+        what = fdb(R.id.login_what)
+        qq = fdb(R.id.login_qq)
     }
 
     override fun initData() {
@@ -73,6 +87,7 @@ class LoginAct : BaseActivity() {
             pwd!!.isFocusableInTouchMode = true
             pwd!!.requestFocus()
         }
+        mTencent = Tencent.createInstance(APPID, applicationContext)
     }
 
     override fun bindListener() {
@@ -90,7 +105,7 @@ class LoginAct : BaseActivity() {
                 stopHeartProgressBar()
             }
         })
-        sub!!.setOnClickListener { findUser() }
+        sub!!.setOnClickListener { doLogin() }
 
         what!!.setOnClickListener {
             AlertDialog.Builder(this)
@@ -100,6 +115,72 @@ class LoginAct : BaseActivity() {
                     .create()
                     .show()
         }
+        qq?.setOnClickListener {
+            mTencent?.login(this, "all", loginListener)
+        }
+    }
+
+
+    private val loginListener = object : IUiListener {
+
+        override fun onComplete(value: Any) {
+            try {
+                if (value == null)
+                    return
+                val jo = value as JSONObject
+
+                if (jo.has("ret") && jo.optInt("ret") == 0) {
+                    DLog.d(jo)
+                    val openID = jo.getString("openid")
+                    val accessToken = jo.getString("access_token")
+                    val expires = jo.getString("expires_in")
+                    mTencent?.setOpenId(openID)
+                    mTencent?.setAccessToken(accessToken, expires)
+                    val userInfo = UserInfo(this@LoginAct, mTencent?.getQQToken())
+                    userInfo.getUserInfo(object : IUiListener {
+                        override fun onComplete(reult: Any?) {
+                            if (reult == null)
+                                return
+                            try {
+                                val jo = reult as JSONObject
+                                DLog.d(jo)
+                                if (jo.has("ret") && jo.optInt("ret") == 0) {
+                                    val imageUrl = jo.getString("figureurl_qq_2")
+                                    val mPerson = Person()
+                                    mPerson.name = openID
+                                    mPerson.pwd = openID
+                                    mPerson.header=imageUrl
+                                    httpFindUser(mPerson)
+                                    CommonUtils.displayRoundImage(header!!, imageUrl)
+                                }
+                            } catch (e: Exception) {
+                                toastError("获取用户信息失败")
+                            }
+                        }
+
+                        override fun onCancel() {
+                        }
+
+                        override fun onError(p0: UiError?) {
+                            toastError("获取用户信息失败")
+                        }
+
+                    })
+                }
+
+            } catch (e: Exception) {
+                toastError("获取用户信息失败")
+            }
+        }
+
+        override fun onError(uiError: UiError) {
+            toastError("获取用户信息失败")
+        }
+
+        override fun onCancel() {
+
+        }
+
     }
 
     fun stopHeartProgressBar() {
@@ -121,10 +202,14 @@ class LoginAct : BaseActivity() {
         }, 400)
     }
 
-    private fun findUser() {
+    private fun doLogin() {
         val mPerson = Person()
         mPerson.name = name!!.text.toString()
         mPerson.pwd = pwd!!.text.toString()
+        httpFindUser(mPerson)
+    }
+
+    private fun httpFindUser(mPerson: Person) {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", mPerson.name)
         query.addWhereEqualTo("pwd", mPerson.pwd)
@@ -142,7 +227,7 @@ class LoginAct : BaseActivity() {
 
     private fun changeAct(mPerson: Person) {
         CommonUtils.showSuccess(this, sub!!
-                , object : ActionBack{
+                , object : ActionBack {
             override fun call() {
                 Hawk.put(USER_NAME, mPerson.name)
                 App.getInstance().savePerson(mPerson)
@@ -185,5 +270,15 @@ class LoginAct : BaseActivity() {
         CommonUtils.displayRoundImage(header!!, Hawk.get(key, ""))
     }
 
+    override fun onDestroy() {
+        mTencent?.logout(this)
+        super.onDestroy()
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        if (requestCode == Constants.REQUEST_LOGIN || requestCode == Constants.REQUEST_APPBAR) {
+            Tencent.onActivityResultData(requestCode, resultCode, data, loginListener)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }

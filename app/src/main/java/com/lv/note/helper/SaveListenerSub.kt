@@ -12,6 +12,10 @@ import com.lv.note.util.CommonUtils
  * Description:
  */
 abstract class SaveListenerSub@JvmOverloads constructor(private var mBaseView: IBaseView, private var mShowLodingView: Boolean = true) : SaveListener<String>() {
+    init {
+        if (mShowLodingView)
+            mBaseView.showLodingView()
+    }
     override fun done(p0: String?, p1: BmobException?) {
         if (p1 != null)
             mBaseView.toastError(CommonUtils.getErrorMessage(p1.errorCode))
@@ -20,10 +24,6 @@ abstract class SaveListenerSub@JvmOverloads constructor(private var mBaseView: I
         onFinish()
     }
 
-    override fun onStart() {
-        if (mShowLodingView)
-            mBaseView.showLodingView()
-    }
 
     abstract fun onSuccess()
 

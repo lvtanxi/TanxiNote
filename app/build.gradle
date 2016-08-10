@@ -16,8 +16,8 @@ android {
         applicationId "com.lv.note"
         minSdkVersion 21
         targetSdkVersion 22
-        versionCode 9
-        versionName "1.8"
+        versionCode 10
+        versionName "1.9"
     }
 
     signingConfigs {
@@ -106,6 +106,7 @@ dependencies {
     compile 'br.com.mauker.materialsearchview:materialsearchview:1.1.2'
     compile 'io.reactivex:rxandroid:1.2.0'
 }
+
 repositories {
     mavenCentral()
 }
