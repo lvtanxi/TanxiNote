@@ -11,8 +11,8 @@ import com.lv.note.R
 import com.lv.note.helper.IBaseView
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.ThemeUtils
-import com.lv.note.util.ToastUtils
 import com.lv.note.widget.LoadingDialog
+import com.sdsmdg.tastytoast.TastyToast
 import rx.Subscription
 import rx.subscriptions.CompositeSubscription
 
@@ -113,7 +113,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun toastError(message: String?) {
-        ToastUtils.textToastError(this, message)
+        TastyToast.makeText(getApplicationContext(), message, TastyToast.LENGTH_LONG,TastyToast.ERROR)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

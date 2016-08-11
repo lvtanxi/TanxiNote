@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lv.note.util.ToastUtils
+import com.sdsmdg.tastytoast.TastyToast
 import rx.Subscription
 import rx.subscriptions.CompositeSubscription
 
@@ -98,7 +98,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected  fun toastError(message: String) {
-        ToastUtils.textToastError(mBaseActivity!!, message)
+        TastyToast.makeText(activity.getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
     }
 
     override fun onDestroyView() {

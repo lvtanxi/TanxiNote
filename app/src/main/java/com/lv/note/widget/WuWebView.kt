@@ -15,7 +15,7 @@ import android.widget.AbsoluteLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.lv.note.R
-import com.lv.note.util.ToastUtils
+import com.sdsmdg.tastytoast.TastyToast
 
 
 /**
@@ -133,7 +133,7 @@ class WuWebView(context: Context, attrs: AttributeSet) : WebView(context, attrs)
         }
 
         override fun onJsAlert(view: WebView, url: String, message: String, result: JsResult): Boolean {
-            ToastUtils.textToastError(view.context, message)
+            TastyToast.makeText(view.context.getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
             result.confirm()
             return true
         }

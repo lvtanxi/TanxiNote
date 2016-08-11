@@ -105,6 +105,7 @@ dependencies {
     compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
     compile 'br.com.mauker.materialsearchview:materialsearchview:1.1.2'
     compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'com.sdsmdg.tastytoast:tastytoast:0.0.3'
 }
 
 repositories {
