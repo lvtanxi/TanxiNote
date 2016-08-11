@@ -1,6 +1,9 @@
 package com.lv.note.ui
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.view.View
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
@@ -24,11 +27,13 @@ class LaunchAct : BaseActivity(){
     val param = "isFrist"
 
     private var mSubscribe: Subscription? =null
+    private var mTopLay: View? =null
     override fun loadLayoutId(): Int {
         return R.layout.act_launch
     }
 
     override fun initViews() {
+        mTopLay=fdb(R.id.launch_lay)
     }
 
     override fun initData() {
@@ -38,7 +43,8 @@ class LaunchAct : BaseActivity(){
 
     override fun onResume() {
         super.onResume()
-        mSubscribe=Observable.timer(800,TimeUnit.MILLISECONDS)
+        startAnim()
+        mSubscribe=Observable.timer(1000,TimeUnit.MILLISECONDS)
                 .subscribe {
                     var mCl:Class<*> = LoginAct::class.java
                     if (App.getInstance().getPerson() == null)
@@ -49,6 +55,16 @@ class LaunchAct : BaseActivity(){
                     finish()
                 }
         addSubscription(mSubscribe)
+    }
+
+    fun startAnim(){
+        mTopLay?.let {
+            val scaleX = ObjectAnimator.ofFloat(mTopLay, "scaleX", 1f, 1.12f)
+            val scaleY = ObjectAnimator.ofFloat(mTopLay, "scaleY", 1f, 1.12f)
+            val animatorSet = AnimatorSet()
+            animatorSet.setDuration(1000).play(scaleX).with(scaleY)
+            animatorSet.start()
+        }
     }
 
     override fun onPause() {

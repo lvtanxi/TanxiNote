@@ -21,6 +21,7 @@
             app:aiv_BoarderWidth="2dp"
             android:layout_centerVertical="true"
             android:src="@drawable/header"
+            android:tint="?attr/colorPrimary"
             app:aiv_ShowBoarder="true"/>
     </RelativeLayout>
 

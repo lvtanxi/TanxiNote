@@ -90,33 +90,37 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
 
                     override fun onResponse(response: String?, id: Int) {
                         response?.let {
-                            val jsonObj = JSONObject(response)
-                            val code: Int = jsonObj.optInt("errNum")
-                            if (code == 0) {
-                                val resultData: ResultData = Gson().fromJson(jsonObj.optString("retData")!!, ResultData::class.java)
-                                var index = 0
-                                val datas = ArrayList<Weather>()
+                            try {
+                                val jsonObj = JSONObject(response)
+                                val code: Int = jsonObj.optInt("errNum")
+                                if (code == 0) {
+                                    val resultData: ResultData = Gson().fromJson(jsonObj.optString("retData")!!, ResultData::class.java)
+                                    var index = 0
+                                    val datas = ArrayList<Weather>()
 
-                                resultData.history?.let {
-                                    datas.addAll(resultData.history!!)
-                                    index += resultData.history!!.size
+                                    resultData.history?.let {
+                                        datas.addAll(resultData.history!!)
+                                        index += resultData.history!!.size
+                                    }
+
+                                    resultData.today?.let {
+                                        datas.add(resultData.today!!)
+                                    }
+
+                                    resultData.forecast?.let {
+                                        datas.addAll(resultData.forecast!!)
+                                    }
+
+
+                                    mfancyCoverFlow!!.adapter = LFancyCoverFlowAdapter(activity, datas)
+                                    mfancyCoverFlow!!.setSelection(index)
+                                    val mWeatherChartData = datas.filterIndexed { i, weather -> (i > index - 3 && i < index + 4) }
+                                    mWeatherChartView!!.setTuView(mWeatherChartData, "单位: 摄氏度")
+                                } else {
+                                    toastError(jsonObj.optString("errMsg"))
                                 }
-
-                                resultData.today?.let {
-                                    datas.add(resultData.today!!)
-                                }
-
-                                resultData.forecast?.let {
-                                    datas.addAll(resultData.forecast!!)
-                                }
-
-
-                                mfancyCoverFlow!!.adapter = LFancyCoverFlowAdapter(activity, datas)
-                                mfancyCoverFlow!!.setSelection(index)
-                                val mWeatherChartData = datas.filterIndexed { i, weather -> (i > index - 3 && i < index + 4) }
-                                mWeatherChartView!!.setTuView(mWeatherChartData, "单位: 摄氏度");
-                            } else {
-                                toastError(jsonObj.optString("errMsg"))
+                            }catch (e:Exception){
+                                toastError("获取天气失败")
                             }
                         }
                     }
