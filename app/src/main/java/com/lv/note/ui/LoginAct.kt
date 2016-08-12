@@ -3,7 +3,6 @@ package com.lv.note.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Handler
-import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
@@ -25,6 +24,7 @@ import com.lv.note.widget.HeartProgressBar
 import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
+import com.sdsmdg.tastytoast.TastyToast
 import com.tencent.connect.UserInfo
 import com.tencent.connect.common.Constants
 import com.tencent.tauth.IUiListener
@@ -106,12 +106,7 @@ class LoginAct : BaseActivity() {
         sub!!.setOnClickListener { doLogin() }
 
         what!!.setOnClickListener {
-            AlertDialog.Builder(this)
-                    .setTitle("檀溪提示")
-                    .setMessage("用户是根据后端判断是否存在,所以没用注册界面,请见谅.也请妥善管理自己的用户名和密码!")
-                    .setPositiveButton("确定") { dialog, index -> dialog.dismiss() }
-                    .create()
-                    .show()
+            TastyToast.makeText(getApplicationContext(), "用户是根据后端判断是否存在,所以没用注册界面,请见谅.也请妥善管理自己的用户名和密码!", TastyToast.LENGTH_LONG, TastyToast.INFO)
         }
         qq?.setOnClickListener {
             mTencent?.login(this, "all", loginListener)
@@ -141,7 +136,6 @@ class LoginAct : BaseActivity() {
                                 return
                             try {
                                 val jo = reult as JSONObject
-                                DLog.d(jo)
                                 if (jo.has("ret") && jo.optInt("ret") == 0) {
                                     val imageUrl = jo.getString("figureurl_qq_2")
                                     val mPerson = Person()

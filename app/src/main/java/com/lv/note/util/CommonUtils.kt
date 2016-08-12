@@ -215,17 +215,19 @@ object CommonUtils {
         }
     }
 
-    fun showSuccess(activity: Activity, tageView: View, back: ActionBack?) {
-        ParticleSystem(activity, 800, R.drawable.star_pink, 1000)
-                .setSpeedRange(0.1f, 0.25f)
-                .oneShot(tageView, 100)
-        Observable.timer(1000,TimeUnit.MILLISECONDS)
-            .io_main<Long>()
-            .subscribe{
-                back?.let {
-                    back.call()
-                }
-            }
+    fun showSuccess(activity: Activity?, tageView: View?, back: ActionBack?) {
+        if(tageView!=null && activity!=null){
+            ParticleSystem(activity, 800, R.drawable.star_pink, 1000)
+                    .setSpeedRange(0.1f, 0.25f)
+                    .oneShot(tageView, 100)
+            Observable.timer(1000,TimeUnit.MILLISECONDS)
+                    .io_main<Long>()
+                    .subscribe{
+                        back?.let {
+                            back.call()
+                        }
+                    }
+        }
     }
 
 

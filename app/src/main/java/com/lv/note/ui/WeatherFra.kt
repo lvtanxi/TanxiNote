@@ -127,8 +127,8 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
 
                     override fun onAfter(id: Int) {
                         super.onAfter(id)
-                        mRefreshLayout!!.endRefreshing()
-                        CommonUtils.showSuccess(activity, mRefreshLayout!!, null)
+                        mRefreshLayout?.endRefreshing()
+                        CommonUtils.showSuccess(activity, mRefreshLayout, null)
                     }
 
                 });

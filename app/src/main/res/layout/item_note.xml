@@ -21,9 +21,9 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/item_date"/>
 
-        <com.lv.note.widget.TintImageView
+        <ImageView
             android:id="@+id/item_more"
-            style="@style/WrapWrap"
+            style="@style/WrapWrap.tint"
             android:layout_alignParentRight="true"
             android:background="?selectableItemBackground"
             android:contentDescription="@null"

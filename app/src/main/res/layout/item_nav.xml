@@ -11,9 +11,9 @@
         android:layout_height="50dp"
         android:gravity="center_vertical">
 
-        <com.lv.note.widget.TintImageView
+        <ImageView
             android:id="@+id/navitem_image"
-            style="@style/WrapWrap"
+            style="@style/WrapWrap.tint"
             android:layout_marginLeft="20dp"
             android:contentDescription="@null"
             android:src="@drawable/more"/>
@@ -24,9 +24,9 @@
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/navitem_image"/>
 
-        <com.lv.note.widget.TintImageView
+        <ImageView
             android:id="@+id/navitem_selected"
-            style="@style/WrapWrap"
+            style="@style/WrapWrap.tint"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:contentDescription="@null"/>

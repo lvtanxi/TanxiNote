@@ -70,9 +70,9 @@
                     app:heartColor="?attr/colorPrimary"
                     android:layout_centerHorizontal="true"/>
 
-                <com.lv.note.widget.TintImageView
+                <ImageView
                     android:id="@+id/login_sub"
-                    style="@style/WrapWrap"
+                    style="@style/WrapWrap.tint"
                     android:layout_centerInParent="true"
                     android:background="?selectableItemBackground"
                     android:contentDescription="@null"
@@ -80,18 +80,18 @@
                     android:elevation="10dp"
                     android:src="@drawable/go_p"/>
 
-                <com.lv.note.widget.TintImageView
+                <ImageView
                     android:id="@+id/login_what"
-                    style="@style/WrapWrap"
+                    style="@style/WrapWrap.tint"
                     android:layout_below="@id/login_progress"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="2dp"
                     android:background="?selectableItemBackground"
                     android:contentDescription="@null"
                     android:src="@drawable/what"/>
-                <com.lv.note.widget.TintImageView
+                <ImageView
                     android:id="@+id/login_qq"
-                    style="@style/WrapWrap"
+                    style="@style/WrapWrap.tint"
                     android:paddingRight="10dp"
                     android:layout_toLeftOf="@id/login_what"
                     android:layout_below="@id/login_progress"

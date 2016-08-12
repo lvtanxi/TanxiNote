@@ -7,5 +7,5 @@ package br.com.mauker;
  * Description:
  */
 public class MsvAuthority {
-    public static final String CONTENT_AUTHORITY = "br.com.mauker.materialsearchview.searchhistorydatabase";
+    public static final String CONTENT_AUTHORITY = "lvtanxi.searchhistorydatabase";
 }

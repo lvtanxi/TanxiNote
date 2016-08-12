@@ -98,7 +98,10 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected  fun toastError(message: String) {
-        TastyToast.makeText(activity.getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
+        try {
+            TastyToast.makeText(activity.getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
+        }catch (e:Exception){
+        }
     }
 
     override fun onDestroyView() {

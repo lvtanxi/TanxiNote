@@ -10,9 +10,9 @@
         android:focusableInTouchMode="true"
         android:padding="10dp">
 
-        <com.lv.note.widget.TintImageView
+        <ImageView
             android:id="@+id/bookitem_image"
-            style="@style/WrapWrap"
+            style="@style/WrapWrap.tint"
             android:layout_centerVertical="true"
             android:contentDescription="@null"
             android:src="@drawable/ic_book"/>
