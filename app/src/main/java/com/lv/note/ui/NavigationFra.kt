@@ -136,7 +136,7 @@ class NavigationFra : BaseFragment() {
     override fun bindListener() {
         mLoginOut!!.setOnClickListener {
             App.getInstance().savePerson(null)
-            LoginAct.startLoginAct(activity,mLoginOut!!)
+            LoginAct.startLoginAct(activity)
             activity.finish()
         }
         mImageView!!.setOnClickListener {

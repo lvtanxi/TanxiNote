@@ -19,7 +19,10 @@ import com.lv.note.helper.ActionBack
 import com.lv.note.helper.CustTextWatcher
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.SaveListenerSub
-import com.lv.note.util.*
+import com.lv.note.util.CommonUtils
+import com.lv.note.util.changeTopBgColor
+import com.lv.note.util.isEmptyList
+import com.lv.note.util.isNumeric
 import com.lv.note.widget.HeartProgressBar
 import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
@@ -57,8 +60,8 @@ class LoginAct : BaseActivity() {
     companion object {
         val APPID = "1105488020"
         val USER_NAME = "USER_PHONE"
-        fun startLoginAct(actvity: Activity, tageView: View) {
-            actvity.openNewAct(LoginAct::class.java, tageView)
+        fun startLoginAct(actvity: Activity) {
+            actvity.startActivity(Intent(actvity,LoginAct::class.java))
         }
     }
 
@@ -223,7 +226,7 @@ class LoginAct : BaseActivity() {
             override fun call() {
                 Hawk.put(USER_NAME, mPerson.name)
                 App.getInstance().savePerson(mPerson)
-                openNewAct(HomeAct::class.java, sub!!)
+                startActivity(Intent(this@LoginAct,HomeAct::class.java))
                 finish()
             }
 
