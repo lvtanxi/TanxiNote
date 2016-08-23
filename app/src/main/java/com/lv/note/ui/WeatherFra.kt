@@ -1,8 +1,5 @@
 package com.lv.note.ui
 
-import android.widget.TextView
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout
-import com.dalong.francyconverflow.FancyCoverFlow
 import com.google.gson.Gson
 import com.lv.note.R
 import com.lv.note.adapter.LFancyCoverFlowAdapter
@@ -11,11 +8,10 @@ import com.lv.note.entity.weather.ResultData
 import com.lv.note.entity.weather.Weather
 import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
-import com.lv.note.widget.chart.WeatherChartItem
-import com.lv.note.widget.chart.WeatherChartView
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
+import kotlinx.android.synthetic.main.fra_weather.*
 import okhttp3.Call
 import org.json.JSONObject
 import java.util.*
@@ -30,11 +26,7 @@ import java.util.*
 class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
 
 
-    private var mRefreshLayout: BGARefreshLayout? = null
     private var mDelegate: BGARefreshDelegate? = null
-    private var mfancyCoverFlow: FancyCoverFlow? = null
-    private var mWeatherChartView: WeatherChartView<WeatherChartItem>? = null
-    private var mTextView:TextView? =null
 
     companion object {
         val CITY_ID="CITY_ID"
@@ -46,29 +38,22 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
         return R.layout.fra_weather
     }
 
-    override fun initViews() {
-        mRefreshLayout = fdb(R.id.w_recyclerview_refresh)
-        mfancyCoverFlow = fdb(R.id.w_fancyCoverFlow)
-        mWeatherChartView = fdb(R.id.w_weather_chartview)
-        mTextView = fdb(R.id.change_city_btn)
-    }
-
     override fun initData() {
-        mTextView?.text = "${Hawk.get(CITY_NAME,"成都")}天气"
-        mDelegate = BGARefreshDelegate(mRefreshLayout!!, this, false)
-        mfancyCoverFlow!!.unselectedScale = 0.3f//设置选中的规模
-        mfancyCoverFlow!!.scaleDownGravity = 0.5f
+        change_city_btn.text = "${Hawk.get(CITY_NAME,"成都")}天气"
+        mDelegate = BGARefreshDelegate(w_recyclerview_refresh, this, false)
+        w_fancyCoverFlow.unselectedScale = 0.3f//设置选中的规模
+        w_fancyCoverFlow.scaleDownGravity = 0.5f
     }
 
 
 
     override fun processLogic() {
-        mRefreshLayout!!.beginRefreshing()
+        w_recyclerview_refresh.beginRefreshing()
     }
 
     override fun bindListener() {
-        mRefreshLayout!!.setDelegate(mDelegate)
-        mTextView?.setOnClickListener{view->
+        w_recyclerview_refresh.setDelegate(mDelegate)
+        change_city_btn.setOnClickListener{view->
             ChangeCityAct.startChangeCityAct(activity,view)
         }
     }
@@ -112,10 +97,10 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
                                     }
 
 
-                                    mfancyCoverFlow!!.adapter = LFancyCoverFlowAdapter(activity, datas)
-                                    mfancyCoverFlow!!.setSelection(index)
+                                    w_fancyCoverFlow.adapter = LFancyCoverFlowAdapter(activity, datas)
+                                    w_fancyCoverFlow.setSelection(index)
                                     val mWeatherChartData = datas.filterIndexed { i, weather -> (i > index - 3 && i < index + 4) }
-                                    mWeatherChartView!!.setTuView(mWeatherChartData, "单位: 摄氏度")
+                                    w_weather_chartview.setTuView(mWeatherChartData, "单位: 摄氏度")
                                 } else {
                                     toastError(jsonObj.optString("errMsg"))
                                 }
@@ -127,8 +112,8 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
 
                     override fun onAfter(id: Int) {
                         super.onAfter(id)
-                        mRefreshLayout?.endRefreshing()
-                        CommonUtils.showSuccess(activity, mRefreshLayout, null)
+                        w_recyclerview_refresh.endRefreshing()
+                        CommonUtils.showSuccess(activity, w_recyclerview_refresh, null)
                     }
 
                 });
@@ -143,7 +128,7 @@ class WeatherFra : BaseFragment(), BGARefreshDelegate.BGARefreshListener {
         super.onResume()
         if(Hawk.get(CITY_CHANGE,false)){
             Hawk.remove(CITY_CHANGE)
-            mTextView?.text = "${Hawk.get(CITY_NAME,"成都")}天气"
+            change_city_btn.text = "${Hawk.get(CITY_NAME,"成都")}天气"
             processLogic()
         }
     }

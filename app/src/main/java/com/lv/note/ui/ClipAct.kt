@@ -10,7 +10,7 @@ import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.util.CommonUtils
 import com.lv.note.util.openNewAct
-import com.lv.note.widget.clip.ClipImageLayout
+import kotlinx.android.synthetic.main.act_clipimage.*
 import java.io.File
 
 /**
@@ -20,23 +20,17 @@ import java.io.File
  * Description:图片裁剪
  */
 class ClipAct : BaseActivity() {
-    private var mClipImageLayout: ClipImageLayout? = null
     private var path: String? = null
-    private var btn: View? = null
     override fun loadLayoutId(): Int {
         return R.layout.act_clipimage
     }
 
-    override fun initViews() {
-        mClipImageLayout = fdb(R.id.id_clipImageLayout)
-        btn = fdb(R.id.id_action_clip)
-    }
 
     override fun bindListener() {
-        btn!!.setOnClickListener{
+        id_action_clip.setOnClickListener{
             showLodingView()
             Thread(Runnable {
-                val bitmap = mClipImageLayout!!.clip()
+                val bitmap = id_clipImageLayout.clip()
                 val path = Clip_CACHE + System.currentTimeMillis() + ".png"
                 CommonUtils.savePhotoToSDCard(bitmap, path)
                 val intent = Intent()
@@ -67,7 +61,7 @@ class ClipAct : BaseActivity() {
             finish()
             return
         }
-        mClipImageLayout!!.setBitmap(bitmap!!)
+        id_clipImageLayout.setBitmap(bitmap!!)
     }
 
     companion object {

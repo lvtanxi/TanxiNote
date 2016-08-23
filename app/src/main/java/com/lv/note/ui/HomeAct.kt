@@ -1,9 +1,7 @@
 package com.lv.note.ui
 
 import android.content.Intent
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.ViewPager
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,7 +12,8 @@ import com.lv.note.base.BaseActivity
 import com.lv.note.util.LAnimUtils
 import com.lv.note.util.changeTopBgColor
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
-import github.chenupt.springindicator.SpringIndicator
+import kotlinx.android.synthetic.main.act_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
 
 
@@ -26,13 +25,8 @@ import java.util.*
  */
 class HomeAct : BaseActivity() {
 
-    private var mDrawerLayout: DrawerLayout? = null
     private var mActionBarDrawerToggle: ActionBarDrawerToggle? = null;
     private var mAdapter: LBaseFragmentAdapter? = null;
-    private var mViewPager: ViewPager? = null
-    private var mSpringIndicator: SpringIndicator? = null
-    private var mSearchView: MaterialSearchView? = null
-    private var mAddBtn: FloatingActionButton? = null
 
     override fun loadLayoutId(): Int {
         changeTopBgColor()
@@ -44,30 +38,22 @@ class HomeAct : BaseActivity() {
         XiaomiUpdateAgent.update(this)
     }
 
-    override fun initViews() {
-        mDrawerLayout = fdb(R.id.mian_drawer_layout)
-        mViewPager = fdb(R.id.main_view_pager)
-        mSpringIndicator = fdb(R.id.indicator)
-        mSearchView = fdb(R.id.main_search_view)
-        mAddBtn = fdb(R.id.main_float_button)
-    }
-
     override fun initData() {
-        mSearchView?.adjustTintAlpha(0.8f)
-        mSearchView?.setHint("请输入关键字")
-        mActionBarDrawerToggle = ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+        main_search_view.adjustTintAlpha(0.8f)
+        main_search_view.setHint("请输入关键字")
+        mActionBarDrawerToggle = ActionBarDrawerToggle(this, mian_drawer_layout, mToolbar, R.string.open, R.string.close);
         mActionBarDrawerToggle?.syncState()
-        mAdapter= LBaseFragmentAdapter(supportFragmentManager, Arrays.asList(NotesFra(), WeatherFra()), arrayOf("笔记", "天气"))
-        mViewPager?.adapter =mAdapter
-        mSpringIndicator?.setViewPager(mViewPager)
+        mAdapter = LBaseFragmentAdapter(supportFragmentManager, Arrays.asList(NotesFra(), WeatherFra()), arrayOf("笔记", "天气"))
+        main_view_pager.adapter = mAdapter
+        indicator.setViewPager(main_view_pager)
     }
 
     override fun bindListener() {
-        mDrawerLayout?.addDrawerListener(mActionBarDrawerToggle!!)
-        mSearchView?.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
+        mian_drawer_layout.addDrawerListener(mActionBarDrawerToggle!!)
+        main_search_view.setOnQueryTextListener(object : MaterialSearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 mAdapter?.let {
-                    val mNotesFra:NotesFra= mAdapter!!.getItem(0) as NotesFra
+                    val mNotesFra: NotesFra = mAdapter!!.getItem(0) as NotesFra
                     mNotesFra.doSearch(query)
                 }
                 return false
@@ -77,25 +63,25 @@ class HomeAct : BaseActivity() {
                 return false
             }
         })
-        mSearchView?.setSearchViewListener(object : MaterialSearchView.SearchViewListener {
+        main_search_view.setSearchViewListener(object : MaterialSearchView.SearchViewListener {
             override fun onSearchViewOpened() {
-                LAnimUtils.hideView(mAddBtn)
+                LAnimUtils.hideView(main_float_button)
             }
 
             override fun onSearchViewClosed() {
-                LAnimUtils.showView(mAddBtn)
+                LAnimUtils.showView(main_float_button)
             }
         })
 
-        mSearchView?.setOnItemClickListener { parent, view, position, id ->
-            val suggestion =  mSearchView?.getSuggestionAtPosition(position)
-            mSearchView?.setQuery(suggestion, false)
+        main_search_view.setOnItemClickListener { parent, view, position, id ->
+            val suggestion = main_search_view.getSuggestionAtPosition(position)
+            main_search_view.setQuery(suggestion, false)
         }
 
-        mAddBtn?.setOnClickListener {
-            AddNoteAct.startAddNoteAct(this, null, mAddBtn!!)
+        main_float_button.setOnClickListener {
+            AddNoteAct.startAddNoteAct(this, null, main_float_button)
         }
-        mViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        main_view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -104,7 +90,7 @@ class HomeAct : BaseActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                LAnimUtils.hideOrShowView(mAddBtn, position == 0)
+                LAnimUtils.hideOrShowView(main_float_button, position == 0)
                 invalidateOptionsMenu()
             }
 
@@ -112,14 +98,14 @@ class HomeAct : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        if(mViewPager!=null&&mViewPager!!.currentItem==0)
+        if (main_view_pager != null && main_view_pager.currentItem == 0)
             menuInflater.inflate(R.menu.menu_search, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onBackPressed() {
-        if (null != mSearchView && mSearchView!!.isOpen()) {
-            mSearchView?.closeSearch()
+        if (null != main_search_view && main_search_view!!.isOpen()) {
+            main_search_view.closeSearch()
         } else {
             super.onBackPressed()
         }
@@ -127,19 +113,19 @@ class HomeAct : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        mSearchView?.activityResumed()
+        main_search_view.activityResumed()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.action_search) {
-            mSearchView?.openSearch()
+            main_search_view.openSearch()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val fragment= supportFragmentManager.findFragmentById(R.id.main_nvg)
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_nvg)
         fragment?.let {
             fragment!!.onActivityResult(requestCode, resultCode, data)
         }

@@ -10,14 +10,15 @@ import android.view.ViewTreeObserver
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
-import com.lv.note.adapter.BaseHolder
 import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.base.BaseRecyclerFragment
 import com.lv.note.entity.Note
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
+import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
-import io.github.mthli.knife.KnifeText
+import kotlinx.android.synthetic.main.item_note.*
+import kotlinx.android.synthetic.main.item_note.view.*
 
 
 /**
@@ -46,19 +47,25 @@ class NotesFra : BaseRecyclerFragment<Note>() {
 
     override val lBaseAdapter: LBaseAdapter<Note>
         get() = object : LBaseAdapter<Note>(R.layout.item_note) {
-            override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: Note) {
-                val knife = baseHolder.getView<KnifeText>(R.id.item_knife)
-                baseHolder.setKnifeTextHtml(R.id.item_knife, item.note)
-                        .setText(R.id.item_date, item.year.replace(year, ""))
-                        .setText(R.id.item_time, item.time)
-                        .setOnItemChildClickListener(OnItemChildClickListener(), R.id.item_more, R.id.item_view)
-                knife.getViewTreeObserver().addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onBindItem(itemView: View, realPosition: Int, item: Note) {
+                DLog.d(item_knife==null);
+                itemView.item_knife.fromHtml(item.note)
+                itemView.item_knife.setOnTouchListener { view, motionEvent ->
+                    view.parent!!.requestDisallowInterceptTouchEvent(false)
+                    false
+                }
+                itemView.item_time.text=item.time
+                itemView.item_date.text= item.year.replace(year, "")
+                val li=OnItemChildClickListener()
+                li.position=realPosition
+                itemView.item_more.setOnClickListener(li)
+                itemView.item_view.setOnClickListener(li)
+                itemView.item_knife.getViewTreeObserver().addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
-                        knife.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-                        val itemView = baseHolder.getView<View>(R.id.item_view)
-                        val itemViewL = itemView.layoutParams
-                        itemViewL.height = knife.height
-                        itemView.layoutParams = itemViewL
+                        itemView.item_knife.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                        val itemViewL =  itemView.item_view.layoutParams
+                        itemViewL.height = itemView.item_knife.height
+                        itemView.item_view.layoutParams = itemViewL
                     }
                 })
             }

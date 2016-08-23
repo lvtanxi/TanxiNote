@@ -4,7 +4,6 @@ import android.app.Activity
 import android.support.v4.content.ContextCompat
 import android.support.v4.util.ArrayMap
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lv.note.R
-import com.lv.note.adapter.BaseHolder
 import com.lv.note.adapter.LBaseSearchAdapter
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.City
@@ -24,12 +22,13 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.io_main
 import com.lv.note.util.openNewAct
 import com.lv.note.widget.FancyIndexer
-import com.lv.note.widget.SearchEditText
 import com.lv.note.widget.flowtag.TagAdapter
 import com.lv.note.widget.flowtag.TagFlowLayout
 import com.orhanobut.hawk.Hawk
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.StringCallback
+import kotlinx.android.synthetic.main.act_change_city.*
+import kotlinx.android.synthetic.main.item_city.view.*
 import okhttp3.Call
 import org.json.JSONObject
 import rx.Observable
@@ -39,11 +38,8 @@ import java.util.*
 
 class ChangeCityAct : BaseActivity() {
 
-    private var mRecyclerView: RecyclerView? = null
     private var mBaseAdapter: LBaseSearchAdapter<City>? = null
     private var mLetterIndexes: ArrayMap<String, Int>? = null
-    private var mFancyIndexer: FancyIndexer? = null
-    private var mSearchEditText: SearchEditText? = null
     private var mTagFlowLayout: TagFlowLayout<String>? = null
     private var mInflater: LayoutInflater? = null
 
@@ -58,11 +54,6 @@ class ChangeCityAct : BaseActivity() {
         return R.layout.act_change_city
     }
 
-    override fun initViews() {
-        mRecyclerView = fdb(R.id.city_recyclerview);
-        mFancyIndexer = fdb(R.id.city_fancyindexer);
-        mSearchEditText = fdb(R.id.city_search);
-    }
 
     override fun initData() {
         mToolbar!!.title = "选择城市"
@@ -75,11 +66,11 @@ class ChangeCityAct : BaseActivity() {
                 return item.name.contains(constraint) || item.pinyin.contains(constraint)
             }
 
-            override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: City) {
-                baseHolder.setText(R.id.cityitem_name, item.name)
-                        .setVisible(R.id.cityitem_letter, !TextUtils.isEmpty(item.letter))
-                        .setAvatarImageText(R.id.cityitem_name_icon, item.name[0])
-                        .setText(R.id.cityitem_letter, item.letter)
+            override fun onBindItem(itemView: View, realPosition: Int, item: City) {
+                itemView.cityitem_name.text =  item.name
+                itemView.cityitem_letter.visibility = if(TextUtils.isEmpty(item.letter)) View.GONE else View.VISIBLE
+                itemView.cityitem_name_icon.setTextAndColorSeed(item.name[0].toString(),item.name[0].toString())
+                itemView.cityitem_letter.text =  item.letter
             }
 
             override fun onItemClick(view: View, item: City) {
@@ -102,10 +93,10 @@ class ChangeCityAct : BaseActivity() {
                 httpCityCode(getItem(position))
             }
         }
-        mTagFlowLayout!!.setAdapter(tagAdapter)
-        mBaseAdapter!!.addHeaderView(mTagFlowLayout)
-        mRecyclerView!!.layoutManager = LinearLayoutManager(mRecyclerView!!.context, LinearLayoutManager.VERTICAL, false)
-        mRecyclerView!!.adapter = mBaseAdapter
+        mTagFlowLayout?.setAdapter(tagAdapter)
+        mBaseAdapter?.addHeaderView(mTagFlowLayout)
+        city_recyclerview.layoutManager = LinearLayoutManager(city_recyclerview.context, LinearLayoutManager.VERTICAL, false)
+        city_recyclerview.adapter = mBaseAdapter
     }
 
     private fun httpCityCode(cityname: String) {
@@ -131,7 +122,7 @@ class ChangeCityAct : BaseActivity() {
                                 Hawk.put(WeatherFra.CITY_ID, jsonObj.optJSONObject("retData").optString("cityCode"))
                                 Hawk.put(WeatherFra.CITY_NAME, jsonObj.optJSONObject("retData").optString("cityName"))
                                 Hawk.put(WeatherFra.CITY_CHANGE, true)
-                                CommonUtils.showSuccess(this@ChangeCityAct, mRecyclerView!!, object : ActionBack {
+                                CommonUtils.showSuccess(this@ChangeCityAct, city_recyclerview, object : ActionBack {
                                     override fun call() {
                                         finish()
                                     }
@@ -207,15 +198,15 @@ class ChangeCityAct : BaseActivity() {
     }
 
     override fun bindListener() {
-        mFancyIndexer!!.setOnTouchLetterChangedListener(object : FancyIndexer.OnTouchLetterChangedListener {
+        city_fancyindexer.setOnTouchLetterChangedListener(object : FancyIndexer.OnTouchLetterChangedListener {
             override fun onTouchLetterChanged(str: String) {
                 mLetterIndexes!![str]?.let {
-                    mRecyclerView!!.layoutManager.scrollToPosition(mLetterIndexes!![str]!!)
+                    city_recyclerview.layoutManager.scrollToPosition(mLetterIndexes!![str]!!)
                 }
             }
 
         })
-        mSearchEditText!!.addTextChangedListener(mBaseAdapter!!.filterTextWatcher)
+        city_search.addTextChangedListener(mBaseAdapter!!.filterTextWatcher)
     }
 
 }

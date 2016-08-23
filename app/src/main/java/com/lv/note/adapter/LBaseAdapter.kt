@@ -145,20 +145,20 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
                 if (layoutParams == null && mHeaderView != null && mHeaderView!!.parent is RecyclerView) {
                     val recyclerView = mHeaderView!!.parent as RecyclerView
                     layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, recyclerView.height - mHeaderView!!.height)
-                    emptyView!!.layoutParams=layoutParams
+                    emptyView?.layoutParams=layoutParams
                 }
                 val networkAvailable = CommonUtils.isNetworkAvailable(emptyView!!.context)
                 if (networkAvailable)
-                    emptyView!!.showEmptyView()
+                    emptyView?.showEmptyView()
                 else
-                    emptyView!!.showNetWorkError()
+                    emptyView?.showNetWorkError()
             }
             HEADER_VIEW, FOOTER_VIEW -> {
             }
             else -> {
                 val pos = getRealPosition(baseHolder)
                 baseHolder.itemView.tag = pos
-                onBindItem(baseHolder, pos, mDatas[pos])
+                onBindItem(baseHolder.itemView, pos, mDatas[pos])
                 addAnimation(baseHolder)
             }
         }
@@ -247,7 +247,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         this.mFirstOnlyEnable = firstOnly
     }
 
-    abstract fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: T)
+    abstract fun onBindItem(itemView: View, realPosition: Int, item: T)
 
     //需要处理瀑布流的时候再放开
     override fun onViewAttachedToWindow(baseHolder: BaseHolder?) {

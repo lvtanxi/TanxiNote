@@ -9,15 +9,11 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import cn.carbs.android.avatarimageview.library.AvatarImageView
 import com.cocosw.bottomsheet.BottomSheet
 import com.lv.note.App
 import com.lv.note.R
-import com.lv.note.adapter.BaseHolder
 import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.base.BaseFragment
 import com.lv.note.entity.NavigationItem
@@ -33,6 +29,8 @@ import com.lv.note.widget.selectpop.SelectPopupWindow
 import com.upyun.library.common.Params
 import com.upyun.library.common.UploadManager
 import com.upyun.library.listener.UpCompleteListener
+import kotlinx.android.synthetic.main.fra_navigation_drawer.*
+import kotlinx.android.synthetic.main.item_nav.view.*
 import java.io.File
 import java.util.*
 
@@ -54,11 +52,8 @@ class NavigationFra : BaseFragment() {
         val UPYUN_BASE = "http://erp-img-upload.b0.upaiyun.com/"
     }
 
-    private var mRecyclerView: RecyclerView? = null
     private var mBaseAdapter: LBaseAdapter<NavigationItem>? = null
     private var lastIndex = 0
-    private var mLoginOut: Button? = null
-    private var mImageView: AvatarImageView? = null
     private var urls = arrayOf("http://user.qzone.qq.com/992507862/2", "http://my.oschina.net/u/1269023")
     private var photoSaveName: String? = null//图pian名
     private var path: String? = null//图片全路径
@@ -68,18 +63,12 @@ class NavigationFra : BaseFragment() {
         return R.layout.fra_navigation_drawer
     }
 
-    override fun initViews() {
-        mRecyclerView = fdb(R.id.nva_recycler_view);
-        mLoginOut = fdb(R.id.nva_login_out);
-        mImageView = fdb(R.id.nva_header);
-    }
 
     override fun initData() {
-        mRecyclerView!!.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
         mBaseAdapter = object : LBaseAdapter<NavigationItem>(R.layout.item_nav) {
-            override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: NavigationItem) {
-                baseHolder.setText(R.id.navitem_txt, item.txt)
-                        .setImageResource(R.id.navitem_selected, if(item.selected==1)R.drawable.selected else R.drawable.nav_item)
+            override fun onBindItem(itemView: View, realPosition: Int, item: NavigationItem) {
+                itemView.navitem_txt.text=item.txt
+                itemView.navitem_selected.setImageResource(if(item.selected==1)R.drawable.selected else R.drawable.nav_item)
             }
 
             override fun onItemClick(view: View, item: NavigationItem) {
@@ -103,14 +92,15 @@ class NavigationFra : BaseFragment() {
                         .title("请选择主题:")
                         .sheet(R.menu.menu_theme)
                         .listener { dialogInterface, index ->
-                                ThemeUtils.saveTheme(activity,mRecyclerView!!,index)
+                                ThemeUtils.saveTheme(activity,nva_recycler_view,index)
                             }
                         .grid()
                         .build()
                         .show()
             }
         }
-        mRecyclerView!!.adapter = mBaseAdapter
+        nva_recycler_view.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        nva_recycler_view.adapter = mBaseAdapter
         val names = arrayOf("檀溪动态", "檀溪博客", "檀溪阅读", "檀溪主题")
         val items = ArrayList<NavigationItem>();
         for ((index, name) in names.withIndex()) {
@@ -121,7 +111,7 @@ class NavigationFra : BaseFragment() {
                     items.add(NavigationItem(index, name, 0))
             }
         }
-        mBaseAdapter!!.addItems(items, true)
+        mBaseAdapter?.addItems(items, true)
 
     }
 
@@ -130,16 +120,16 @@ class NavigationFra : BaseFragment() {
         if (!file.exists())
             file.mkdirs()
         photoSaveName = System.currentTimeMillis().toString() + ".png"
-        CommonUtils.displayRoundImage(mImageView!!, App.getInstance().getPerson()!!.header)
+        CommonUtils.displayRoundImage(nva_header, App.getInstance().getPerson()!!.header)
     }
 
     override fun bindListener() {
-        mLoginOut!!.setOnClickListener {
+        nva_login_out.setOnClickListener {
             App.getInstance().savePerson(null)
             LoginAct.startLoginAct(activity)
             activity.finish()
         }
-        mImageView!!.setOnClickListener {
+        nva_header.setOnClickListener {
             if (mSelectPopupWindow == null) {
 
                 mSelectPopupWindow = object : SelectPopupWindow<DefExtendItem>(activity, "请选择", SelectPopupWindow.getDefExtendItems("拍照", "相册")) {
@@ -164,7 +154,7 @@ class NavigationFra : BaseFragment() {
 
                                         override fun onShowRationale(permissionManager: PermissionManager, permissions: Array<String>) {
                                             //当用户拒绝某权限时并点击`不再提醒`的按钮时，下次应用再请求该权限时，需要给出合适的响应（比如,给个展示对话框来解释应用为什么需要该权限）
-                                            Snackbar.make(mImageView!!, "需要相机权限去拍照", Snackbar.LENGTH_INDEFINITE)
+                                            Snackbar.make(nva_header, "需要相机权限去拍照", Snackbar.LENGTH_INDEFINITE)
                                                     .setAction("确定") {
                                                         permissionManager.setIsPositive(true)
                                                         permissionManager.request()
@@ -174,12 +164,12 @@ class NavigationFra : BaseFragment() {
                         } else {
                             val openAlbumIntent = Intent(Intent.ACTION_GET_CONTENT)
                             openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
-                            activity.openNewAct(openAlbumIntent,mImageView!!, PHOTOZOOM)
+                            activity.openNewAct(openAlbumIntent,nva_header, PHOTOZOOM)
                         }
                     }
                 }
             }
-            mSelectPopupWindow!!.show(mImageView!!)
+            mSelectPopupWindow!!.show(nva_header)
 
         }
     }
@@ -239,8 +229,8 @@ class NavigationFra : BaseFragment() {
         addSubscription(mPerson.update(object :UpdateListenerSub(mBaseActivity!!){
             override fun onSuccess() {
                 App.getInstance().savePerson(mPerson)
-                CommonUtils.displayRoundImage(mImageView!!, mPerson.header)
-                CommonUtils.showSuccess(activity, mRecyclerView!!, null)
+                CommonUtils.displayRoundImage(nva_header, mPerson.header)
+                CommonUtils.showSuccess(activity, nva_recycler_view, null)
             }
         }))
     }

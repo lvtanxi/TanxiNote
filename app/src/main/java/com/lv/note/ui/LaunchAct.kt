@@ -3,7 +3,6 @@ package com.lv.note.ui
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.view.View
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
@@ -11,6 +10,7 @@ import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.util.changeTopBgColor
+import kotlinx.android.synthetic.main.act_launch.*
 import rx.Observable
 import rx.Subscription
 import java.util.concurrent.TimeUnit
@@ -27,14 +27,10 @@ class LaunchAct : BaseActivity(){
     val param = "isFrist"
 
     private var mSubscribe: Subscription? =null
-    private var mTopLay: View? =null
     override fun loadLayoutId(): Int {
         return R.layout.act_launch
     }
 
-    override fun initViews() {
-        mTopLay=fdb(R.id.launch_lay)
-    }
 
     override fun initData() {
         changeTopBgColor()
@@ -58,9 +54,9 @@ class LaunchAct : BaseActivity(){
     }
 
     fun startAnim(){
-        mTopLay?.let {
-            val scaleX = ObjectAnimator.ofFloat(mTopLay, "scaleX", 1f, 1.12f)
-            val scaleY = ObjectAnimator.ofFloat(mTopLay, "scaleY", 1f, 1.12f)
+        launch_lay.let {
+            val scaleX = ObjectAnimator.ofFloat(launch_lay, "scaleX", 1f, 1.12f)
+            val scaleY = ObjectAnimator.ofFloat(launch_lay, "scaleY", 1f, 1.12f)
             val animatorSet = AnimatorSet()
             animatorSet.setDuration(1000).play(scaleX).with(scaleY)
             animatorSet.start()

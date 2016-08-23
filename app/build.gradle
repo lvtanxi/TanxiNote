@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -16,8 +17,8 @@ android {
         applicationId "com.lv.note"
         minSdkVersion 21
         targetSdkVersion 22
-        versionCode 11
-        versionName "2.0"
+        versionCode 12
+        versionName "2.1"
     }
 
     signingConfigs {

@@ -3,9 +3,7 @@ package com.lv.note.base
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import com.lv.note.R
-
 import com.lv.note.adapter.LBaseFragmentAdapter
-import com.lv.note.base.BaseActivity
 
 /**
  * User: 吕勇
@@ -30,7 +28,6 @@ abstract class BaseTabLayoutActivity : BaseActivity() {
         mFragmentAdapter?.let {
             mViewPager?.adapter = mFragmentAdapter
             mTabLayout?.setupWithViewPager(mViewPager)
-            mTabLayout?.setTabsFromPagerAdapter(mFragmentAdapter)
         }
     }
 

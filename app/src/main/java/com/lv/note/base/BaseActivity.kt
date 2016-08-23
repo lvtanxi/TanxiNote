@@ -57,7 +57,9 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     /**
      * 初始化控件
      */
-    protected abstract fun initViews()
+    protected  open fun initViews(){
+
+    }
 
     /**
      * 初始化数剧

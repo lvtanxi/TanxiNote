@@ -7,10 +7,7 @@ import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateInterpolator
-import android.widget.EditText
-import android.widget.ImageView
 import cn.bmob.v3.BmobQuery
-import cn.carbs.android.avatarimageview.library.AvatarImageView
 import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
@@ -23,7 +20,6 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.changeTopBgColor
 import com.lv.note.util.isEmptyList
 import com.lv.note.util.isNumeric
-import com.lv.note.widget.HeartProgressBar
 import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
@@ -34,6 +30,7 @@ import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
 import com.tencent.tauth.UiError
 import com.xiaomi.market.sdk.XiaomiUpdateAgent
+import kotlinx.android.synthetic.main.act_login.*
 import org.json.JSONObject
 
 
@@ -44,16 +41,7 @@ import org.json.JSONObject
  * Description:登录界面
  */
 class LoginAct : BaseActivity() {
-
-
-    private var name: EditText? = null
-    private var pwd: EditText? = null
-    private var sub: ImageView? = null
     private var ps: ParticleSystem ? = null
-    private var mP: HeartProgressBar? = null
-    private var header: AvatarImageView? = null
-    private var what: ImageView? = null
-    private var qq: ImageView? = null
     private var mTencent: Tencent? = null
 
 
@@ -69,49 +57,40 @@ class LoginAct : BaseActivity() {
         return R.layout.act_login
     }
 
-    override fun initViews() {
-        name = fdb(R.id.login_name)
-        pwd = fdb(R.id.login_pwd)
-        sub = fdb(R.id.login_sub)
-        mP = fdb(R.id.login_progress)
-        header = fdb(R.id.login_image)
-        what = fdb(R.id.login_what)
-        qq = fdb(R.id.login_qq)
-    }
 
     override fun initData() {
         changeTopBgColor()
         if(Hawk.get(USER_NAME, "").isNumeric())
-            name!!.setText(Hawk.get(USER_NAME, ""))
-        if (name!!.text.length != 0) {
-            pwd!!.isFocusable = true
-            pwd!!.isFocusableInTouchMode = true
-            pwd!!.requestFocus()
+            login_name.setText(Hawk.get(USER_NAME, ""))
+        if (login_name.text.length != 0) {
+            login_pwd.isFocusable = true
+            login_pwd.isFocusableInTouchMode = true
+            login_pwd.requestFocus()
         }
         mTencent = Tencent.createInstance(APPID, applicationContext)
     }
 
     override fun bindListener() {
-        name!!.addTextChangedListener(object : CustTextWatcher() {
+        login_name.addTextChangedListener(object : CustTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 stopHeartProgressBar()
-                if (name!!.text.length == 11)
-                    loadImage(name!!.text.toString())
+                if (login_name.text.length == 11)
+                    loadImage(login_name.text.toString())
                 else
-                    header!!.setImageResource(R.drawable.header)
+                    login_image.setImageResource(R.drawable.header)
             }
         })
-        pwd!!.addTextChangedListener(object : CustTextWatcher() {
+        login_pwd.addTextChangedListener(object : CustTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 stopHeartProgressBar()
             }
         })
-        sub!!.setOnClickListener { doLogin() }
+        login_sub.setOnClickListener { doLogin() }
 
-        what!!.setOnClickListener {
+        login_what.setOnClickListener {
             TastyToast.makeText(getApplicationContext(), "用户是根据后端判断是否存在,所以没用注册界面,请见谅.也请妥善管理自己的用户名和密码!", TastyToast.LENGTH_LONG, TastyToast.INFO)
         }
-        qq?.setOnClickListener {
+        login_qq.setOnClickListener {
             mTencent?.login(this, "all", loginListener)
         }
     }
@@ -146,7 +125,7 @@ class LoginAct : BaseActivity() {
                                     mPerson.pwd = openID
                                     mPerson.header=imageUrl
                                     httpFindUser(mPerson)
-                                    CommonUtils.displayRoundImage(header!!, imageUrl)
+                                    CommonUtils.displayRoundImage(login_image, imageUrl)
                                 }
                             } catch (e: Exception) {
                                 toastError("获取用户信息失败")
@@ -179,13 +158,13 @@ class LoginAct : BaseActivity() {
     }
 
     fun stopHeartProgressBar() {
-        if ((name!!.text.length == 11) && (pwd!!.text.length >= 6)) {
-            mP!!.dismiss()
-            sub!!.visibility = View.VISIBLE
+        if ((login_name.text.length == 11) && (login_pwd.text.length >= 6)) {
+            login_progress.dismiss()
+            login_sub.visibility = View.VISIBLE
             return
         }
-        sub!!.visibility = View.GONE
-        mP!!.start()
+        login_sub.visibility = View.GONE
+        login_progress.start()
     }
 
     override fun processLogic() {
@@ -193,14 +172,14 @@ class LoginAct : BaseActivity() {
         XiaomiUpdateAgent.update(this)
         loadImage(Hawk.get(USER_NAME, ""))
         Handler().postDelayed({
-            mP!!.start()
+            login_progress.start()
         }, 400)
     }
 
     private fun doLogin() {
         val mPerson = Person()
-        mPerson.name = name!!.text.toString()
-        mPerson.pwd = pwd!!.text.toString()
+        mPerson.name = login_name.text.toString()
+        mPerson.pwd = login_pwd.text.toString()
         httpFindUser(mPerson)
     }
 
@@ -221,7 +200,7 @@ class LoginAct : BaseActivity() {
     }
 
     private fun changeAct(mPerson: Person) {
-        CommonUtils.showSuccess(this, sub!!
+        CommonUtils.showSuccess(this, login_sub
                 , object : ActionBack {
             override fun call() {
                 Hawk.put(USER_NAME, mPerson.name)
@@ -262,7 +241,7 @@ class LoginAct : BaseActivity() {
 
 
     fun loadImage(key: String) {
-        CommonUtils.displayRoundImage(header!!, Hawk.get(key, ""))
+        CommonUtils.displayRoundImage(login_image, Hawk.get(key, ""))
     }
 
     override fun onDestroy() {

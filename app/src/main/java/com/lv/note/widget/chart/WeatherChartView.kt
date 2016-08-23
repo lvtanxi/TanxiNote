@@ -12,13 +12,13 @@ import android.view.View
 import com.lv.note.util.ThemeUtils
 import java.util.*
 
-class WeatherChartView<T : WeatherChartItem> : View {
-    var items: List<T>? = null
+class WeatherChartView: View {
+    var items: List<WeatherChartItem>? = null
     private var unit: String? = null
     private var yFormat = "0.#"
 
 
-    fun setTuView(list: List<T>, unitInfo: String) {
+    fun setTuView(list: List<WeatherChartItem>, unitInfo: String) {
         this.items = list
         this.unit = unitInfo
     }

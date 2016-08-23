@@ -1,7 +1,6 @@
 package com.lv.note.adapter
 
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.v7.widget.RecyclerView.ViewHolder
@@ -404,10 +403,9 @@ class BaseHolder
      * *
      * @param viewIds the viewIds
      */
-    fun setOnItemChildClickListener(listener: LBaseAdapter<*>.OnItemChildClickListener, vararg viewIds: Int): BaseHolder {
+    fun setOnItemChildClickListener(listener: LBaseAdapter<*>.OnItemChildClickListener, vararg views: View): BaseHolder {
         listener.position = adapterPosition
-        for (viewId in viewIds) {
-            val view = getView<View>(viewId)
+        for (view in views) {
             view.setOnClickListener(listener)
         }
         return this

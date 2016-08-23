@@ -5,7 +5,6 @@ import android.os.Environment
 import android.text.format.DateFormat
 import android.view.View
 import com.lv.note.R
-import com.lv.note.adapter.BaseHolder
 import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.base.BaseRecyclerActivity
 import com.lv.note.entity.Book
@@ -13,6 +12,7 @@ import com.lv.note.util.io_main
 import com.lv.note.util.openNewAct
 import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
+import kotlinx.android.synthetic.main.item_book.view.*
 import rx.Observable
 import rx.Subscriber
 import java.io.File
@@ -66,10 +66,10 @@ class BookListAct : BaseRecyclerActivity<Book>() {
 
     override val lBaseAdapter: LBaseAdapter<Book>
         get() = object : LBaseAdapter<Book>(R.layout.item_book) {
-            override fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: Book) {
-                baseHolder.setText(R.id.bookitem_name, item.fileName)
-                        .setText(R.id.bookitem_size, item.fileSize)
-                        .setText(R.id.bookitem_progress, Hawk.get("${item.fileName}_progress", ""))
+            override fun onBindItem(itemView:View, realPosition: Int, item: Book) {
+                itemView.bookitem_name.text= item.fileName
+                itemView.bookitem_size.text= item.fileSize
+                itemView.bookitem_progress.text=Hawk.get("${item.fileName}_progress", "")
             }
 
             override fun onItemClick(view: View, item: Book) {

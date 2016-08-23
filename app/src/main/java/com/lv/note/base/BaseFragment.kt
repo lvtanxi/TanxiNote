@@ -42,13 +42,17 @@ abstract class BaseFragment : Fragment() {
         return contentView
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initData()
+        bindListener()
+        processLogic()
+    }
+
 
     private fun initFragment(inflater: LayoutInflater) {
         this.contentView = inflater.inflate(loadLayoutId(), null)
         initViews()
-        initData()
-        bindListener()
-        processLogic()
     }
 
     /**
@@ -59,7 +63,9 @@ abstract class BaseFragment : Fragment() {
     /**
      * 初始化控件
      */
-    protected abstract fun initViews()
+    protected  open fun initViews(){
+
+    }
 
     /**
      * 初始化数

@@ -6,7 +6,7 @@ import android.view.View
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.util.openNewAct
-import com.lv.note.widget.WuWebView
+import kotlinx.android.synthetic.main.act_webview.*
 
 
 /**
@@ -17,7 +17,6 @@ import com.lv.note.widget.WuWebView
  */
 class WebViewAct : BaseActivity() {
 
-    private var mWebView: WuWebView? = null
 
     companion object {
         val URL_PARAM = "URL_PARAM"
@@ -33,22 +32,19 @@ class WebViewAct : BaseActivity() {
         return R.layout.act_webview
     }
 
-    override fun initViews() {
-        mWebView = fdb(R.id.web_web_view);
-    }
 
     override fun initData() {
         mToolbar!!.title=intent.getStringExtra(TITLE_PARAM)
     }
 
     override fun processLogic() {
-        mWebView!!.loadUrl(intent.getStringExtra(URL_PARAM))
+        web_web_view.loadUrl(intent.getStringExtra(URL_PARAM))
     }
 
 
     override fun onDestroy() {
-        mWebView!!.clearHistory()
-        mWebView!!.destroy()
+        web_web_view.clearHistory()
+        web_web_view.destroy()
         super.onDestroy()
     }
 }
