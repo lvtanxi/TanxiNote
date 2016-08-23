@@ -20,7 +20,6 @@ import com.lv.note.util.CommonUtils
 import com.lv.note.util.changeTopBgColor
 import com.lv.note.util.isEmptyList
 import com.lv.note.util.isNumeric
-import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
 import com.plattysoft.leonids.ParticleSystem
 import com.sdsmdg.tastytoast.TastyToast
@@ -105,7 +104,6 @@ class LoginAct : BaseActivity() {
                 val jo = value as JSONObject
 
                 if (jo.has("ret") && jo.optInt("ret") == 0) {
-                    DLog.d(jo)
                     val openID = jo.getString("openid")
                     val accessToken = jo.getString("access_token")
                     val expires = jo.getString("expires_in")

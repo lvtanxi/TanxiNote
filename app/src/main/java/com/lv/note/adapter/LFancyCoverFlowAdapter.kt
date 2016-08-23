@@ -1,10 +1,11 @@
 package com.lv.note.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import com.dalong.francyconverflow.FancyCoverFlow
 import com.dalong.francyconverflow.FancyCoverFlowAdapter
 import com.lv.note.R
@@ -25,8 +26,9 @@ class LFancyCoverFlowAdapter(private val mContext: Context, var list: List<Weath
         var convertView = convertView
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_pager_view, null)
-            val wm = mContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            val width = wm.defaultDisplay.width
+            val dm = DisplayMetrics()
+            (mContext as Activity).windowManager.defaultDisplay.getMetrics(dm)
+            val width = dm.widthPixels
             convertView!!.layoutParams = FancyCoverFlow.LayoutParams(width / 2, FancyCoverFlow.LayoutParams.WRAP_CONTENT)
         }
         val item = getItem(position)

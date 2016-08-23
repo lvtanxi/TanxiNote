@@ -38,8 +38,7 @@ abstract class LBaseSearchAdapter<T>(layoutId: Int) : LBaseAdapter<T>(layoutId),
             return results
         }
 
-        override fun publishResults(constraint: CharSequence,
-                                    results: Filter.FilterResults) {
+        override fun publishResults(constraint: CharSequence, results: Filter.FilterResults) {
             mDatas = results.values as MutableList<T>
             notifyDataSetChanged()
         }
@@ -52,13 +51,11 @@ abstract class LBaseSearchAdapter<T>(layoutId: Int) : LBaseAdapter<T>(layoutId),
         override fun afterTextChanged(s: Editable) {
         }
 
-        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
-                                       after: Int) {
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
         }
 
-        override fun onTextChanged(s: CharSequence, start: Int, before: Int,
-                                   count: Int) {
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             getFilter().filter(s)
         }
     }

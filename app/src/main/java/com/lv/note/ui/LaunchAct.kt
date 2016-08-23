@@ -22,11 +22,12 @@ import java.util.concurrent.TimeUnit
  * Time: 09:33
  * Description:启动界面
  */
-class LaunchAct : BaseActivity(){
+class LaunchAct : BaseActivity() {
 
     val param = "isFrist"
+    private var mAnimatorSet:AnimatorSet? =null
 
-    private var mSubscribe: Subscription? =null
+    private var mSubscribe: Subscription? = null
     override fun loadLayoutId(): Int {
         return R.layout.act_launch
     }
@@ -39,40 +40,36 @@ class LaunchAct : BaseActivity(){
 
     override fun onResume() {
         super.onResume()
-        startAnim()
-        mSubscribe=Observable.timer(1000,TimeUnit.MILLISECONDS)
-                .subscribe {
-                    var mCl:Class<*> = LoginAct::class.java
-                    if (App.getInstance().getPerson() == null)
-                    mCl = LoginAct::class.java
-                    else
-                    mCl = HomeAct::class.java
-                    startActivity(Intent(this,mCl))
-                    finish()
+        mSubscribe = Observable.timer(1000, TimeUnit.MILLISECONDS)
+                .doOnSubscribe {  startAnim() }
+                .map { num -> if (App.getInstance().getPerson() == null) LoginAct::class.java else HomeAct::class.java }
+                .subscribe { restule ->
+                        startActivity(Intent(this, restule))
+                        finish()
                 }
         addSubscription(mSubscribe)
     }
 
-    fun startAnim(){
-        launch_lay.let {
-            val scaleX = ObjectAnimator.ofFloat(launch_lay, "scaleX", 1f, 1.12f)
-            val scaleY = ObjectAnimator.ofFloat(launch_lay, "scaleY", 1f, 1.12f)
-            val animatorSet = AnimatorSet()
-            animatorSet.setDuration(1000).play(scaleX).with(scaleY)
-            animatorSet.start()
-        }
+    fun startAnim() {
+        mAnimatorSet = AnimatorSet()
+        val scaleX = ObjectAnimator.ofFloat(launch_lay, "scaleX", 1f, 1.12f)
+        val scaleY = ObjectAnimator.ofFloat(launch_lay, "scaleY", 1f, 1.12f)
+        mAnimatorSet?.setDuration(1000)?.play(scaleX)?.with(scaleY)
+        mAnimatorSet?.start()
     }
 
     override fun onPause() {
         super.onPause()
         mCompositeSubscription?.remove(mSubscribe)
+        mAnimatorSet?.cancel()
     }
+
 
     override fun processLogic() {
         val query = BmobQuery<Person>("Person")
         query.addWhereEqualTo("name", "我是的")
         query.addWhereEqualTo("pwd", "123123")
-        addSubscription(query.findObjects(object :FindListenerSub<Person>(this,false){
+        addSubscription(query.findObjects(object : FindListenerSub<Person>(this, false) {
             override fun onSuccess(result: MutableList<Person>) {
             }
         }))

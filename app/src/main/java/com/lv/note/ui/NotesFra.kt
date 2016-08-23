@@ -15,9 +15,7 @@ import com.lv.note.base.BaseRecyclerFragment
 import com.lv.note.entity.Note
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.UpdateListenerSub
-import com.lv.test.DLog
 import com.orhanobut.hawk.Hawk
-import kotlinx.android.synthetic.main.item_note.*
 import kotlinx.android.synthetic.main.item_note.view.*
 
 
@@ -48,7 +46,6 @@ class NotesFra : BaseRecyclerFragment<Note>() {
     override val lBaseAdapter: LBaseAdapter<Note>
         get() = object : LBaseAdapter<Note>(R.layout.item_note) {
             override fun onBindItem(itemView: View, realPosition: Int, item: Note) {
-                DLog.d(item_knife==null);
                 itemView.item_knife.fromHtml(item.note)
                 itemView.item_knife.setOnTouchListener { view, motionEvent ->
                     view.parent!!.requestDisallowInterceptTouchEvent(false)

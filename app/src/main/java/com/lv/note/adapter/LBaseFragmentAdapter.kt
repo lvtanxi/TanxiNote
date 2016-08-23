@@ -36,7 +36,7 @@ class LBaseFragmentAdapter : FragmentStatePagerAdapter {
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        mTitles?.last {
+        mTitles?.let {
             return mTitles!![position]
         }
         return ""
