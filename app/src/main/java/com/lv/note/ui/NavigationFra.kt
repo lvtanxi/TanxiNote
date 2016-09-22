@@ -230,7 +230,6 @@ class NavigationFra : BaseFragment() {
             override fun onSuccess() {
                 App.getInstance().savePerson(mPerson)
                 CommonUtils.displayRoundImage(nva_header, mPerson.header)
-                CommonUtils.showSuccess(activity, nva_recycler_view, null)
             }
         }))
     }

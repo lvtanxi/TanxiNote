@@ -6,14 +6,6 @@
               android:paddingBottom="10dp"
               tools:ignore="RtlHardcoded">
 
-    <TextView
-        android:id="@+id/cityitem_letter"
-        style="@style/LetterIndexTextViewStyle"
-        android:clickable="false"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="18sp"
-        android:textStyle="italic|bold"/>
-
     <RelativeLayout
         android:paddingLeft="15dp"
         android:paddingTop="10dp"
@@ -36,7 +28,7 @@
             android:layout_toRightOf="@id/cityitem_name_icon"
             android:gravity="center_vertical"
             android:paddingLeft="16dp"
-            android:paddingRight="@dimen/side_letter_bar_width"
+            android:paddingRight="15dp"
             android:text="asd"/>
 
         <View
@@ -45,6 +37,6 @@
             android:layout_alignLeft="@id/cityitem_name"
             android:layout_below="@id/cityitem_name"
             android:layout_marginLeft="16dp"
-            android:background="@color/COLOR_BORDER_LINE"/>
+            android:background="@color/alertdialog_line"/>
     </RelativeLayout>
 </LinearLayout>

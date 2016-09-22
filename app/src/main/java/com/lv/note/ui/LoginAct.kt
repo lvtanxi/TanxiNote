@@ -4,15 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Handler
 import android.text.Editable
-import android.view.MotionEvent
 import android.view.View
-import android.view.animation.AccelerateInterpolator
 import cn.bmob.v3.BmobQuery
 import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Person
-import com.lv.note.helper.ActionBack
 import com.lv.note.helper.CustTextWatcher
 import com.lv.note.helper.FindListenerSub
 import com.lv.note.helper.SaveListenerSub
@@ -21,7 +18,6 @@ import com.lv.note.util.changeTopBgColor
 import com.lv.note.util.isEmptyList
 import com.lv.note.util.isNumeric
 import com.orhanobut.hawk.Hawk
-import com.plattysoft.leonids.ParticleSystem
 import com.sdsmdg.tastytoast.TastyToast
 import com.tencent.connect.UserInfo
 import com.tencent.connect.common.Constants
@@ -40,7 +36,6 @@ import org.json.JSONObject
  * Description:登录界面
  */
 class LoginAct : BaseActivity() {
-    private var ps: ParticleSystem ? = null
     private var mTencent: Tencent? = null
 
 
@@ -48,7 +43,7 @@ class LoginAct : BaseActivity() {
         val APPID = "1105488020"
         val USER_NAME = "USER_PHONE"
         fun startLoginAct(actvity: Activity) {
-            actvity.startActivity(Intent(actvity,LoginAct::class.java))
+            actvity.startActivity(Intent(actvity, LoginAct::class.java))
         }
     }
 
@@ -59,7 +54,7 @@ class LoginAct : BaseActivity() {
 
     override fun initData() {
         changeTopBgColor()
-        if(Hawk.get(USER_NAME, "").isNumeric())
+        if (Hawk.get(USER_NAME, "").isNumeric())
             login_name.setText(Hawk.get(USER_NAME, ""))
         if (login_name.text.length != 0) {
             login_pwd.isFocusable = true
@@ -121,7 +116,7 @@ class LoginAct : BaseActivity() {
                                     val mPerson = Person()
                                     mPerson.name = openID
                                     mPerson.pwd = openID
-                                    mPerson.header=imageUrl
+                                    mPerson.header = imageUrl
                                     httpFindUser(mPerson)
                                     CommonUtils.displayRoundImage(login_image, imageUrl)
                                 }
@@ -198,36 +193,12 @@ class LoginAct : BaseActivity() {
     }
 
     private fun changeAct(mPerson: Person) {
-        CommonUtils.showSuccess(this, login_sub
-                , object : ActionBack {
-            override fun call() {
-                Hawk.put(USER_NAME, mPerson.name)
-                App.getInstance().savePerson(mPerson)
-                startActivity(Intent(this@LoginAct,HomeAct::class.java))
-                finish()
-            }
-
-        })
+        Hawk.put(USER_NAME, mPerson.name)
+        App.getInstance().savePerson(mPerson)
+        startActivity(Intent(this@LoginAct, HomeAct::class.java))
+        finish()
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        event?.let {
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    ps = ParticleSystem(this, 200, R.drawable.star_pink, 800)
-                    ps!!.setScaleRange(0.7f, 1.3f)
-                    ps!!.setSpeedRange(0.05f, 0.1f)
-                    ps!!.setRotationSpeedRange(90f, 180f)
-                    ps!!.setFadeOut(200, AccelerateInterpolator())
-                    ps!!.emit(event.x.toInt(), event.y.toInt(), 40)
-                }
-                MotionEvent.ACTION_MOVE -> ps!!.updateEmitPoint(event.x.toInt(), event.y.toInt())
-                MotionEvent.ACTION_UP -> ps!!.stopEmitting()
-            }
-            return true
-        }
-        return super.onTouchEvent(event)
-    }
 
     private fun addUser(mPerson: Person) {
         addSubscription(mPerson.save(object : SaveListenerSub(this) {

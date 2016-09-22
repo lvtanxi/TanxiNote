@@ -12,10 +12,8 @@ import com.lv.note.App
 import com.lv.note.R
 import com.lv.note.base.BaseActivity
 import com.lv.note.entity.Note
-import com.lv.note.helper.ActionBack
 import com.lv.note.helper.SaveListenerSub
 import com.lv.note.helper.UpdateListenerSub
-import com.lv.note.util.CommonUtils
 import com.lv.note.util.notEmptyStr
 import com.lv.note.util.openNewAct
 import com.orhanobut.hawk.Hawk
@@ -123,12 +121,8 @@ class AddNoteAct : BaseActivity() {
     }
 
     private fun goBack() {
-        CommonUtils.showSuccess(this, knife, object : ActionBack {
-            override fun call() {
-                Hawk.put(NotesFra.CHANGE_NOTE, true)
-                finish()
-            }
-        })
+        Hawk.put(NotesFra.CHANGE_NOTE, true)
+        finish()
     }
 
     private fun showLinkDialog() {

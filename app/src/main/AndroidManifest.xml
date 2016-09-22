@@ -49,7 +49,9 @@
             android:windowSoftInputMode="adjustResize|stateVisible"/>
         <activity android:name=".ui.WebViewAct"/>
         <activity android:name=".ui.ClipAct"/>
-        <activity android:name=".ui.ChangeCityAct"/>
+        <activity
+            android:name=".ui.ChangeCityAct"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.BookListAct"/>
         <activity android:name=".ui.BookAct"/>
 

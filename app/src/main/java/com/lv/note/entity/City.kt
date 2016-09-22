@@ -7,8 +7,7 @@ package com.lv.note.entity
  * Time: 11:41
  * Description:
  */
-class City {
-    var name=""
-    var pinyin=""
-    var letter=""
+class City @JvmOverloads constructor(val name: String = "", var pinyin: String = "", var letter: String = "", var type: Int = 0) : LMultiItem {
+    override val itemType: Int
+        get() = type
 }

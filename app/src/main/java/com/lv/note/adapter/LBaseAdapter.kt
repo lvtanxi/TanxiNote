@@ -1,8 +1,8 @@
 package com.lv.note.adapter
 
 
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -249,16 +249,20 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
 
     abstract fun onBindItem(itemView: View, realPosition: Int, item: T)
 
-    //需要处理瀑布流的时候再放开
-    override fun onViewAttachedToWindow(baseHolder: BaseHolder?) {
-        super.onViewAttachedToWindow(baseHolder)
-        val lp = baseHolder!!.itemView.layoutParams
-        if (lp != null && lp is StaggeredGridLayoutManager.LayoutParams) {
-            val position = baseHolder.layoutPosition
-            if (isHeaderView(position) || isBottomView(position)|| mDatas.isEmptyList()) {
-                lp.isFullSpan = true
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+        super.onAttachedToRecyclerView(recyclerView)
+        val manager = recyclerView!!.layoutManager
+        if (manager is GridLayoutManager) {
+            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return getSpanCount(position, manager.spanCount)
+                }
             }
         }
+    }
+
+    protected open fun getSpanCount(position: Int, defCount: Int): Int {
+        return if (isHeaderView(position) || isBottomView(position) || mDatas.isEmptyList()) defCount else 1
     }
 
     /*@Override

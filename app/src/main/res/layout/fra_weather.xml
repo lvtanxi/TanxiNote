@@ -12,17 +12,22 @@
 
         <LinearLayout
             style="@style/MatchMatch.Vertical"
-            android:gravity="center">
+            android:fitsSystemWindows="true">
 
-            <com.dalong.francyconverflow.FancyCoverFlow
-                android:id="@+id/w_fancyCoverFlow"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/w_viewpager"
+                style="@style/MatchAuto"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingEnd="60dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:paddingStart="60dp"/>
 
             <com.lv.note.widget.chart.WeatherChartView
                 android:id="@+id/w_weather_chartview"
                 style="@style/MatchAuto"/>
+
         </LinearLayout>
 
     </cn.bingoogolapple.refreshlayout.BGARefreshLayout>

@@ -60,9 +60,6 @@ abstract class BaseRecyclerActivity<T> : BaseActivity(), BGARefreshDelegate.BGAR
     }
 
     protected fun stopRefreshing() {
-        commonRefresh?.let {
-            CommonUtils.showSuccess(this@BaseRecyclerActivity, commonRefresh!!, null)
-        }
         mDelegate?.stopRefresh()
         mBaseAdapter?.let {
             if (mBaseAdapter!!.isEmpty)
