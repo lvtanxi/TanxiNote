@@ -1,4 +1,4 @@
-package com.lv.test
+package com.lv.note.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -9,8 +9,12 @@ import android.view.MenuItem
 import android.view.View
 import com.lv.note.R
 import com.lv.note.helper.IBaseView
-import com.lv.note.util.ToastUtils
+import com.lv.note.util.CommonUtils
+import com.lv.note.util.ThemeUtils
 import com.lv.note.widget.LoadingDialog
+import com.sdsmdg.tastytoast.TastyToast
+import rx.Subscription
+import rx.subscriptions.CompositeSubscription
 
 
 /**
@@ -22,8 +26,11 @@ import com.lv.note.widget.LoadingDialog
 abstract class BaseActivity : AppCompatActivity(), IBaseView {
     protected var mLodingView: LoadingDialog? = null
     protected var mToolbar: Toolbar? = null
+    protected var mCompositeSubscription: CompositeSubscription? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(ThemeUtils.obtainCurrentTheme())
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(loadLayoutId())
         initToolbar()
@@ -32,6 +39,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         bindListener()
         processLogic()
     }
+
 
     protected fun initToolbar() {
         mToolbar = fdb(R.id.comm_toobar)
@@ -49,7 +57,9 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     /**
      * 初始化控件
      */
-    protected abstract fun initViews()
+    protected  open fun initViews(){
+
+    }
 
     /**
      * 初始化数剧
@@ -79,14 +89,18 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
 
 
     override fun onDestroy() {
-        super.onDestroy()
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription?.unsubscribe()
+            mCompositeSubscription = null
+        }
         mToolbar = null
         mLodingView = null
+        super.onDestroy()
     }
 
     override fun showLodingView() {
-        if(null==mLodingView)
-            mLodingView=LoadingDialog(this)
+        if (null == mLodingView)
+            mLodingView = LoadingDialog(this)
         mLodingView?.let {
             if (!mLodingView!!.isShowing)
                 mLodingView!!.show();
@@ -100,16 +114,26 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
         }
     }
 
-    override fun toastError(message: String) {
-        ToastUtils.textToastError(this, message)
+    override fun toastError(message: String?) {
+        TastyToast.makeText(applicationContext, message, TastyToast.LENGTH_LONG,TastyToast.ERROR)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == android.R.id.home) {
+            mToolbar?.let {
+                CommonUtils.hiddenKeyBoard(mToolbar!!)
+            }
             finish()
             return true
         }
         return super.onOptionsItemSelected(item)
     }
+
+    protected fun addSubscription(subscription: Subscription?) {
+        if (mCompositeSubscription == null)
+            mCompositeSubscription = CompositeSubscription()
+        mCompositeSubscription?.add(subscription)
+    }
+
 
 }

@@ -1,0 +1,52 @@
+package com.lv.note.ui
+
+import com.joanzapata.pdfview.listener.OnPageChangeListener
+import com.lv.note.R
+import com.lv.note.base.BaseActivity
+import com.lv.note.entity.Book
+import com.orhanobut.hawk.Hawk
+import kotlinx.android.synthetic.main.act_book.*
+import java.io.File
+
+
+/**
+ * User: 吕勇
+ * Date: 2016-07-04
+ * Time: 12:57
+ * Description:
+ */
+class BookAct : BaseActivity(), OnPageChangeListener {
+
+    companion object {
+        private val BOOK_PARAM = "book_param"
+    }
+
+
+
+    override fun loadLayoutId(): Int {
+        return R.layout.act_book
+    }
+
+
+    override fun initData() {
+        val book: Book? = intent.getSerializableExtra(BOOK_PARAM) as Book?;
+        book?.let {
+            mToolbar?.title = book.fileName
+            val file = File(book.filePath)
+            if (!file.exists())
+                return
+            book_pdf_view.fromFile(file)
+                    .swipeVertical(true)
+                    .enableSwipe(true)
+                    .defaultPage(Hawk.get(book.fileName,1))
+                    .onPageChange(this).load()
+        }
+    }
+
+    override fun onPageChanged(page: Int, pageCount: Int) {
+        Hawk.put(mToolbar!!.title.toString(),page)
+        Hawk.put("${mToolbar!!.title}_progress","$page/$pageCount")
+        book_pdf_num.text="$page/$pageCount"
+    }
+
+}

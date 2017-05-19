@@ -8,7 +8,7 @@ import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.helper.BGARefreshDelegate
 import com.lv.note.util.CommonUtils
 import com.lv.note.widget.EmptyView
-import com.lv.test.BaseActivity
+import com.lv.note.base.BaseActivity
 
 /**
  * User: 吕勇
@@ -55,14 +55,11 @@ abstract class BaseRecyclerActivity<T> : BaseActivity(), BGARefreshDelegate.BGAR
     protected abstract val lBaseAdapter: LBaseAdapter<T>
 
 
-    protected fun addItems(items: List<T>) {
+    protected fun addItems(items: List<T>?) {
         mBaseAdapter?.addItems(items, true)
     }
 
     protected fun stopRefreshing() {
-        commonRefresh?.let {
-            CommonUtils.showSuccess(this@BaseRecyclerActivity, commonRefresh!!, null)
-        }
         mDelegate?.stopRefresh()
         mBaseAdapter?.let {
             if (mBaseAdapter!!.isEmpty)

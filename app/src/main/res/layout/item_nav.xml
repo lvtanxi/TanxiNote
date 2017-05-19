@@ -13,10 +13,10 @@
 
         <ImageView
             android:id="@+id/navitem_image"
-            style="@style/WrapWrap"
+            style="@style/WrapWrap.tint"
             android:layout_marginLeft="20dp"
             android:contentDescription="@null"
-            android:src="@mipmap/more"/>
+            android:src="@drawable/more"/>
 
         <TextView
             android:id="@+id/navitem_txt"
@@ -26,10 +26,9 @@
 
         <ImageView
             android:id="@+id/navitem_selected"
-            style="@style/WrapWrap"
+            style="@style/WrapWrap.tint"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
-            android:contentDescription="@null"
-            android:src="@drawable/nav_item"/>
+            android:contentDescription="@null"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

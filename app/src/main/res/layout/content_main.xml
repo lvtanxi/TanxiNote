@@ -1,32 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:id="@+id/id_coordinatorlayout"
-                                                 style="@style/MatchMatch"
-                                                 android:fitsSystemWindows="true">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchMatch"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CoordinatorLayout
+        style="@style/MatchMatch.Vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@id/comm_toobar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="10dp"
+            android:gravity="center_vertical"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/back"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:title=""
+            app:titleTextColor="@android:color/white">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginRight="45dp">
+
+                <github.chenupt.springindicator.SpringIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:siIndicatorColor="@android:color/white"
+                    app:siSelectedTextColor="?attr/colorPrimary"
+                    app:siTextColor="@android:color/white"
+                    app:siTextSize="16sp"/>
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
 
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/main_appbar"
-        style="@style/MatchWrap">
+        <android.support.v4.view.ViewPager
+            android:id="@+id/main_view_pager"
+            style="@style/MatchMatch"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@color/WINDOW_BACKGROUND"/>
 
-        <include layout="@layout/common_toobar"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_float_button"
+            style="@style/WrapWrap"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_action_plusone"
+            app:backgroundTint="?attr/colorPrimary"
+            app:elevation="8dp"
+            app:layout_behavior="com.lv.note.widget.ScrollBehavior"
+            app:pressedTranslationZ="16dp"
+            app:rippleColor="@color/alertdialog_line"/>
+    </android.support.design.widget.CoordinatorLayout>
 
-
-    </android.support.design.widget.AppBarLayout>
-
-
-    <include layout="@layout/common_recyclerview"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/main_float_button"
-        style="@style/WrapWrap"
-        android:layout_gravity="bottom|center"
-        android:src="@mipmap/ic_action_plusone"
-        app:backgroundTint="?attr/colorPrimary"
-        app:elevation="8dp"
-        android:layout_marginBottom="10dp"
-        app:pressedTranslationZ="16dp"
-        app:rippleColor="@color/alertdialog_line"
-        app:layout_behavior="com.lv.note.widget.ScrollBehavior"/>
-</android.support.design.widget.CoordinatorLayout>
+    <br.com.mauker.materialsearchview.MaterialSearchView
+        android:id="@+id/main_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

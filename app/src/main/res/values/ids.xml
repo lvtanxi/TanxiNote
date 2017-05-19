@@ -6,4 +6,6 @@
 
     <item name="common_tab_layout" type="id"/>
     <item name="common_view_pager" type="id"/>
+
+    <item name="common_tagflow" type="id"/>
 </resources>

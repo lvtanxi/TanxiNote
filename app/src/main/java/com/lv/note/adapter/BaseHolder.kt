@@ -13,8 +13,7 @@ import android.widget.CheckedTextView
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.lv.note.R
+import cn.carbs.android.avatarimageview.library.AvatarImageView
 import io.github.mthli.knife.KnifeText
 
 /**
@@ -68,6 +67,20 @@ class BaseHolder
     fun setText(viewId: Int, text: String): BaseHolder {
         val view = getView<TextView>(viewId)
         view.text = text
+        return this
+    }
+    /**
+     * 设置TextView的内
+
+     * @param viewId 控件id
+     * *
+     * @param text   文本内容
+     * *
+     * @return ViewHolder text
+     */
+    fun setAvatarImageText(viewId: Int, text: Char): BaseHolder {
+        val view = getView<AvatarImageView>(viewId)
+        view.setTextAndColorSeed(text.toString(),text.toString())
         return this
     }
 
@@ -130,16 +143,6 @@ class BaseHolder
         return this
     }
 
-    fun setImageUrl(viewId: Int, url: String): BaseHolder {
-        val view = getView<ImageView>(viewId)
-        Glide.with(view.context)
-                .load(url)
-                .placeholder(R.mipmap.ic_loading)
-                .error(R.mipmap.ic_loading)
-                .crossFade()
-                .into(view)
-        return this
-    }
 
     /**
      * Sets image bitmap.
@@ -400,10 +403,9 @@ class BaseHolder
      * *
      * @param viewIds the viewIds
      */
-    fun setOnItemChildClickListener(listener: LBaseAdapter<*>.OnItemChildClickListener, vararg viewIds: Int): BaseHolder {
+    fun setOnItemChildClickListener(listener: LBaseAdapter<*>.OnItemChildClickListener, vararg views: View): BaseHolder {
         listener.position = adapterPosition
-        for (viewId in viewIds) {
-            val view = getView<View>(viewId)
+        for (view in views) {
             view.setOnClickListener(listener)
         }
         return this

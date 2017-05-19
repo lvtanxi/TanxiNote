@@ -7,7 +7,6 @@ import com.orhanobut.hawk.Hawk
 import com.orhanobut.hawk.HawkBuilder
 import com.orhanobut.logger.Logger
 import com.zhy.http.okhttp.OkHttpUtils
-import im.fir.sdk.FIR
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
@@ -36,9 +35,7 @@ class App : Application() {
         super.onCreate()
         app = this
 
-        if(!BuildConfig.DEBUG)
-            FIR.init(this);
-         else
+        if(BuildConfig.DEBUG)
             Logger.init("lvtanxi")
         initBmob()
         initDb()

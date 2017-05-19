@@ -1,8 +1,8 @@
 package com.lv.note.adapter
 
 
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +11,8 @@ import android.widget.RelativeLayout
 import com.lv.note.anim.BaseAnimation
 import com.lv.note.anim.SlideInBottomAnimation
 import com.lv.note.util.CommonUtils
+import com.lv.note.util.isEmptyList
 import com.lv.note.widget.EmptyView
-import com.lv.test.ArrayUtils
 import java.util.*
 
 /**
@@ -22,7 +22,7 @@ import java.util.*
  * Description:可以爲RecyclerView添加HeaderView
  */
 
-abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutResId: Int, protected var mDatas: MutableList<T> = ArrayList<T>()) : RecyclerView.Adapter<BaseHolder>() {
+abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutResId: Int=0, protected  var mDatas: MutableList<T> = ArrayList<T>()) : RecyclerView.Adapter<BaseHolder>() {
 
     private var mOpenAnimationEnable = true
     private val mInterpolator = LinearInterpolator()
@@ -80,7 +80,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         notifyDataSetChanged()
     }
 
-    fun addItems(items: List<T>, isRefresh: Boolean) {
+    fun addItems(items: List<T>?, isRefresh: Boolean) {
         if (isRefresh) {
             mDatas.clear()
             notifyDataSetChanged()
@@ -122,7 +122,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         return getDefItemViewType(position)
     }
 
-    protected fun getDefItemViewType(position: Int): Int {
+    protected open fun getDefItemViewType(position: Int): Int {
         return super.getItemViewType(position)
     }
 
@@ -132,7 +132,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
             HEADER_VIEW -> baseViewHolder = BaseHolder(mHeaderView!!)
             EMPTY_VIEW -> baseViewHolder = BaseHolder(emptyView!!)
             FOOTER_VIEW -> baseViewHolder = BaseHolder(mFooterView!!)
-            else -> baseViewHolder = onCreateDefViewHolder(parent)
+            else -> baseViewHolder = onCreateDefViewHolder(parent,viewType)
         }
         return baseViewHolder
 
@@ -145,20 +145,20 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
                 if (layoutParams == null && mHeaderView != null && mHeaderView!!.parent is RecyclerView) {
                     val recyclerView = mHeaderView!!.parent as RecyclerView
                     layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, recyclerView.height - mHeaderView!!.height)
-                    emptyView!!.layoutParams=layoutParams
+                    emptyView?.layoutParams=layoutParams
                 }
                 val networkAvailable = CommonUtils.isNetworkAvailable(emptyView!!.context)
                 if (networkAvailable)
-                    emptyView!!.showEmptyView()
+                    emptyView?.showEmptyView()
                 else
-                    emptyView!!.showNetWorkError()
+                    emptyView?.showNetWorkError()
             }
             HEADER_VIEW, FOOTER_VIEW -> {
             }
             else -> {
                 val pos = getRealPosition(baseHolder)
                 baseHolder.itemView.tag = pos
-                onBindItem(baseHolder, pos, mDatas[pos])
+                onBindItem(baseHolder.itemView, pos, mDatas[pos])
                 addAnimation(baseHolder)
             }
         }
@@ -170,7 +170,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         return holder.layoutPosition - headerViewsCount
     }
 
-    protected fun onCreateDefViewHolder(parent: ViewGroup): BaseHolder {
+    protected open fun onCreateDefViewHolder(parent: ViewGroup,viewType: Int): BaseHolder {
         return createBaseViewHolder(parent, mLayoutResId)
     }
 
@@ -179,12 +179,12 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         baseViewHolder.itemView.setOnClickListener { view ->
             val vTag = view.tag
             if (vTag != null && vTag is Int)
-                onItemClick(mDatas[Integer.valueOf(vTag.toString())!!])
+                onItemClick(view,mDatas[Integer.valueOf(vTag.toString())!!])
         }
         return baseViewHolder
     }
 
-    protected open fun onItemClick(item: T) {
+    protected open fun onItemClick(view: View,item: T) {
 
     }
 
@@ -247,18 +247,22 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
         this.mFirstOnlyEnable = firstOnly
     }
 
-    abstract fun onBindItem(baseHolder: BaseHolder, realPosition: Int, item: T)
+    abstract fun onBindItem(itemView: View, realPosition: Int, item: T)
 
-    //需要处理瀑布流的时候再放开
-    override fun onViewAttachedToWindow(baseHolder: BaseHolder?) {
-        super.onViewAttachedToWindow(baseHolder)
-        val lp = baseHolder!!.itemView.layoutParams
-        if (lp != null && lp is StaggeredGridLayoutManager.LayoutParams) {
-            val position = baseHolder.layoutPosition
-            if (isHeaderView(position) || isBottomView(position)|| ArrayUtils.isEmpty(mDatas)) {
-                lp.isFullSpan = true
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+        super.onAttachedToRecyclerView(recyclerView)
+        val manager = recyclerView!!.layoutManager
+        if (manager is GridLayoutManager) {
+            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return getSpanCount(position, manager.spanCount)
+                }
             }
         }
+    }
+
+    protected open fun getSpanCount(position: Int, defCount: Int): Int {
+        return if (isHeaderView(position) || isBottomView(position) || mDatas.isEmptyList()) defCount else 1
     }
 
     /*@Override
@@ -291,7 +295,7 @@ abstract class LBaseAdapter<T> @JvmOverloads constructor(protected var mLayoutRe
     }
 
     val isEmpty: Boolean
-        get() = ArrayUtils.isEmpty(mDatas)
+        get() = mDatas.isEmptyList()
 
     fun clearDatas() {
         if (!isEmpty) {

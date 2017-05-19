@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MyActivity">
+    <item
+        android:id="@+id/action_change"
+        android:orderInCategory="100"
+        android:title="切换"
+        android:icon="@drawable/change_city"
+        app:showAsAction="ifRoom"/>
+</menu>

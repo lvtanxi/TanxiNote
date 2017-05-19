@@ -6,7 +6,6 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout
 import com.lv.note.R
 import com.lv.note.adapter.LBaseAdapter
 import com.lv.note.helper.BGARefreshDelegate
-import com.lv.note.util.CommonUtils
 import com.lv.note.widget.EmptyView
 
 /**
@@ -63,9 +62,6 @@ abstract class BaseRecyclerFragment<T> : BaseFragment(), BGARefreshDelegate.BGAR
     }
 
     protected fun stopRefreshing() {
-        commonRefresh?.let {
-            CommonUtils.showSuccess(activity, commonRefresh!!, null)
-        }
         mDelegate?.stopRefresh()
         mBaseAdapter?.let {
             if (mBaseAdapter!!.isEmpty)

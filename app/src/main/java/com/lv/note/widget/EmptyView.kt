@@ -32,7 +32,7 @@ class EmptyView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         if (null == messageStr)
             messageStr = "亲，暂时没有数据喔！"
         if (null == mDrawable)
-            mDrawable = ContextCompat.getDrawable(context, R.mipmap.no_data)
+            mDrawable = ContextCompat.getDrawable(context, R.drawable.no_data)
         mTextView = TextView(getContext())
         mTextView.setTextColor(ContextCompat.getColor(context, android.R.color.darker_gray))
         mTextView.gravity = Gravity.CENTER_HORIZONTAL
@@ -89,7 +89,7 @@ class EmptyView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             isOne = false
             return this
         }
-        setImageResId(R.mipmap.network_disconnection)
+        setImageResId(R.drawable.network_disconnection)
         setMessageStr("网络故障,请检查后重新获取数据!")
         visibility = View.VISIBLE
         return this

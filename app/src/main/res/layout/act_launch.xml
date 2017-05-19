@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:background="@mipmap/wallpaper_4"
-              android:layout_height="match_parent">
-
+              android:id="@+id/launch_lay"
+              style="@style/MatchMatch.Vertical"
+              android:background="@drawable/wallpaper_4"
+              android:fitsSystemWindows="true">
 </LinearLayout>

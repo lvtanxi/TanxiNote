@@ -13,6 +13,6 @@ interface IBaseView {
 
     fun hideLodingView()
 
-    fun toastError(message: String)
+    fun toastError(message: String?)
 
 }

@@ -14,8 +14,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup.LayoutParams
 import android.widget.*
 import com.lv.note.R
-import com.lv.test.ArrayUtils
-import com.lv.test.StrUtils
+import com.lv.note.util.notEmptyList
 import java.util.*
 
 /**
@@ -42,7 +41,7 @@ import java.util.*
         btnTakeTitle = view.findViewById(R.id.btn_take_title) as TextView
         btnCancel = view.findViewById(R.id.btn_cancel) as Button
         scrollView = view.findViewById(R.id.select_pop_scrollView) as ScrollView
-        if (StrUtils.notEmpty(title)) {
+        title?.let{
             btnTakeTitle!!.visibility = View.VISIBLE
             btnTakeTitle!!.text = title
         }
@@ -90,7 +89,7 @@ import java.util.*
     }
 
     internal fun addItem(spinnerItems: List<T>) {
-        if (ArrayUtils.isNotEmpty(spinnerItems)) {
+        if (spinnerItems.notEmptyList()) {
             if (spinnerItems.size >= 7) {
                 val dm = DisplayMetrics()
                 (mContext as Activity).windowManager.defaultDisplay.getMetrics(dm)

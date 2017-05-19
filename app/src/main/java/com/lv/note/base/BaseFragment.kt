@@ -7,8 +7,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lv.note.util.ToastUtils
-import com.lv.test.BaseActivity
+import com.sdsmdg.tastytoast.TastyToast
+import rx.Subscription
+import rx.subscriptions.CompositeSubscription
 
 /**
  * User: 吕勇
@@ -20,6 +21,7 @@ abstract class BaseFragment : Fragment() {
     protected var contentView: View? = null
     protected var mBaseActivity: BaseActivity? = null
     protected var seavStatus = true
+    protected var mCompositeSubscription: CompositeSubscription? = null
 
     override fun onAttach(activity: Context?) {
         mBaseActivity = getActivity() as BaseActivity
@@ -28,10 +30,7 @@ abstract class BaseFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (seavStatus) {
-            if (contentView == null)
-                initFragment(inflater)
-
+        if (seavStatus&&contentView!=null) {
             contentView?.parent?.let {
                 val parent = contentView!!.parent as ViewGroup
                 parent.removeView(contentView)
@@ -43,13 +42,17 @@ abstract class BaseFragment : Fragment() {
         return contentView
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initData()
+        bindListener()
+        processLogic()
+    }
+
 
     private fun initFragment(inflater: LayoutInflater) {
         this.contentView = inflater.inflate(loadLayoutId(), null)
         initViews()
-        initData()
-        bindListener()
-        processLogic()
     }
 
     /**
@@ -60,7 +63,9 @@ abstract class BaseFragment : Fragment() {
     /**
      * 初始化控件
      */
-    protected abstract fun initViews()
+    protected  open fun initViews(){
+
+    }
 
     /**
      * 初始化数
@@ -99,12 +104,25 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected  fun toastError(message: String) {
-        ToastUtils.textToastError(mBaseActivity!!, message)
+        try {
+            TastyToast.makeText(activity.getApplicationContext(), message, TastyToast.LENGTH_LONG, TastyToast.ERROR)
+        }catch (e:Exception){
+        }
     }
 
     override fun onDestroyView() {
+        if (mCompositeSubscription != null) {
+            mCompositeSubscription?.unsubscribe()
+            mCompositeSubscription = null
+        }
         contentView = null
         mBaseActivity = null
         super.onDestroyView()
+    }
+
+    protected fun addSubscription(subscription: Subscription) {
+        if (mCompositeSubscription == null)
+            mCompositeSubscription = CompositeSubscription()
+        mCompositeSubscription?.add(subscription)
     }
 }

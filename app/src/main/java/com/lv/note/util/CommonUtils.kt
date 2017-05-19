@@ -7,16 +7,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.lv.note.R
-import com.plattysoft.leonids.ParticleSystem
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.ref.WeakReference
+import java.util.regex.Pattern
 
 /**
  * @author andy he
@@ -210,86 +211,73 @@ object CommonUtils {
         }
     }
 
-    fun showSuccess(activity: Activity, tageView: View, back: CountDown.CountDownBack?) {
-        ParticleSystem(activity, 800, R.mipmap.star_pink, 1000)
-                .setSpeedRange(0.1f, 0.25f)
-                .oneShot(tageView, 100)
-        CountDown(1000)
-                .setActivity(activity)
-                .setDownBack(back)
-                .start();
-    }
 
-    fun forMat(str: String?): String {
-        str?.let {
-            val length = str.length
-            val sb = StringBuffer()
-            for (i in 0..length - 1) {
-                sb.append(str[i])
-                if ((i + 1) % 10 == 0) {
-                    sb.append("\n")
-                }
-            }
-            return sb.toString()
-        }
-        return ""
-    }
 
     fun displayRoundImage(imageView: ImageView, url: String) {
         Glide.with(imageView.context)
                 .load(url)
-                .placeholder(R.mipmap.header)
-                .error(R.mipmap.header)
+                .placeholder(imageView.drawable)
+                .error(imageView.drawable)
                 .crossFade()
                 .into(imageView)
     }
 
     fun getWeatherTypeImageID(type: String?, isDay: Boolean): Int {
         if (null == type)
-            return R.mipmap.ic_weather_no
+            return R.drawable.ic_weather_no
         val weatherId: Int
         when (type) {
             "晴" -> if (isDay) {
-                weatherId = R.mipmap.ic_weather_sunny_day
+                weatherId = R.drawable.ic_weather_sunny_day
             } else {
-                weatherId = R.mipmap.ic_weather_sunny_night
+                weatherId = R.drawable.ic_weather_sunny_night
             }
             "多云" -> if (isDay) {
-                weatherId = R.mipmap.ic_weather_cloudy_day
+                weatherId = R.drawable.ic_weather_cloudy_day
             } else {
-                weatherId = R.mipmap.ic_weather_cloudy_night
+                weatherId = R.drawable.ic_weather_cloudy_night
             }
-            "阴" -> weatherId = R.mipmap.ic_weather_overcast
-            "雷阵雨", "雷阵雨伴有冰雹" -> weatherId = R.mipmap.ic_weather_thunder_shower
-            "雨夹雪" -> weatherId = R.mipmap.ic_weather_sleet
-            "冻雨" -> weatherId = R.mipmap.ic_weather_ice_rain
-            "小雨", "小到中雨", "阵雨" -> weatherId = R.mipmap.ic_weather_light_rain_or_shower
-            "中雨", "中到大雨" -> weatherId = R.mipmap.ic_weather_moderate_rain
-            "大雨", "大到暴雨" -> weatherId = R.mipmap.ic_weather_heavy_rain
-            "暴雨", "大暴雨", "特大暴雨", "暴雨到大暴雨", "大暴雨到特大暴雨" -> weatherId = R.mipmap.ic_weather_storm
-            "阵雪", "小雪", "小到中雪" -> weatherId = R.mipmap.ic_weather_light_snow
-            "中雪", "中到大雪" -> weatherId = R.mipmap.ic_weather_moderate_snow
-            "大雪", "大到暴雪" -> weatherId = R.mipmap.ic_weather_heavy_snow
-            "暴雪" -> weatherId = R.mipmap.ic_weather_snowstrom
-            "雾" -> weatherId = R.mipmap.ic_weather_foggy
-            "霾" -> weatherId = R.mipmap.ic_weather_haze
-            "沙尘暴" -> weatherId = R.mipmap.ic_weather_duststorm
-            "强沙尘暴" -> weatherId = R.mipmap.ic_weather_sandstorm
-            "浮尘", "扬沙" -> weatherId = R.mipmap.ic_weather_sand_or_dust
+            "阴" -> weatherId = R.drawable.ic_weather_overcast
+            "雷阵雨", "雷阵雨伴有冰雹" -> weatherId = R.drawable.ic_weather_thunder_shower
+            "雨夹雪" -> weatherId = R.drawable.ic_weather_sleet
+            "冻雨" -> weatherId = R.drawable.ic_weather_ice_rain
+            "小雨", "小到中雨", "阵雨" -> weatherId = R.drawable.ic_weather_light_rain_or_shower
+            "中雨", "中到大雨" -> weatherId = R.drawable.ic_weather_moderate_rain
+            "大雨", "大到暴雨" -> weatherId = R.drawable.ic_weather_heavy_rain
+            "暴雨", "大暴雨", "特大暴雨", "暴雨到大暴雨", "大暴雨到特大暴雨" -> weatherId = R.drawable.ic_weather_storm
+            "阵雪", "小雪", "小到中雪" -> weatherId = R.drawable.ic_weather_light_snow
+            "中雪", "中到大雪" -> weatherId = R.drawable.ic_weather_moderate_snow
+            "大雪", "大到暴雪" -> weatherId = R.drawable.ic_weather_heavy_snow
+            "暴雪" -> weatherId = R.drawable.ic_weather_snowstrom
+            "雾" -> weatherId = R.drawable.ic_weather_foggy
+            "霾" -> weatherId = R.drawable.ic_weather_haze
+            "沙尘暴" -> weatherId = R.drawable.ic_weather_duststorm
+            "强沙尘暴" -> weatherId = R.drawable.ic_weather_sandstorm
+            "浮尘", "扬沙" -> weatherId = R.drawable.ic_weather_sand_or_dust
             else -> if (type.contains("尘") || type.contains("沙")) {
-                weatherId = R.mipmap.ic_weather_sand_or_dust
+                weatherId = R.drawable.ic_weather_sand_or_dust
             } else if (type.contains("雾") || type.contains("霾")) {
-                weatherId = R.mipmap.ic_weather_foggy
+                weatherId = R.drawable.ic_weather_foggy
             } else if (type.contains("雨")) {
-                weatherId = R.mipmap.ic_weather_ice_rain
+                weatherId = R.drawable.ic_weather_ice_rain
             } else if (type.contains("雪") || type.contains("冰雹")) {
-                weatherId = R.mipmap.ic_weather_moderate_snow
+                weatherId = R.drawable.ic_weather_moderate_snow
             } else {
-                weatherId = R.mipmap.ic_weather_no
+                weatherId = R.drawable.ic_weather_no
             }
         }
 
         return weatherId
+    }
+
+    fun getFirstLetter(pinyin: String): String {
+        if (TextUtils.isEmpty(pinyin)) return "#"
+        val c = pinyin.substring(0, 1)
+        val pattern = Pattern.compile("^[A-Za-z]+$")
+        if (pattern.matcher(c).matches()) {
+            return c.toUpperCase()
+        }
+        return "#"
     }
 
 }

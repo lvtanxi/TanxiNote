@@ -35,13 +35,13 @@ class HeartProgressBar : View {
     // #MARK - Constructors
 
     constructor(context: Context) : super(context) {
-        init(Color.parseColor("#FF4351"))
+        init(0)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.HeartProgressBar, 0, 0)
         try {
-            val heartColor = typedArray.getColor(R.styleable.HeartProgressBar_heartColor, Color.parseColor("#FF4351"))
+            val heartColor = typedArray.getColor(R.styleable.HeartProgressBar_heartColor, 0)
             init(heartColor)
         } finally {
             typedArray.recycle()

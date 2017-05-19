@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/MatchMatch.Vertical"
+              android:fitsSystemWindows="true"
+              android:focusable="true"
+              android:focusableInTouchMode="true">
+
+    <include layout="@layout/common_toobar"/>
+
+    <RelativeLayout
+        style="@style/MatchMatch"
+        android:layout_marginTop="0dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/city_recyclerview"
+            style="@style/MatchMatch"
+            android:background="@android:color/white"/>
+
+        <com.lv.note.widget.WaveSideBar
+            android:id="@+id/side_bar"
+            style="@style/WrapMatch"
+            android:paddingRight="8dp"
+            app:sidebar_lazy_respond="false"
+            app:sidebar_max_offset="80dp"
+            app:sidebar_position="right"
+            app:sidebar_text_color="?attr/colorPrimary"/>
+    </RelativeLayout>
+
+</LinearLayout>

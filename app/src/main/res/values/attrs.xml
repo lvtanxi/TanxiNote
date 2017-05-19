@@ -2,16 +2,31 @@
 <resources>
 
     <declare-styleable name="HeartProgressBar">
-        <attr name="heartColor" format="color" />
+        <attr name="heartColor" format="color"/>
     </declare-styleable>
-    <declare-styleable name="CircleImageView">
-        <attr name="layoutBorderColor" format="color|reference"/>
-        <attr name="layoutBgColor" format="color|reference"/>
-        <attr name="layoutBorderWidth" format="float|dimension"/>
-        <attr name="CircleImageWidth" format="float|dimension"/>
-        <attr name="CircleImageHight" format="float|dimension"/>
-        <attr name="CircleImagePadding" format="float|dimension"/>
-        <attr name="CircleImageSrc" format="reference"/>
+
+
+    <declare-styleable name="FancyIndexer">
+        <attr name="widthOffset" format="dimension" />
+        <attr name="minFontSize" format="integer" />
+        <attr name="maxFontSize" format="integer" />
+        <attr name="tipFontSize" format="integer" />
+        <attr name="maxBezierHeight" format="dimension" />
+        <attr name="maxBezierWidth" format="dimension" />
+        <attr name="maxBezierLines" format="integer" />
+        <attr name="additionalTipOffset" format="dimension" />
+        <attr name="fontColor" format="color" />
+        <attr name="tipFontColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="WaveSideBar">
+        <attr name="sidebar_lazy_respond" format="boolean"/>
+        <attr name="sidebar_text_color" format="color"/>
+        <attr name="sidebar_max_offset" format="dimension"/>
+        <attr name="sidebar_position" format="enum">
+            <enum name="right" value="0"/>
+            <enum name="left" value="1"/>
+        </attr>
+        <attr name="sidebar_clear" format="boolean"/>
     </declare-styleable>
 </resources>
 

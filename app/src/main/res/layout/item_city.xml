@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              style="@style/MatchWrap.Vertical"
+              android:paddingBottom="10dp"
+              tools:ignore="RtlHardcoded">
+
+    <RelativeLayout
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        style="@style/MatchWrap">
+
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
+            android:id="@+id/cityitem_name_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            app:aiv_TextColor="@android:color/white"
+            app:aiv_TextSizeRatio="0.4"
+            app:aiv_ShowBoarder="true"/>
+
+        <TextView
+            android:id="@+id/cityitem_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/cityitem_name_icon"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="15dp"
+            android:text="asd"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignLeft="@id/cityitem_name"
+            android:layout_below="@id/cityitem_name"
+            android:layout_marginLeft="16dp"
+            android:background="@color/alertdialog_line"/>
+    </RelativeLayout>
+</LinearLayout>

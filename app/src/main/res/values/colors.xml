@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FC4103</color>
-    <color name="colorPrimaryDark">#FC4103</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="theme_color_primary">#FC4103</color>
+    <color name="theme_color_primary_dark">#FC4103</color>
+    <color name="theme_color_primary_trans">#FF4081</color>
+
     <color name="alertdialog_line">#c6c6c6</color>
     <color name="TOAST_COLOR">#88000000</color>
     <color name="COLOR_BORDER_LINE">#d7d7d7</color>
+    <color name="COLOR_BORDER">#e8e8e8</color>
     <color name="WINDOW_BACKGROUND">#F8F8F8</color>
     <color name="black">#222222</color>
     <color name="trans">#00000000</color>
@@ -23,5 +25,29 @@
         <item>@android:color/holo_red_light</item>
         <item>@android:color/holo_purple</item>
     </integer-array>
+    <color name="brown">#8D6E63</color>
+
+    <!-- theme color -->
+    <color name="theme_pink">#fb7299</color>
+    <color name="theme_pink_dark">#fb7299</color>
+
+    <color name="theme_blue">#03a9f4</color>
+    <color name="theme_blue_dark">#03a9f3</color>
+
+    <color name="theme_purple">#673AB7</color>
+    <color name="theme_purple_dark">#673AB6</color>
+
+    <color name="theme_green">#4CAF50</color>
+    <color name="theme_green_dark">#4CAF51</color>
+
+
+    <color name="theme_yellow">#FDD835</color>
+    <color name="theme_yellow_dark">#FDD834</color>
+
+    <color name="theme_orange">#EF6C00</color>
+    <color name="theme_orange_dark">#EF6C00</color>
+
+    <color name="launch_color">#079EB1</color>
+
 
 </resources>

@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MatchMatch.Vertical"
-    android:background="@mipmap/wallpaper_3">
+    android:background="@drawable/wallpaper_3">
 
 
     <com.lv.note.widget.clip.ClipImageLayout

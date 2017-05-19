@@ -190,10 +190,14 @@
     *;
 }
 
+-keep class br.com.mauker.MsvAuthority
+-keepclassmembers class br.com.mauker.** { *; }
+
 #protobuf
 -dontwarn com.google.**
 -keep class com.google.protobuf.** {*;}
 
+-keep class com.iflytek.**{*;}
 # 如果你需要兼容6.0系统，请不要混淆org.apache.http.legacy.jar
  -dontwarn android.net.compatibility.**
  -dontwarn android.net.http.**
@@ -211,6 +215,26 @@
  -keep class com.xiaosu.**{*;}
 
  -keep class com.dalong.coverflow.**{*;}
+
+ -keep class com.tencent.open.TDialog$*
+ -keep class com.tencent.open.TDialog$* {*;}
+ -keep class com.tencent.open.PKDialog
+ -keep class com.tencent.open.PKDialog {*;}
+ -keep class com.tencent.open.PKDialog$*
+ -keep class com.tencent.open.PKDialog$* {*;}
+
+
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+ long producerIndex;
+ long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
 
 -dontoptimize
 -dontpreverify

@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/WrapWrap"
-    android:background="@drawable/we_selector"
-    android:clickable="false"
-    android:padding="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchWrap"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
 
-    <View
-        android:layout_width="800dp"
-        android:layout_height="10px"/>
+    <RelativeLayout
+        style="@style/MatchWrap"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/we_selector"
+        android:clickable="false">
 
-    <ImageView
-        android:id="@+id/vitem_image"
-        style="@style/WrapWrap.Text"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:contentDescription="@null"/>
+        <ImageView
+            android:id="@+id/vitem_image"
+            style="@style/WrapWrap.Text"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"/>
 
-    <TextView
-        android:id="@+id/vitem_temperature"
-        style="@style/WrapWrap.Text"
-        android:layout_below="@id/vitem_image"/>
+        <TextView
+            android:id="@+id/vitem_temperature"
+            style="@style/WrapWrap.Text"
+            android:layout_below="@id/vitem_image"/>
 
-    <TextView
-        android:id="@+id/vitem_wind"
-        style="@style/WrapWrap.Text"
-        android:layout_below="@id/vitem_temperature"/>
+        <TextView
+            android:id="@+id/vitem_wind"
+            style="@style/WrapWrap.Text"
+            android:layout_below="@id/vitem_temperature"/>
 
-    <TextView
-        android:id="@+id/vitem_weather"
-        style="@style/WrapWrap.Text"
-        android:layout_below="@id/vitem_wind"/>
+        <TextView
+            android:id="@+id/vitem_weather"
+            style="@style/WrapWrap.Text"
+            android:layout_below="@id/vitem_wind"/>
 
-    <TextView
-        android:id="@+id/vitem_date"
-        style="@style/WrapWrap.Text"
-        android:layout_below="@id/vitem_weather"/>
+        <TextView
+            android:id="@+id/vitem_date"
+            style="@style/WrapWrap.Text"
+            android:layout_below="@id/vitem_weather"/>
 
-    <TextView
-        android:id="@+id/vitem_week"
-        style="@style/WrapWrap.Text"
-        android:layout_below="@id/vitem_date"/>
-
-</RelativeLayout>
+        <TextView
+            android:id="@+id/vitem_week"
+            style="@style/WrapWrap.Text"
+            android:layout_below="@id/vitem_date"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
