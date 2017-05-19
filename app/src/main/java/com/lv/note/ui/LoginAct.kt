@@ -56,7 +56,7 @@ class LoginAct : BaseActivity() {
         changeTopBgColor()
         if (Hawk.get(USER_NAME, "").isNumeric())
             login_name.setText(Hawk.get(USER_NAME, ""))
-        if (login_name.text.length != 0) {
+        if (login_name.text.isNotEmpty()) {
             login_pwd.isFocusable = true
             login_pwd.isFocusableInTouchMode = true
             login_pwd.requestFocus()
@@ -94,8 +94,6 @@ class LoginAct : BaseActivity() {
 
         override fun onComplete(value: Any) {
             try {
-                if (value == null)
-                    return
                 val jo = value as JSONObject
 
                 if (jo.has("ret") && jo.optInt("ret") == 0) {

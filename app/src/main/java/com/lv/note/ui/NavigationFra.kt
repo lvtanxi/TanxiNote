@@ -54,7 +54,7 @@ class NavigationFra : BaseFragment() {
 
     private var mBaseAdapter: LBaseAdapter<NavigationItem>? = null
     private var lastIndex = 0
-    private var urls = arrayOf("http://user.qzone.qq.com/992507862/2", "http://my.oschina.net/u/1269023")
+    private var urls = arrayOf("https://lvtanxi.github.io", "http://my.oschina.net/u/1269023")
     private var photoSaveName: String? = null//图pian名
     private var path: String? = null//图片全路径
     private var mSelectPopupWindow: SelectPopupWindow<DefExtendItem>? = null

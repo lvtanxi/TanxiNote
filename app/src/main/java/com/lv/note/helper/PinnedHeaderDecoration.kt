@@ -39,16 +39,16 @@ class PinnedHeaderDecoration : RecyclerView.ItemDecoration() {
         if (mPinnedHeaderView != null) {
             val headerEndAt = mPinnedHeaderView!!.top + mPinnedHeaderView!!.height
             val v = parent.findChildViewUnder((c.width / 2).toFloat(), (headerEndAt + 1).toFloat())
-
-            if (isPinnedView(parent, v)) {
-                mPinnedHeaderTop = v.top - mPinnedHeaderView!!.height
-            } else {
-                mPinnedHeaderTop = 0
+            v?.let {
+                if (isPinnedView(parent, v)) {
+                    mPinnedHeaderTop = v.top - mPinnedHeaderView!!.height
+                } else {
+                    mPinnedHeaderTop = 0
+                }
+                mClipBounds = c.clipBounds
+                mClipBounds!!.top = mPinnedHeaderTop + mPinnedHeaderView!!.height
+                c.clipRect(mClipBounds!!)
             }
-
-            mClipBounds = c.clipBounds
-            mClipBounds!!.top = mPinnedHeaderTop + mPinnedHeaderView!!.height
-            c.clipRect(mClipBounds!!)
         }
     }
 

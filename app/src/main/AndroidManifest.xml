@@ -31,7 +31,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.LaunchAct">
+            android:name=".ui.LaunchAct"
+            android:theme="@style/LaunchAct.Style">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

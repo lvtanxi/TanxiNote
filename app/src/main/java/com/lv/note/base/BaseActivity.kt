@@ -115,7 +115,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView {
     }
 
     override fun toastError(message: String?) {
-        TastyToast.makeText(getApplicationContext(), message, TastyToast.LENGTH_LONG,TastyToast.ERROR)
+        TastyToast.makeText(applicationContext, message, TastyToast.LENGTH_LONG,TastyToast.ERROR)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
